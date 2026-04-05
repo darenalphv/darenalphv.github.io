@@ -70,7 +70,7 @@
             "addressRegion": "Wilayah Persekutuan",
             "addressCountry": "MY"
           },
-          "email": "hello@darentan.my",
+          "email": "daren@alphv.com",
           "knowsAbout": [
             "Artificial Intelligence",
             "Digital Transformation",
@@ -125,7 +125,7 @@
             "addressLocality": "Kuala Lumpur",
             "addressCountry": "MY"
           },
-          "email": "hello@darentan.my"
+          "email": "daren@alphv.com"
         },
         {
           "@type": "FAQPage",
@@ -144,7 +144,7 @@
               "name": "How can I book Daren Tan as a keynote speaker?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "You can book Daren Tan for keynote speaking engagements by emailing speaking@darentan.my or filling in the contact form at darentan.my. He is available for corporate conferences, university talks, government events, and private workshops across Malaysia and Asia."
+                "text": "You can book Daren Tan for keynote speaking engagements by emailing daren@alphv.com or filling in the contact form at darentan.my. He is available for corporate conferences, university talks, government events, and private workshops across Malaysia and Asia."
               }
             },
             {
@@ -2454,7 +2454,7 @@
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
             <h3 class="faq-q" itemprop="name">How can I book Daren as a keynote speaker?</h3>
             <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <p itemprop="text">Email <strong>speaking@darentan.my</strong> or use the contact form on this page. Daren is available for corporate conferences, university events, government programmes, and private workshops across Malaysia and Asia.</p>
+              <p itemprop="text">Email <strong>daren@alphv.com</strong> or use the contact form on this page. Daren is available for corporate conferences, university events, government programmes, and private workshops across Malaysia and Asia.</p>
             </div>
           </div>
           <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -2519,28 +2519,44 @@
         </div>
 
         <div class="contact-grid">
-          <form class="contact-form reveal" onsubmit="return false;">
+          <!-- FORM: powered by Formspree. Sign up free at formspree.io,
+               create a new form, and replace YOUR_FORMSPREE_ID below.
+               Example: https://formspree.io/f/xpzgkwla -->
+          <form
+            id="contact-form"
+            class="contact-form reveal"
+            action="https://formspree.io/f/mbdpqjgk"
+            method="POST"
+            novalidate
+          >
+            <!-- Hidden fields for Formspree -->
+            <input type="hidden" name="_subject" value="New inquiry from darentan.my" />
+            <input type="hidden" name="_replyto" value="" />
+
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">First Name</label>
-                <input type="text" class="form-input" placeholder="Ahmad" />
+                <label class="form-label" for="cf-first">First Name</label>
+                <input id="cf-first" type="text" name="first_name" class="form-input" placeholder="Ahmad" required />
               </div>
               <div class="form-group">
-                <label class="form-label">Last Name</label>
-                <input type="text" class="form-input" placeholder="Razali" />
+                <label class="form-label" for="cf-last">Last Name</label>
+                <input id="cf-last" type="text" name="last_name" class="form-input" placeholder="Razali" required />
               </div>
             </div>
             <div class="form-group">
-              <label class="form-label">Email Address</label>
+              <label class="form-label" for="cf-email">Email Address</label>
               <input
+                id="cf-email"
                 type="email"
+                name="email"
                 class="form-input"
                 placeholder="you@company.com"
+                required
               />
             </div>
             <div class="form-group">
-              <label class="form-label">Inquiry Type</label>
-              <select class="form-select">
+              <label class="form-label" for="cf-type">Inquiry Type</label>
+              <select id="cf-type" name="inquiry_type" class="form-select" required>
                 <option value="">Select an option...</option>
                 <option>Keynote Speaking</option>
                 <option>Tech Advisory</option>
@@ -2549,19 +2565,26 @@
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Message</label>
+              <label class="form-label" for="cf-message">Message</label>
               <textarea
+                id="cf-message"
+                name="message"
                 class="form-textarea"
                 placeholder="Tell me about your event or project..."
+                required
               ></textarea>
             </div>
+
+            <!-- Submit button -->
             <button
               type="submit"
+              id="cf-submit"
               class="btn btn-sienna"
               style="width: 100%; justify-content: center"
             >
-              Send Message
+              <span id="cf-btn-text">Send Message</span>
               <svg
+                id="cf-btn-arrow"
                 width="14"
                 height="14"
                 fill="none"
@@ -2571,7 +2594,18 @@
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
+              <svg id="cf-btn-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none; animation: cf-spin 0.8s linear infinite;">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
             </button>
+
+            <!-- Status messages -->
+            <div id="cf-success" style="display:none; margin-top:16px; padding:14px 18px; background:#f0faf0; border:1px solid #b7dfb7; border-radius:6px; color:#2a6b2a; font-size:0.88rem; line-height:1.5;">
+              ✓ Message sent! I'll get back to you within 1–2 business days.
+            </div>
+            <div id="cf-error" style="display:none; margin-top:16px; padding:14px 18px; background:#fdf0f0; border:1px solid #e8b4b4; border-radius:6px; color:#7a1f1f; font-size:0.88rem; line-height:1.5;">
+              Something went wrong. Please email <a href="mailto:daren@alphv.com" style="color:inherit; font-weight:600;">daren@alphv.com</a> directly.
+            </div>
           </form>
 
           <address class="contact-info reveal delay-2" style="font-style:normal;">
@@ -2592,22 +2626,15 @@
               <div class="contact-item">
                 <div class="contact-item-icon">✉️</div>
                 <div>
-                  <div class="contact-item-label">General Email</div>
-                  <div class="contact-item-value">hello@darentan.my</div>
+                  <div class="contact-item-label">Email</div>
+                  <div class="contact-item-value"><a href="mailto:daren@alphv.com" style="color:inherit; text-decoration:none;">daren@alphv.com</a></div>
                 </div>
               </div>
               <div class="contact-item">
                 <div class="contact-item-icon">🎤</div>
                 <div>
-                  <div class="contact-item-label">Speaking Enquiries</div>
-                  <div class="contact-item-value">speaking@darentan.my</div>
-                </div>
-              </div>
-              <div class="contact-item">
-                <div class="contact-item-icon">💼</div>
-                <div>
-                  <div class="contact-item-label">Advisory & Consulting</div>
-                  <div class="contact-item-value">advisory@darentan.my</div>
+                  <div class="contact-item-label">Speaking & Advisory</div>
+                  <div class="contact-item-value">Use the form →</div>
                 </div>
               </div>
             </div>
@@ -2711,6 +2738,72 @@
           );
         });
       });
+
+      // ── Contact form: Formspree AJAX submission ──────────────────────────
+      // NOTE FOR DAREN: Before going live, sign up free at https://formspree.io
+      // Create a new form, then replace YOUR_FORMSPREE_ID in the form's action URL.
+      (function() {
+        var form    = document.getElementById('contact-form');
+        var submit  = document.getElementById('cf-submit');
+        var btnText = document.getElementById('cf-btn-text');
+        var arrow   = document.getElementById('cf-btn-arrow');
+        var spinner = document.getElementById('cf-btn-spinner');
+        var success = document.getElementById('cf-success');
+        var error   = document.getElementById('cf-error');
+
+        if (!form) return;
+
+        // Keep _replyto in sync with email field for Formspree threading
+        var emailField = document.getElementById('cf-email');
+        if (emailField) {
+          emailField.addEventListener('input', function() {
+            form.querySelector('[name="_replyto"]').value = emailField.value;
+          });
+        }
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (!form.checkValidity()) { form.reportValidity(); return; }
+
+          // Loading state
+          submit.disabled = true;
+          btnText.textContent = 'Sending…';
+          arrow.style.display = 'none';
+          spinner.style.display = 'inline-block';
+          success.style.display = 'none';
+          error.style.display   = 'none';
+
+          fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          })
+          .then(function(res) {
+            if (res.ok) {
+              success.style.display = 'block';
+              form.reset();
+            } else {
+              return res.json().then(function(data) { throw data; });
+            }
+          })
+          .catch(function() {
+            error.style.display = 'block';
+          })
+          .finally(function() {
+            submit.disabled = false;
+            btnText.textContent = 'Send Message';
+            arrow.style.display = 'inline-block';
+            spinner.style.display = 'none';
+          });
+        });
+      })();
+
+      // Spinner keyframe (injected once)
+      (function() {
+        var s = document.createElement('style');
+        s.textContent = '@keyframes cf-spin { to { transform: rotate(360deg); } }';
+        document.head.appendChild(s);
+      })();
 
       // YouTube talk cards: click thumbnail or play button → open on YouTube
       document.querySelectorAll('.talk-thumb[data-video-id]').forEach(function(thumb) {
