@@ -1,0 +1,370 @@
+---
+// The report's last two pages, on every page: the closing statement with the single call to action,
+// then Corporate Information.
+import { LINKEDIN, person, group, communities, caseStudies, socials } from '../data/content';
+
+// Source: Daren's LinkedIn profile, 8,747 followers, read October 2026 (.source/content.md).
+const linkedinFollowers = '8,747';
+
+const companies = group.members.filter((m) => m.kind === 'company').map((m) => m.name);
+---
+
+<footer class="site-footer">
+  <section class="closing" aria-labelledby="closing-heading">
+    <div class="closing-grid">
+      <h2 id="closing-heading" class="statement" data-reveal>
+        <span class="line">Continue the conversation</span>{' '}
+        <span class="line">on LinkedIn.</span>
+      </h2>
+
+      <div class="action" data-reveal>
+        <a class="btn-linkedin cta" href={LINKEDIN} rel="me noopener" target="_blank">
+          Connect on LinkedIn
+          <svg class="cta-arrow" viewBox="0 0 24 24" aria-hidden="true"
+            ><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.6"></path></svg
+          >
+          {' '}<span class="sr-only">(opens in a new tab)</span>
+        </a>
+        <p class="followers">
+          <span class="tabular">{linkedinFollowers}</span> followers on LinkedIn, as of{' '}
+          <time datetime="2026-10">October 2026</time>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="corporate" aria-labelledby="corporate-heading">
+    <span class="strong-rule" aria-hidden="true" data-draw></span>
+    <h2 id="corporate-heading" class="section-heading corporate-heading">Corporate Information</h2>
+
+    <dl class="facts">
+      <div class="row" data-reveal>
+        <dt>Name</dt>
+        <dd>{person.name}</dd>
+      </div>
+      <div class="row" data-reveal>
+        <dt>Position</dt>
+        <dd>{person.role}, {person.company}</dd>
+      </div>
+      <div class="row" data-reveal>
+        <dt>Based in</dt>
+        <dd>{person.location}</dd>
+      </div>
+      <div class="row" data-reveal>
+        <dt>Group companies</dt>
+        <dd>
+          <ul class="cols">
+            {companies.map((name) => <li>{name}</li>)}
+          </ul>
+        </dd>
+      </div>
+      <div class="row" data-reveal>
+        <dt>Communities</dt>
+        <dd>
+          <ul class="cols">
+            {
+              communities.map((c) => (
+                <li>
+                  {c.name}{' '}
+                  <span class="sub">
+                    {c.role}, since <span class="tabular">{c.since}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </dd>
+      </div>
+      <div class="row" data-reveal>
+        <dt>Segment reviews</dt>
+        <dd>
+          <ul class="cols cols-wide">
+            {
+              caseStudies.map((c) => (
+                <li>
+                  <a class="quiet" href={`/work/${c.slug}/`}>
+                    {c.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </dd>
+      </div>
+      <div class="row" data-reveal>
+        <dt>Elsewhere</dt>
+        <dd>
+          <ul class="cols">
+            {
+              [...socials]
+                .sort((a, b) => Number(b.label === 'LinkedIn') - Number(a.label === 'LinkedIn'))
+                .map((s) => (
+                  <li>
+                    <a class="quiet" href={s.href} rel="me noopener" target="_blank">
+                      {s.label}
+                      {' '}<span class="sr-only">(opens in a new tab)</span>
+                    </a>
+                  </li>
+                ))
+            }
+          </ul>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="imprint">
+      <p class="copyright">© <span class="tabular">2026</span> {person.name}</p>
+      <p class="colophon">
+        Set in Archivo. Cover art: <span class="tabular">72,000</span> points, one for every Developer Kaki member.
+      </p>
+    </div>
+  </section>
+</footer>
+
+<style>
+  /* One column system for both pages: the 411u label column, then four value columns. */
+  .site-footer {
+    --label-col: calc(371 * var(--u));
+    --col-gap: calc(40 * var(--u));
+    --strong: max(calc(2 * var(--u)), 1px);
+    --text: max(calc(30 * var(--u)), 16px);
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  /* The closing statement */
+  .closing {
+    padding: calc(170 * var(--u)) var(--gutter) calc(190 * var(--u));
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .closing-grid {
+    display: grid;
+    grid-template-columns: var(--label-col) repeat(4, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+
+  .statement {
+    grid-area: 1 / 1 / 2 / -1;
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 88%;
+    font-size: calc(196 * var(--u));
+    line-height: 0.92;
+    letter-spacing: -0.015em;
+  }
+
+  .statement .line {
+    display: block;
+    white-space: nowrap;
+  }
+
+  /* Hangs from the cap height of the statement's second line, so it can grow downward but never
+     into the first line. */
+  .action {
+    grid-area: 1 / 4 / 2 / -1;
+    align-self: start;
+    margin-top: calc(210 * var(--u));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(22 * var(--u));
+  }
+
+  .cta {
+    height: calc(104 * var(--u));
+    min-height: 52px;
+    padding-inline: max(calc(44 * var(--u)), 22px) max(calc(38 * var(--u)), 20px);
+    font-size: max(calc(32 * var(--u)), 17px);
+    letter-spacing: -0.005em;
+  }
+
+  .cta-arrow {
+    width: 1.05em;
+    height: 1.05em;
+    transition: transform 260ms var(--ease-out-expo);
+  }
+
+  .cta:hover .cta-arrow {
+    transform: translate(2px, -2px);
+  }
+
+  .followers {
+    margin: 0;
+    font-weight: 500;
+    font-size: max(calc(26 * var(--u)), 15px);
+    color: var(--color-ink-2);
+  }
+
+  .followers .tabular {
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  /* Corporate Information */
+  .corporate {
+    position: relative;
+    margin-inline: var(--gutter);
+    padding-top: calc(30 * var(--u));
+  }
+
+  .strong-rule {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--strong);
+    background: var(--color-ink);
+  }
+
+  .corporate-heading {
+    margin: 0 0 calc(64 * var(--u));
+  }
+
+  .facts {
+    margin: 0;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding-block: calc(26 * var(--u)) calc(28 * var(--u));
+    border-top: 1px solid var(--color-rule-soft);
+    font-size: var(--text);
+    line-height: 1.35;
+    letter-spacing: -0.005em;
+  }
+
+  .row:last-child {
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  dt {
+    font-weight: 600;
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 400;
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    row-gap: 0.4em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sub {
+    display: block;
+    margin-top: 0.2em;
+    font-size: max(calc(24 * var(--u)), 14px);
+    color: var(--color-ink-2);
+  }
+
+  .quiet {
+    color: var(--color-ink);
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-rule-soft);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition:
+      color 180ms var(--ease-out-expo),
+      text-decoration-color 180ms var(--ease-out-expo);
+  }
+
+  .quiet:hover {
+    color: var(--color-plate);
+    text-decoration-color: currentColor;
+  }
+
+  .imprint {
+    display: grid;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+    padding-block: calc(34 * var(--u)) calc(64 * var(--u));
+    font-size: max(calc(22 * var(--u)), 13.5px);
+    line-height: 1.5;
+    color: var(--color-ink-2);
+  }
+
+  .imprint p {
+    margin: 0;
+  }
+
+  .copyright {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  @media (max-width: 1023px) {
+    .site-footer {
+      --label-col: 1fr;
+      --col-gap: 16px;
+      --text: 16px;
+    }
+
+    .closing {
+      padding: 72px var(--gutter) 64px;
+    }
+
+    .closing-grid {
+      grid-template-columns: 1fr;
+      row-gap: 36px;
+    }
+
+    .statement {
+      grid-area: auto;
+      font-size: clamp(44px, 13vw, 104px);
+      line-height: 0.95;
+    }
+
+    .statement .line {
+      display: inline;
+      white-space: normal;
+    }
+
+    .action {
+      grid-area: auto;
+      margin-top: 0;
+      gap: 14px;
+    }
+
+    .cta {
+      height: 56px;
+    }
+
+    .corporate {
+      padding-top: 22px;
+    }
+
+    .corporate-heading {
+      margin-bottom: 28px;
+    }
+
+    .row {
+      grid-template-columns: 1fr;
+      row-gap: 6px;
+      padding-block: 16px 18px;
+    }
+
+    .cols {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .cols-wide {
+      grid-template-columns: 1fr;
+    }
+
+    .imprint {
+      grid-template-columns: 1fr;
+      row-gap: 6px;
+      padding-block: 22px 40px;
+    }
+  }
+</style>

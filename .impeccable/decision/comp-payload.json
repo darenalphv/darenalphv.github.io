@@ -1,0 +1,37 @@
+{
+  "title": "Approve the home page composition",
+  "question": "Three compositions of The Annual Report. Pick the one to build; use the steer box to combine or revise (e.g. 'comp 1 cover with comp 3's contents rail').",
+  "options": [
+    {
+      "id": "comp-1",
+      "label": "1 · Cover split",
+      "thesis": "Name on an ultramarine plate of 72,000 dots beside the full-bleed stage photo; key figures strip below; group structure chart next.",
+      "palette": ["#1B2BD9", "#FFFFFF", "#0D0D0F"],
+      "materials": ["dot-field plate", "stage photo on black", "tabular figures"],
+      "viewport": "58/42 split cover, top nav with LinkedIn button, four key figures with source notes.",
+      "risk": "The most balanced and least surprising of the three; the dot field is atmosphere behind the name rather than the headline.",
+      "comp": ".impeccable/mocks/comp-1-cover-split.png"
+    },
+    {
+      "id": "comp-2",
+      "label": "2 · The figure leads",
+      "thesis": "A full-width ultramarine plate where 72,000 is drawn in dots, one per Developer Kaki member; the founder's statement and photo follow.",
+      "palette": ["#1B2BD9", "#FFFFFF", "#0D0D0F"],
+      "materials": ["dot-matrix numeral", "stage photo on black", "statement column"],
+      "viewport": "The number is the headline; the name sits small in the plate's corner; the photo arrives in the second band.",
+      "risk": "Your name is secondary on first sight; it relies on the caption to explain the number.",
+      "comp": ".impeccable/mocks/comp-2-figure-led.png"
+    },
+    {
+      "id": "comp-3",
+      "label": "3 · Contents rail",
+      "thesis": "The report's Contents page is the navigation: a numbered left rail with LinkedIn at its foot, and an ultramarine name plate overlapping the stage photo.",
+      "palette": ["#1B2BD9", "#FFFFFF", "#0D0D0F"],
+      "materials": ["contents rail", "overlapping plate", "stage photo on black"],
+      "viewport": "A fixed left rail with six numbered sections; the photo fills the main area; key figures run along the bottom.",
+      "risk": "A fixed rail needs a mobile translation (a contents drawer), and the photo's on-stage slide text shows behind you.",
+      "comp": ".impeccable/mocks/comp-3-contents-rail.png"
+    }
+  ],
+  "steer": true
+}

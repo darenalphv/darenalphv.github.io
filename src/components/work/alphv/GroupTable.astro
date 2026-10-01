@@ -1,0 +1,207 @@
+---
+// Segment review, ALPHV Group of Companies: the group as a report table (not a chart; the home page
+// already draws the structure). Names and descriptions come straight from content.ts `group`.
+// Source: content.ts `group` (sourced from .source/content.md "Case study: ALPHV Group of Companies").
+import { group } from '../../../data/content';
+import { groupRoles } from './data';
+---
+
+<section class="group" aria-labelledby="group-heading">
+  <h2 id="group-heading" class="section-heading">The group</h2>
+
+  <table>
+    <caption>
+      Companies and community of {group.parent}, at October 2026.<a
+        class="note-ref"
+        href="#note-1"
+        aria-label="Note 1">1</a
+      >
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Company</th>
+        <th scope="col">Role</th>
+        <th scope="col">What it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        group.members.map((m) => (
+          <tr class:list={[m.kind]} data-reveal>
+            <th scope="row" class="name">
+              {m.kind === 'community' ? <a href="/work/developer-kaki/">{m.name}</a> : m.name}
+            </th>
+            <td class="role">{groupRoles[m.name]}</td>
+            <td class="does">{m.does}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</section>
+
+<style>
+  .group {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) 1fr;
+    padding: calc(130 * var(--u)) var(--gutter) calc(140 * var(--u));
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .group .section-heading {
+    margin: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  caption {
+    caption-side: bottom;
+    padding-top: calc(28 * var(--u));
+    text-align: left;
+    font-size: max(calc(20 * var(--u)), 13.5px);
+    color: var(--color-ink-2);
+  }
+
+  caption .note-ref {
+    font-size: 0.72em;
+  }
+
+  thead th {
+    padding: 0 0 calc(18 * var(--u));
+    border-bottom: max(calc(2 * var(--u)), 1px) solid var(--color-ink);
+    text-align: left;
+    font-weight: 600;
+    font-size: max(calc(20 * var(--u)), 13.5px);
+    color: var(--color-ink-2);
+  }
+
+  /* Rules sit above each row so the community row can own a dashed one, as on the home chart. */
+  tbody tr {
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  tbody tr:first-child {
+    border-top: 0;
+  }
+
+  tbody tr:last-child {
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  tbody tr.community {
+    border-top: 1px dashed var(--color-ink);
+  }
+
+  tbody th,
+  tbody td {
+    padding-block: calc(40 * var(--u));
+    text-align: left;
+    vertical-align: baseline;
+  }
+
+  .name {
+    width: calc(760 * var(--u));
+    padding-right: calc(40 * var(--u));
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: calc(62 * var(--u));
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .name a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: max(calc(2 * var(--u)), 1px);
+    text-underline-offset: 0.12em;
+    transition: color 200ms var(--ease-out-expo);
+  }
+
+  .name a:hover {
+    color: var(--color-plate);
+  }
+
+  .role {
+    width: calc(300 * var(--u));
+    font-weight: 600;
+    font-size: max(calc(28 * var(--u)), 16px);
+  }
+
+  .does {
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.5;
+    color: var(--color-ink-2);
+  }
+
+  @media (max-width: 1023px) {
+    .group {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+      padding: 56px var(--gutter) 64px;
+    }
+
+    /* As blocks the caption would jump above the rows; a column flex keeps it under them. */
+    table {
+      display: flex;
+      flex-direction: column;
+    }
+
+    tbody {
+      display: block;
+    }
+
+    caption {
+      display: block;
+      order: 1;
+      padding-top: 18px;
+      font-size: 13.5px;
+    }
+
+    /* The column heads read as labels on desktop only; on a phone each row is self-describing. */
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    tbody {
+      border-top: 1px solid var(--color-ink);
+    }
+
+    tbody tr {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 16px;
+      row-gap: 8px;
+      padding-block: 20px;
+    }
+
+    tbody th,
+    tbody td {
+      padding: 0;
+    }
+
+    .name {
+      width: auto;
+      padding: 0;
+      font-size: clamp(26px, 7.4vw, 40px);
+    }
+
+    .role {
+      width: auto;
+      font-size: 14px;
+      color: var(--color-ink-2);
+    }
+
+    .does {
+      grid-column: 1 / -1;
+      font-size: 16px;
+    }
+  }
+</style>

@@ -1,0 +1,105 @@
+---
+// Developer Kaki segment review: the review itself. A lead statement, then the account in two columns.
+// Source for every claim: .source/content.md, "Case study: Developer Kaki"; the quoted description is
+// Daren Tan's own, from LinkedIn (page note 5).
+---
+
+<section class="review" aria-labelledby="review-heading">
+  <h2 id="review-heading" class="section-heading">Review</h2>
+
+  <div class="body">
+    <p class="lead" data-reveal>
+      Developer Kaki is Malaysia’s largest developer community, and the bridge between local tech talent
+      and the companies hiring it across Southeast Asia.
+    </p>
+
+    <div class="text" data-reveal>
+      <p>
+        Daren Tan founded the community as a Facebook group in February 2019. It is still anchored there,
+        and has spread to LinkedIn, WhatsApp, XiaoHongShu and in-person events. Across them it counts more
+        than <span class="tabular">72,000</span> members.<a class="note-ref" href="#note-1" aria-label="Note 1">1</a>
+      </p>
+      <p>
+        Its value is the signal it carries. Curated job postings have surfaced more than{' '}
+        <span class="tabular">5,000</span> roles,<a class="note-ref" href="#note-2" aria-label="Note 2">2</a>{' '}
+        and alongside them members share what they earn, what employers are like to work for and how their
+        careers have moved. Daren describes it as “the most candid tech career signal in
+        Malaysia”.<a class="note-ref" href="#note-5" aria-label="Note 5">5</a>
+      </p>
+      <p>
+        The jobs have since outgrown the group. JOBS by Developer Kaki, a web portal operated under an
+        employment-agency licence, has <span class="tabular">5,000</span> registered
+        users,<a class="note-ref" href="#note-3" aria-label="Note 3">3</a>{' '}
+        and <span class="tabular">MYR 50.5k</span> in payments was verified through its Payex-Xendit gateway
+        between <span class="tabular">2023</span> and <span class="tabular">2026</span>.<a class="note-ref" href="#note-4" aria-label="Note 4">4</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .review {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) minmax(0, 1fr);
+    padding: calc(130 * var(--u)) var(--gutter) calc(150 * var(--u));
+  }
+
+  .review .section-heading {
+    margin: 0;
+  }
+
+  .lead {
+    margin: 0;
+    max-width: 30em;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 95%;
+    font-size: max(calc(56 * var(--u)), 26px);
+    line-height: 1.14;
+    letter-spacing: -0.022em;
+    color: var(--color-ink);
+  }
+
+  .text {
+    columns: 2;
+    column-gap: calc(90 * var(--u));
+    margin-top: calc(84 * var(--u));
+    padding-top: calc(40 * var(--u));
+    border-top: 1px solid var(--color-rule-soft);
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.6;
+    color: var(--color-ink);
+  }
+
+  .text p {
+    margin: 0 0 1em;
+    max-width: 62ch;
+  }
+
+  .text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .text .note-ref {
+    font-size: 0.62em;
+  }
+
+  @media (max-width: 1023px) {
+    .review {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+      padding: 56px var(--gutter) 64px;
+    }
+
+    .lead {
+      font-size: clamp(24px, 6.4vw, 34px);
+      line-height: 1.16;
+    }
+
+    .text {
+      columns: 1;
+      margin-top: 32px;
+      padding-top: 24px;
+    }
+  }
+</style>

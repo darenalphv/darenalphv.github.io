@@ -1,0 +1,30 @@
+# build
+node_modules/
+dist/
+.astro/
+.DS_Store
+
+# local-only
+.impeccable/config.local.json
+
+# confidential: unpacked key-personnel deck (marked "Strictly Private & Confidential")
+.source/deck/
+
+# AI-generated mockups contain generated likenesses of Daren; keep them local.
+# Their prompt and approval sidecars (*.png.json, *.json, prompts/) stay in the repo.
+.impeccable/mocks/**/*.png
+
+# large review captures and measurement scratch
+.impeccable/review/
+.impeccable/build/crops/
+.impeccable/build/font-match/
+.impeccable/build/scaffold/
+.impeccable/build/comp-grid.png
+
+# extracted from the confidential deck, unused by the site
+.source/deck-logos/
+.source/photos/
+
+# impeccable runtime state
+.impeccable/hook.cache.json
+.impeccable/questions/

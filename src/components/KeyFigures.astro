@@ -1,0 +1,119 @@
+---
+import { keyFigures } from '../data/content';
+
+interface Props {
+  figures?: ReadonlyArray<{ value: string; label: string; note: number }>;
+  id?: string;
+  label?: string;
+}
+const { figures = keyFigures, id = 'key-figures', label = 'Key figures' } = Astro.props;
+---
+
+<section id={id} class="figures" aria-label={label}>
+  <dl style={`--cols: ${figures.length}`}>
+    {
+      figures.map((f) => (
+        <div class="figure">
+          <dt class="label">{f.label}</dt>
+          <dd class="value tabular" data-figure={f.value}>
+            <span class="digits">{f.value}</span>
+            <a class="note-ref" href={`#note-${f.note}`} aria-label={`Note ${f.note}`}>
+              {f.note}
+            </a>
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<style>
+  .figures {
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  dl {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    margin: 0;
+    padding-block: calc(47 * var(--u)) calc(80 * var(--u));
+  }
+
+  /* The home strip keeps the approved comp's column rhythm: the widest figure gets the widest column. */
+  @media (min-width: 1024px) {
+    #key-figures dl {
+      grid-template-columns: 1.18fr 0.83fr 0.97fr 1.02fr;
+    }
+  }
+
+  .figure {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    gap: calc(9 * var(--u));
+    padding: calc(10 * var(--u)) calc(24 * var(--u));
+    text-align: center;
+  }
+
+  .figure + .figure {
+    border-left: max(calc(2 * var(--u)), 1px) solid var(--color-rule);
+  }
+
+  .value {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: calc(113 * var(--u));
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  .value .note-ref {
+    font-size: 0.26em;
+    vertical-align: 2.3em;
+  }
+
+  .label {
+    font-weight: 500;
+    font-size: max(calc(30 * var(--u)), 14px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 1023px) {
+    dl {
+      grid-template-columns: 1fr 1fr;
+      padding-block: 8px;
+    }
+
+    .figure {
+      align-items: flex-start;
+      text-align: left;
+      gap: 8px;
+      padding: 22px var(--gutter);
+    }
+
+    .figure + .figure {
+      border-left: 0;
+    }
+
+    .figure:nth-child(even) {
+      border-left: 1px solid var(--color-rule);
+    }
+
+    .figure:nth-child(n + 3) {
+      border-top: 1px solid var(--color-rule-soft);
+    }
+
+    .value {
+      font-size: clamp(34px, 10.5vw, 64px);
+    }
+
+    .label {
+      font-size: 14px;
+    }
+  }
+</style>

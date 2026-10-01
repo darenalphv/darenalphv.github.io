@@ -1,0 +1,150 @@
+---
+// Signal: the page's one ultramarine plate. The 72,000 members, and the home cover that draws them.
+// Source: .source/content.md, "Case study: Developer Kaki" (72,000+ members); the cover art's 72,000
+// points are set in src/scripts/cover-field.ts (COUNT = 72000).
+---
+
+<section class="signal on-plate" aria-labelledby="signal-heading">
+  <h2 id="signal-heading" class="section-heading">Signal</h2>
+
+  <div class="body">
+    <p class="count tabular" data-reveal data-figure="72,000">
+      <span class="digits">72,000</span><a
+        class="note-ref"
+        href="#note-1"
+        aria-label="Note 1">1</a
+      >
+    </p>
+
+    <p class="statement" data-reveal>The cover of this report draws one point for every member.</p>
+
+    <p class="aside" data-reveal>
+      On the home page, <span class="tabular">72,000</span> points fill the ultramarine plate behind
+      Daren’s name. The first thing a visitor sees is the community, counted.
+    </p>
+
+    <a class="see" href="/">
+      See the cover
+      <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"
+        ><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"></path></svg
+      >
+    </a>
+  </div>
+</section>
+
+<style>
+  .signal {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) minmax(0, 1fr);
+    padding: calc(120 * var(--u)) var(--gutter) calc(140 * var(--u));
+    background: var(--color-plate);
+    color: #fff;
+  }
+
+  .signal .section-heading {
+    margin: 0;
+    color: #fff;
+  }
+
+  .count {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 88%;
+    font-size: calc(560 * var(--u));
+    line-height: 0.8;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    /* The digits sit on the heading's line: pull the cap height up to it. */
+    margin-top: calc(-36 * var(--u));
+  }
+
+  .count .note-ref {
+    font-size: max(calc(44 * var(--u)), 14px);
+    vertical-align: calc(340 * var(--u));
+    margin-left: calc(14 * var(--u));
+    color: #fff;
+  }
+
+  .count .note-ref:hover {
+    color: var(--color-plate-ink);
+  }
+
+  .statement {
+    margin: calc(130 * var(--u)) 0 0;
+    max-width: 24em;
+    font-weight: 700;
+    font-stretch: 95%;
+    font-size: max(calc(56 * var(--u)), 26px);
+    line-height: 1.12;
+    letter-spacing: -0.022em;
+  }
+
+  .aside {
+    margin: calc(28 * var(--u)) 0 0;
+    max-width: 52ch;
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.6;
+    color: var(--color-plate-ink);
+  }
+
+  .see {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-top: calc(48 * var(--u));
+    font-weight: 600;
+    font-size: max(calc(28 * var(--u)), 16px);
+    color: #fff;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition: text-decoration-thickness 180ms var(--ease-out-expo);
+  }
+
+  .see .arrow {
+    width: 1.25em;
+    height: 1.25em;
+    transition: transform 260ms var(--ease-out-expo);
+  }
+
+  .see:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .see:hover .arrow {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 1023px) {
+    .signal {
+      grid-template-columns: 1fr;
+      row-gap: 28px;
+      padding: 56px var(--gutter) 64px;
+    }
+
+    .count {
+      margin-top: 0;
+      font-size: clamp(92px, 27vw, 240px);
+    }
+
+    .count .note-ref {
+      font-size: 14px;
+      vertical-align: calc(clamp(92px, 27vw, 240px) * 0.6);
+      margin-left: 6px;
+    }
+
+    .statement {
+      margin-top: 32px;
+      font-size: clamp(24px, 6.4vw, 34px);
+    }
+
+    .aside {
+      margin-top: 16px;
+    }
+
+    .see {
+      margin-top: 28px;
+    }
+  }
+</style>

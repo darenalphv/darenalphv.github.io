@@ -1,0 +1,889 @@
+{
+  "tool": "comp-spec",
+  "version": 1,
+  "createdAt": "2026-10-01T11:10:31.430Z",
+  "comp": ".impeccable/mocks/comp-1-cover-split.png",
+  "warnings": [
+    "region cover-plate: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region cover-plate: \"container\": true set in the regions file (the region-size refusal is overridden: one undivided element)",
+    "region cover-photo: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region structure-chart: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)"
+  ],
+  "uncoveredInkCells": [],
+  "compSize": {
+    "width": 2688,
+    "height": 1520
+  },
+  "aspect": 1.7684,
+  "orientation": "landscape",
+  "palette": [
+    {
+      "hex": "#f8f8f8",
+      "coverage": 0.4488
+    },
+    {
+      "hex": "#0921cc",
+      "coverage": 0.3024
+    },
+    {
+      "hex": "#16171a",
+      "coverage": 0.2202
+    },
+    {
+      "hex": "#293756",
+      "coverage": 0.0166
+    },
+    {
+      "hex": "#0b0d2d",
+      "coverage": 0.0119
+    }
+  ],
+  "bands": [
+    {
+      "y": 0.0139,
+      "strength": 0.2753
+    },
+    {
+      "y": 0.0556,
+      "strength": 1
+    },
+    {
+      "y": 0.2083,
+      "strength": 0.3943
+    },
+    {
+      "y": 0.2917,
+      "strength": 0.4207
+    },
+    {
+      "y": 0.3194,
+      "strength": 0.2746
+    },
+    {
+      "y": 0.3472,
+      "strength": 0.3967
+    },
+    {
+      "y": 0.3889,
+      "strength": 0.3549
+    },
+    {
+      "y": 0.6667,
+      "strength": 1
+    },
+    {
+      "y": 0.7083,
+      "strength": 0.4611
+    },
+    {
+      "y": 0.7639,
+      "strength": 0.3749
+    },
+    {
+      "y": 0.8056,
+      "strength": 0.3511
+    },
+    {
+      "y": 0.8889,
+      "strength": 0.2998
+    }
+  ],
+  "regions": [
+    {
+      "id": "nav-name",
+      "kind": "text",
+      "note": "wordmark 'Daren Tan' in black on white top bar",
+      "grid": "A0:A0",
+      "coverBox": {
+        "x": 0,
+        "y": 0,
+        "w": 0.1,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0.1001,
+        "h": 0.0632
+      },
+      "px": {
+        "x": 0,
+        "y": 0,
+        "w": 269,
+        "h": 96
+      },
+      "aspect": 2.8021,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.8417
+        },
+        {
+          "hex": "#0826cd",
+          "coverage": 0.094
+        },
+        {
+          "hex": "#090909",
+          "coverage": 0.0472
+        },
+        {
+          "hex": "#c6c6c5",
+          "coverage": 0.0098
+        },
+        {
+          "hex": "#818181",
+          "coverage": 0.0073
+        }
+      ],
+      "detail": {
+        "energy": 22.1283
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "nav-links",
+      "kind": "control",
+      "note": "nav links: Key Figures, Group Structure, Profile, Recognition, Media",
+      "grid": "G0:I0",
+      "coverBox": {
+        "x": 0.6,
+        "y": 0,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.6001,
+        "y": 0,
+        "w": 0.2999,
+        "h": 0.0632
+      },
+      "px": {
+        "x": 1613,
+        "y": 0,
+        "w": 806,
+        "h": 96
+      },
+      "aspect": 8.3958,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.8641
+        },
+        {
+          "hex": "#19181a",
+          "coverage": 0.1102
+        },
+        {
+          "hex": "#6e6e6e",
+          "coverage": 0.0144
+        },
+        {
+          "hex": "#cacaca",
+          "coverage": 0.0061
+        },
+        {
+          "hex": "#413f41",
+          "coverage": 0.0052
+        }
+      ],
+      "detail": {
+        "energy": 36.7127
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "nav-cta",
+      "kind": "control",
+      "note": "solid ultramarine rectangular button 'Connect on LinkedIn'",
+      "grid": "J0:J0",
+      "coverBox": {
+        "x": 0.9,
+        "y": 0,
+        "w": 0.1,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.8999,
+        "y": 0,
+        "w": 0.1001,
+        "h": 0.0632
+      },
+      "px": {
+        "x": 2419,
+        "y": 0,
+        "w": 269,
+        "h": 96
+      },
+      "aspect": 2.8021,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.5984
+        },
+        {
+          "hex": "#1226d5",
+          "coverage": 0.2715
+        },
+        {
+          "hex": "#181818",
+          "coverage": 0.0957
+        },
+        {
+          "hex": "#8695e8",
+          "coverage": 0.0245
+        },
+        {
+          "hex": "#233dd2",
+          "coverage": 0.0099
+        }
+      ],
+      "detail": {
+        "energy": 28.8293
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "cover-plate",
+      "kind": "chrome",
+      "note": "ultramarine cover plate; its swirl of points is a runtime data chart drawn by WebGL from 72,000 points, one per Developer Kaki member",
+      "grid": "A0:F6",
+      "codeDrawn": true,
+      "container": true,
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0.6,
+        "h": 0.7
+      },
+      "px": {
+        "x": 0,
+        "y": 0,
+        "w": 1613,
+        "h": 1064
+      },
+      "aspect": 1.516,
+      "palette": [
+        {
+          "hex": "#0921cc",
+          "coverage": 0.6982
+        },
+        {
+          "hex": "#f7f8f8",
+          "coverage": 0.229
+        },
+        {
+          "hex": "#18181b",
+          "coverage": 0.041
+        },
+        {
+          "hex": "#273cd1",
+          "coverage": 0.017
+        },
+        {
+          "hex": "#4759d5",
+          "coverage": 0.0147
+        }
+      ],
+      "detail": {
+        "energy": 39.9403
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "cover-label",
+      "kind": "text",
+      "note": "white label 'Report 2016 to 2026'",
+      "grid": "A1:B1",
+      "coverBox": {
+        "x": 0,
+        "y": 0.1,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0246,
+        "y": 0.1711,
+        "w": 0.058,
+        "h": 0.0289
+      },
+      "px": {
+        "x": 66,
+        "y": 260,
+        "w": 156,
+        "h": 44
+      },
+      "aspect": 3.5455,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.6059
+        },
+        {
+          "hex": "#0b1ec9",
+          "coverage": 0.3427
+        },
+        {
+          "hex": "#394cd5",
+          "coverage": 0.0475
+        },
+        {
+          "hex": "#8088e8",
+          "coverage": 0.0026
+        },
+        {
+          "hex": "#5868d8",
+          "coverage": 0.0013
+        }
+      ],
+      "detail": {
+        "energy": 10.0609
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "cover-name",
+      "kind": "text",
+      "note": "huge white heavy grotesque 'Daren Tan'",
+      "grid": "A2:D2",
+      "coverBox": {
+        "x": 0,
+        "y": 0.2,
+        "w": 0.4,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0246,
+        "y": 0.2,
+        "w": 0.3754,
+        "h": 0.1
+      },
+      "px": {
+        "x": 66,
+        "y": 304,
+        "w": 1009,
+        "h": 152
+      },
+      "aspect": 6.6382,
+      "palette": [
+        {
+          "hex": "#0920cc",
+          "coverage": 0.4933
+        },
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.4756
+        },
+        {
+          "hex": "#4d5fd8",
+          "coverage": 0.0105
+        },
+        {
+          "hex": "#c2c8f3",
+          "coverage": 0.0105
+        },
+        {
+          "hex": "#9ca5ea",
+          "coverage": 0.0101
+        }
+      ],
+      "detail": {
+        "energy": 62.5277
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 8,
+          "capHeightPx": 128.8,
+          "inkIsDark": false,
+          "allCaps": false,
+          "advance": 0.9591,
+          "advTall": 0.9591,
+          "advX": null,
+          "gap": 0.0582,
+          "xRatio": 0.8324,
+          "stemW": 0.3051,
+          "contrast": 1.6437,
+          "serif": null,
+          "densTall": 0.6522,
+          "densX": null,
+          "weight": 0.6522
+        },
+        "widthClass": "wide",
+        "weightClass": "bold",
+        "chosen": {
+          "family": "Archivo Black",
+          "weight": 400,
+          "fontSizePx": 187,
+          "source": "index",
+          "fp": {
+            "lines": 1,
+            "glyphs": 8,
+            "capHeightPx": 129,
+            "inkIsDark": true,
+            "allCaps": false,
+            "advance": 0.8952,
+            "advTall": 0.9688,
+            "advX": 0.8332,
+            "gap": 0.0853,
+            "xRatio": 0.7694,
+            "stemW": 0.2988,
+            "contrast": 1.4311,
+            "serif": 1,
+            "densTall": 0.635,
+            "densX": 0.7151,
+            "weight": 0.635
+          },
+          "stamp": "966cc85f87fb"
+        }
+      }
+    },
+    {
+      "id": "cover-title",
+      "kind": "text",
+      "note": "white two-line title 'Founder & Chief Executive Officer, ALPHV Group of Companies'",
+      "grid": "A3:C3",
+      "coverBox": {
+        "x": 0,
+        "y": 0.3,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0223,
+        "y": 0.3,
+        "w": 0.2775,
+        "h": 0.1
+      },
+      "px": {
+        "x": 60,
+        "y": 456,
+        "w": 746,
+        "h": 152
+      },
+      "aspect": 4.9079,
+      "palette": [
+        {
+          "hex": "#0a21cd",
+          "coverage": 0.7497
+        },
+        {
+          "hex": "#f7f7f8",
+          "coverage": 0.2018
+        },
+        {
+          "hex": "#6575dd",
+          "coverage": 0.018
+        },
+        {
+          "hex": "#253bcf",
+          "coverage": 0.0158
+        },
+        {
+          "hex": "#909ce6",
+          "coverage": 0.0148
+        }
+      ],
+      "detail": {
+        "energy": 85.7743
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "cover-caption",
+      "kind": "text",
+      "note": "small white caption 'Cover art: 72,000 points, one for every Developer Kaki member'",
+      "grid": "A6:C6",
+      "box": {
+        "x": 0,
+        "y": 0.6,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "px": {
+        "x": 0,
+        "y": 912,
+        "w": 806,
+        "h": 152
+      },
+      "aspect": 5.3026,
+      "palette": [
+        {
+          "hex": "#0921ca",
+          "coverage": 0.5733
+        },
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.3912
+        },
+        {
+          "hex": "#dbe1f8",
+          "coverage": 0.023
+        },
+        {
+          "hex": "#2b3fcd",
+          "coverage": 0.0066
+        },
+        {
+          "hex": "#b4bcf5",
+          "coverage": 0.0058
+        }
+      ],
+      "detail": {
+        "energy": 22.8
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "cover-photo",
+      "kind": "image",
+      "note": "real stage photograph of Daren on black stage (ships as stage-main.jpg, never regenerated)",
+      "grid": "G0:J6",
+      "bleed": true,
+      "box": {
+        "x": 0.6,
+        "y": 0,
+        "w": 0.4,
+        "h": 0.7
+      },
+      "px": {
+        "x": 1613,
+        "y": 0,
+        "w": 1075,
+        "h": 1064
+      },
+      "aspect": 1.0103,
+      "palette": [
+        {
+          "hex": "#17171b",
+          "coverage": 0.6945
+        },
+        {
+          "hex": "#f7f6f6",
+          "coverage": 0.1654
+        },
+        {
+          "hex": "#283757",
+          "coverage": 0.071
+        },
+        {
+          "hex": "#0b0d2d",
+          "coverage": 0.0439
+        },
+        {
+          "hex": "#365c8a",
+          "coverage": 0.0253
+        }
+      ],
+      "detail": {
+        "energy": 15.9706
+      },
+      "medium": "raster",
+      "plate": "assets/plates/cover-photo.png",
+      "text": null
+    },
+    {
+      "id": "fig-1",
+      "kind": "text",
+      "note": "large statistic numeral '72,000+' with superscript 1 over label 'Developer Kaki members'",
+      "grid": "A7:C7",
+      "snap": false,
+      "box": {
+        "x": 0,
+        "y": 0.7,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "px": {
+        "x": 0,
+        "y": 1064,
+        "w": 806,
+        "h": 152
+      },
+      "aspect": 5.3026,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.8481
+        },
+        {
+          "hex": "#090909",
+          "coverage": 0.1316
+        },
+        {
+          "hex": "#515151",
+          "coverage": 0.0098
+        },
+        {
+          "hex": "#bababa",
+          "coverage": 0.006
+        },
+        {
+          "hex": "#898989",
+          "coverage": 0.0045
+        }
+      ],
+      "detail": {
+        "energy": 45.7157
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "fig-2",
+      "kind": "text",
+      "note": "large statistic numeral '4' with superscript 2 over label 'Group companies', thin rule at left",
+      "grid": "D7:E7",
+      "snap": false,
+      "box": {
+        "x": 0.3,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "px": {
+        "x": 806,
+        "y": 1064,
+        "w": 538,
+        "h": 152
+      },
+      "aspect": 3.5395,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.9356
+        },
+        {
+          "hex": "#090909",
+          "coverage": 0.0494
+        },
+        {
+          "hex": "#c3c3c3",
+          "coverage": 0.0093
+        },
+        {
+          "hex": "#616161",
+          "coverage": 0.0038
+        },
+        {
+          "hex": "#909090",
+          "coverage": 0.0019
+        }
+      ],
+      "detail": {
+        "energy": 20.6
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "fig-3",
+      "kind": "text",
+      "note": "large statistic numeral '10' with superscript 3 over label 'Years in technology', thin rule at left",
+      "grid": "F7:G7",
+      "snap": false,
+      "box": {
+        "x": 0.5,
+        "y": 0.7,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "px": {
+        "x": 1344,
+        "y": 1064,
+        "w": 538,
+        "h": 152
+      },
+      "aspect": 3.5395,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.9143
+        },
+        {
+          "hex": "#090909",
+          "coverage": 0.0712
+        },
+        {
+          "hex": "#b1b1b1",
+          "coverage": 0.0066
+        },
+        {
+          "hex": "#6d6d6d",
+          "coverage": 0.0055
+        },
+        {
+          "hex": "#3f3f3f",
+          "coverage": 0.0024
+        }
+      ],
+      "detail": {
+        "energy": 27.5283
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "fig-4",
+      "kind": "text",
+      "note": "large statistic numeral '30+' with superscript 4 over label 'Talks delivered', thin rule at left",
+      "grid": "H7:J7",
+      "snap": false,
+      "box": {
+        "x": 0.7,
+        "y": 0.7,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "px": {
+        "x": 1882,
+        "y": 1064,
+        "w": 806,
+        "h": 152
+      },
+      "aspect": 5.3026,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.9282
+        },
+        {
+          "hex": "#090909",
+          "coverage": 0.0602
+        },
+        {
+          "hex": "#505050",
+          "coverage": 0.005
+        },
+        {
+          "hex": "#8f8f8f",
+          "coverage": 0.005
+        },
+        {
+          "hex": "#bfbfbf",
+          "coverage": 0.0016
+        }
+      ],
+      "detail": {
+        "energy": 23.9908
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "structure-heading",
+      "kind": "text",
+      "note": "section heading 'Group Structure'",
+      "grid": "A8:B9",
+      "box": {
+        "x": 0,
+        "y": 0.8,
+        "w": 0.2,
+        "h": 0.2
+      },
+      "px": {
+        "x": 0,
+        "y": 1216,
+        "w": 538,
+        "h": 304
+      },
+      "aspect": 1.7697,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.9663
+        },
+        {
+          "hex": "#0b0b0b",
+          "coverage": 0.0282
+        },
+        {
+          "hex": "#7e7e7e",
+          "coverage": 0.0028
+        },
+        {
+          "hex": "#3f3f3f",
+          "coverage": 0.0016
+        },
+        {
+          "hex": "#b7b7b7",
+          "coverage": 0.0011
+        }
+      ],
+      "detail": {
+        "energy": 14.1485
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "structure-chart",
+      "kind": "chrome",
+      "note": "org chart of outlined boxes: 'ALPHV Group of Companies' over 'ALPHV Technologies', 'ALPHV Academy', 'ALPHV DevRel', 'ALPHV Recruit' joined by solid lines, and a dashed box 'Developer Kaki' joined by a dashed line",
+      "grid": "B8:I9",
+      "codeDrawn": true,
+      "box": {
+        "x": 0.1,
+        "y": 0.8,
+        "w": 0.8,
+        "h": 0.2
+      },
+      "px": {
+        "x": 269,
+        "y": 1216,
+        "w": 2150,
+        "h": 304
+      },
+      "aspect": 7.0724,
+      "palette": [
+        {
+          "hex": "#f8f8f8",
+          "coverage": 0.9739
+        },
+        {
+          "hex": "#0a0a0a",
+          "coverage": 0.019
+        },
+        {
+          "hex": "#626262",
+          "coverage": 0.0038
+        },
+        {
+          "hex": "#9a9a9a",
+          "coverage": 0.0018
+        },
+        {
+          "hex": "#404040",
+          "coverage": 0.0016
+        }
+      ],
+      "detail": {
+        "energy": 15.947
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    }
+  ]
+}

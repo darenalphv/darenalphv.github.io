@@ -1,0 +1,105 @@
+---
+// A segment review's milestones, set as a report table: date, milestone, note.
+interface Props {
+  heading?: string;
+  rows: ReadonlyArray<{ date: string; text: string; note?: number }>;
+}
+const { heading = 'Milestones', rows } = Astro.props;
+---
+
+<section class="milestones" aria-labelledby="milestones-heading">
+  <h2 id="milestones-heading" class="section-heading">{heading}</h2>
+  <table>
+    <thead class="sr-only">
+      <tr><th scope="col">Date</th><th scope="col">Milestone</th></tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr data-reveal>
+            <th scope="row" class="date tabular">{row.date}</th>
+            <td>
+              {row.text}
+              {row.note && (
+                <a class="note-ref" href={`#note-${row.note}`} aria-label={`Note ${row.note}`}>
+                  {row.note}
+                </a>
+              )}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</section>
+
+<style>
+  .milestones {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) 1fr;
+    padding: calc(110 * var(--u)) var(--gutter);
+  }
+
+  .milestones .section-heading {
+    margin: 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: max(calc(2 * var(--u)), 1px) solid var(--color-ink);
+  }
+
+  tr {
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  th,
+  td {
+    padding-block: calc(26 * var(--u));
+    text-align: left;
+    vertical-align: baseline;
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.4;
+  }
+
+  .date {
+    width: calc(320 * var(--u));
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  td {
+    max-width: 62ch;
+    color: var(--color-ink);
+  }
+
+  td .note-ref {
+    font-size: 0.6em;
+  }
+
+  @media (max-width: 1023px) {
+    .milestones {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+      padding: 56px var(--gutter);
+    }
+
+    tr {
+      display: grid;
+      padding-block: 14px;
+    }
+
+    th,
+    td {
+      padding-block: 0;
+      font-size: 16px;
+    }
+
+    .date {
+      width: auto;
+      font-size: 14px;
+      color: var(--color-ink-2);
+    }
+  }
+</style>

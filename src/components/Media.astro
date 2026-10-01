@@ -1,0 +1,383 @@
+---
+import { onAir, talks } from '../data/content';
+
+// "27 Feb 2025" → "2025-02-27" for <time datetime>; "37 min" → "PT37M".
+const MONTHS: Record<string, string> = {
+  Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+  Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12',
+};
+const isoDate = (d: string) => {
+  const [day, mon, year] = d.split(' ');
+  return `${year}-${MONTHS[mon]}-${day.padStart(2, '0')}`;
+};
+const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
+---
+
+<section id="media" class="media on-plate" aria-labelledby="media-heading">
+  <h2 id="media-heading" class="section-heading">Media</h2>
+
+  <div class="block">
+    <div class="block-head">
+      <h3 class="block-heading">On air</h3>
+      <p class="block-sub">BFM 89.9</p>
+    </div>
+
+    <ul class="episodes">
+      {
+        onAir.map((ep) => (
+          <li class="episode" data-reveal>
+            <p class="ep-meta tabular">
+              <span>
+                <time datetime={isoDate(ep.date)}>{ep.date}</time>
+                <span aria-hidden="true">{' · '}</span>
+                <span class="ep-show">{ep.show}</span>
+              </span>
+              <time datetime={isoLength(ep.length)}>{ep.length}</time>
+            </p>
+            <h4 class="ep-title">
+              <a href={ep.url} target="_blank" rel="noopener">
+                {ep.title}
+                <span class="sr-only"> (BFM 89.9, opens in a new tab)</span>
+              </a>
+            </h4>
+            <span class="ep-listen" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M7 4.8v14.4L19 12Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+              </svg>
+              Listen on bfm.my
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="block">
+    <div class="block-head">
+      <h3 class="block-heading">Selected talks</h3>
+      <p class="block-sub">Recorded on YouTube</p>
+    </div>
+
+    <table class="talks">
+      <thead class="sr-only">
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Talk</th>
+          <th scope="col">Venue</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          talks.map((t) => (
+            <tr data-reveal>
+              <td class="date tabular">
+                <time datetime={isoDate(t.date)}>{t.date}</time>
+              </td>
+              <th scope="row" class="talk">
+                <a href={`https://www.youtube.com/watch?v=${t.youtube}`} target="_blank" rel="noopener">
+                  {t.title}
+                  <span class="sr-only"> (YouTube, opens in a new tab)</span>
+                </a>
+              </th>
+              <td class="venue">{t.venue}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  /* The page's one rhythm break after the white sections: a full-bleed ultramarine plate,
+     like the coloured divider spread of a printed report. */
+  .media {
+    --plate-rule-soft: color-mix(in oklab, var(--color-plate-ink) 42%, transparent);
+    --plate-underline: color-mix(in oklab, #fff 38%, transparent);
+    padding: calc(110 * var(--u)) var(--gutter) calc(150 * var(--u));
+    background: var(--color-plate);
+    color: #fff;
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .media .section-heading {
+    margin: 0 0 calc(84 * var(--u));
+  }
+
+  .block {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) 1fr;
+    align-items: start;
+    border-top: max(calc(2 * var(--u)), 1px) solid #fff;
+  }
+
+  .block + .block {
+    margin-top: calc(140 * var(--u));
+  }
+
+  .block-head {
+    padding-top: calc(28 * var(--u));
+  }
+
+  .block-heading {
+    margin: 0;
+    font-weight: 700;
+    font-size: max(calc(30 * var(--u)), 18px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .block-sub {
+    margin: calc(8 * var(--u)) 0 0;
+    font-weight: 500;
+    font-size: max(calc(22 * var(--u)), 14px);
+    color: var(--color-plate-ink);
+  }
+
+  /* On air: the dominant element, three episodes as a row of ruled columns. */
+  .episodes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .episode {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(600 * var(--u));
+    padding: calc(28 * var(--u)) calc(48 * var(--u)) calc(8 * var(--u));
+  }
+
+  .episode:first-child {
+    padding-left: 0;
+  }
+
+  .episode:last-child {
+    padding-right: 0;
+  }
+
+  .episode + .episode {
+    border-left: 1px solid var(--plate-rule-soft);
+  }
+
+  .ep-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin: 0;
+    font-weight: 500;
+    font-size: max(calc(24 * var(--u)), 14px);
+    color: var(--color-plate-ink);
+  }
+
+  .ep-show {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .ep-title {
+    margin: calc(86 * var(--u)) 0 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(70 * var(--u)), 30px);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+  }
+
+  .ep-title a {
+    color: #fff;
+    text-decoration-line: underline;
+    text-decoration-thickness: max(calc(3 * var(--u)), 1px);
+    text-decoration-color: var(--plate-underline);
+    text-underline-offset: 0.12em;
+    transition: text-decoration-color 220ms var(--ease-out-expo);
+  }
+
+  /* The whole column is the target; the title stays the link. */
+  .ep-title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .episode:hover .ep-title a,
+  .ep-title a:focus-visible {
+    text-decoration-color: #fff;
+  }
+
+  .ep-listen {
+    display: flex;
+    align-items: center;
+    gap: 0.55em;
+    margin-top: auto;
+    padding-top: calc(64 * var(--u));
+    font-weight: 500;
+    font-size: max(calc(22 * var(--u)), 14px);
+    color: var(--color-plate-ink);
+    transition: color 220ms var(--ease-out-expo);
+  }
+
+  .ep-listen svg {
+    width: max(calc(34 * var(--u)), 20px);
+    height: max(calc(34 * var(--u)), 20px);
+    transition: transform 260ms var(--ease-out-expo);
+  }
+
+  .episode:hover .ep-listen {
+    color: #fff;
+  }
+
+  .episode:hover .ep-listen svg {
+    transform: translateX(5px);
+  }
+
+  /* Selected talks: the quieter table below. */
+  .talks {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .talks tr + tr {
+    border-top: 1px solid var(--plate-rule-soft);
+  }
+
+  .talks td,
+  .talks th {
+    padding-block: calc(22 * var(--u));
+    text-align: left;
+    vertical-align: baseline;
+    font-size: max(calc(25 * var(--u)), 15px);
+    line-height: 1.4;
+  }
+
+  .talks tr:first-child > * {
+    padding-top: calc(30 * var(--u));
+  }
+
+  .date {
+    width: calc(260 * var(--u));
+    white-space: nowrap;
+    font-weight: 500;
+    color: var(--color-plate-ink);
+  }
+
+  .talk {
+    padding-right: calc(48 * var(--u));
+    font-weight: 500;
+  }
+
+  .talk a {
+    color: #fff;
+    text-decoration-line: underline;
+    text-decoration-color: var(--plate-underline);
+    transition: text-decoration-color 220ms var(--ease-out-expo);
+  }
+
+  .talk a:hover {
+    text-decoration-color: #fff;
+    text-decoration-thickness: 2px;
+  }
+
+  .venue {
+    width: calc(700 * var(--u));
+    color: var(--color-plate-ink);
+  }
+
+  @media (max-width: 1023px) {
+    .media {
+      padding: 56px var(--gutter) 64px;
+    }
+
+    .media .section-heading {
+      margin-bottom: 32px;
+    }
+
+    .block {
+      grid-template-columns: 1fr;
+      border-top-width: 2px;
+    }
+
+    .block + .block {
+      margin-top: 56px;
+    }
+
+    .block-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 16px;
+    }
+
+    .block-sub {
+      margin: 0;
+    }
+
+    .episodes {
+      grid-template-columns: 1fr;
+      margin-top: 8px;
+    }
+
+    .episode,
+    .episode:first-child,
+    .episode:last-child {
+      min-height: 0;
+      padding: 20px 0 24px;
+    }
+
+    .episode + .episode {
+      border-left: 0;
+      border-top: 1px solid var(--plate-rule-soft);
+    }
+
+    .ep-title {
+      margin-top: 18px;
+      font-size: clamp(28px, 7.6vw, 40px);
+      text-wrap: pretty;
+    }
+
+    .ep-listen {
+      padding-top: 18px;
+    }
+
+    .talks,
+    .talks tbody {
+      display: block;
+      margin-top: 8px;
+    }
+
+    .talks tbody {
+      margin-top: 0;
+    }
+
+    .talks tr {
+      display: grid;
+      row-gap: 4px;
+      padding-block: 14px;
+    }
+
+    .talks td,
+    .talks th,
+    .talks tr:first-child > * {
+      padding: 0;
+    }
+
+    .date {
+      width: auto;
+      font-size: 14px;
+    }
+
+    .talk {
+      font-size: 16px;
+    }
+
+    .venue {
+      width: auto;
+      font-size: 14px;
+    }
+  }
+</style>
