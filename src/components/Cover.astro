@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets';
+import coverPhoto from '../../assets/plates/cover-photo.png';
+import { person } from '../data/content';
+---
+
+<section class="cover" aria-labelledby="cover-name">
+  <div class="plate on-plate" data-cover-plate>
+    <canvas class="field" aria-hidden="true" data-cover-field></canvas>
+    <p class="period">{person.period}</p>
+    <h1 id="cover-name" class="name">{person.name}</h1>
+    <p class="title">
+      <span>{person.role},</span>
+      <span>{person.company}</span>
+    </p>
+    <p class="caption">Cover art: 72,000 points, one for every Developer Kaki member</p>
+  </div>
+
+  <figure class="photo on-stage">
+    <Image
+      src={coverPhoto}
+      alt="Daren Tan speaking on stage, microphone in hand, in a navy blazer"
+      widths={[640, 960, 1280, 1613]}
+      sizes="(min-width: 1024px) 43vw, 100vw"
+      format="webp"
+      quality={84}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </figure>
+</section>
+
+<script>
+  import { mountCoverField } from '../scripts/cover-field';
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-cover-field]');
+  if (canvas) mountCoverField(canvas);
+</script>
+
+<style>
+  .cover {
+    display: grid;
+    grid-template-columns: calc(1540 * var(--u)) 1fr;
+    height: calc(922 * var(--u));
+    background: var(--color-stage);
+  }
+
+  .plate {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-plate);
+    color: #fff;
+    isolation: isolate;
+  }
+
+  .field {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .period,
+  .name,
+  .title,
+  .caption {
+    position: absolute;
+    left: var(--gutter);
+    margin: 0;
+  }
+
+  .period {
+    top: calc(52 * var(--u));
+    font-weight: 500;
+    font-size: max(calc(32 * var(--u)), 14px);
+    letter-spacing: -0.005em;
+  }
+
+  .name {
+    top: calc(145 * var(--u));
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 88%;
+    font-size: calc(250 * var(--u));
+    line-height: 1;
+    letter-spacing: -0.014em;
+    white-space: nowrap;
+  }
+
+  .title {
+    top: calc(397 * var(--u));
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    font-stretch: 95%;
+    font-size: calc(59.5 * var(--u));
+    line-height: 1.04;
+    letter-spacing: -0.022em;
+  }
+
+  .caption {
+    top: calc(865 * var(--u));
+    font-weight: 500;
+    font-size: max(calc(22 * var(--u)), 12px);
+    color: #fff;
+  }
+
+  .photo {
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-stage);
+  }
+
+  .photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 0%;
+  }
+
+  @media (max-width: 1023px) {
+    .cover {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+
+    .plate {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: min(78svh, 640px);
+      padding: 28px var(--gutter) 22px;
+    }
+
+    .period,
+    .name,
+    .title,
+    .caption {
+      position: static;
+    }
+
+    .period {
+      font-size: 14px;
+    }
+
+    .name {
+      margin-top: auto;
+      font-size: min(16.5vw, 120px);
+      white-space: normal;
+    }
+
+    .title {
+      font-size: clamp(22px, 6.2vw, 40px);
+      line-height: 1.04;
+    }
+
+    .caption {
+      margin-top: 28px;
+      font-size: 12px;
+      color: var(--color-plate-ink);
+    }
+
+    .photo {
+      aspect-ratio: 1 / 1;
+    }
+  }
+</style>

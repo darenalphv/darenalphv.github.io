@@ -1,0 +1,163 @@
+---
+import { LINKEDIN, nav, person } from '../data/content';
+---
+
+<header class="site-header" data-site-header>
+  <a href="/" class="wordmark" aria-label={`${person.name}, home`}>{person.name}</a>
+
+  <nav class="site-nav" aria-label="Sections">
+    <ul>
+      {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+    </ul>
+  </nav>
+
+  <button class="contents-toggle" type="button" popovertarget="contents" aria-haspopup="true">
+    Contents
+  </button>
+
+  <a class="btn-linkedin header-cta" href={LINKEDIN} rel="me noopener" target="_blank">
+    Connect on LinkedIn
+  </a>
+</header>
+
+<nav id="contents" class="contents-menu" popover aria-label="Contents">
+  <ol>
+    {
+      nav.map((item) => (
+        <li>
+          <a href={item.href} onclick="document.getElementById('contents').hidePopover()">
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+    <li><a href="/work/alphv-group/">ALPHV Group of Companies</a></li>
+    <li><a href="/work/developer-kaki/">Developer Kaki</a></li>
+  </ol>
+</nav>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: calc(48 * var(--u));
+    height: var(--nav-h);
+    padding-inline: var(--gutter) calc(67 * var(--u));
+    background: var(--color-paper);
+  }
+
+  .wordmark {
+    margin-right: auto;
+    font-weight: 700;
+    font-size: max(calc(34 * var(--u)), 18px);
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: calc(48 * var(--u));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-nav a {
+    font-weight: 500;
+    font-size: max(calc(20 * var(--u)), 13px);
+    color: var(--color-ink);
+    text-decoration: none;
+    padding-block: 0.5em;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 260ms var(--ease-out-expo);
+  }
+
+  .site-nav a:hover {
+    background-size: 100% 1px;
+  }
+
+  .header-cta {
+    margin-left: calc(28 * var(--u));
+    height: calc(43 * var(--u));
+    min-height: 34px;
+    padding-inline: max(calc(18 * var(--u)), 14px);
+    font-size: max(calc(18 * var(--u)), 13px);
+  }
+
+  .contents-toggle {
+    display: none;
+    height: 38px;
+    padding-inline: 12px;
+    border: 1px solid var(--color-ink);
+    background: transparent;
+    color: var(--color-ink);
+    font: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .contents-menu {
+    inset: var(--nav-h) 0 auto 0;
+    width: 100%;
+    margin: 0;
+    padding: 8px var(--gutter) 24px;
+    border: 0;
+    border-bottom: 1px solid var(--color-ink);
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .contents-menu ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contents-menu a {
+    display: block;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--color-rule-soft);
+    font-weight: 700;
+    font-stretch: 90%;
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .contents-menu::backdrop {
+    background: color-mix(in oklab, var(--color-ink) 30%, transparent);
+  }
+
+  @media (max-width: 1023px) {
+    .site-header {
+      gap: 8px;
+    }
+    .site-nav {
+      display: none;
+    }
+    .contents-toggle {
+      display: inline-flex;
+      align-items: center;
+    }
+    .header-cta {
+      margin-left: 0;
+      height: 38px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .header-cta {
+      padding-inline: 10px;
+      font-size: 13px;
+    }
+  }
+</style>

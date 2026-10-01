@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Cover from '../components/Cover.astro';
+import KeyFigures from '../components/KeyFigures.astro';
+import GroupStructure from '../components/GroupStructure.astro';
+import Profile from '../components/Profile.astro';
+import Recognition from '../components/Recognition.astro';
+import Media from '../components/Media.astro';
+import Notes from '../components/Notes.astro';
+import { notes } from '../data/content';
+---
+
+<Base>
+  <Cover />
+  <KeyFigures />
+  <GroupStructure />
+  <Profile />
+  <Recognition />
+  <Media />
+  <Notes notes={notes} />
+</Base>

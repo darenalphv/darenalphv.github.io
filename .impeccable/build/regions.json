@@ -1,0 +1,102 @@
+{
+ "regions": [
+  {
+   "id": "nav-name",
+   "kind": "text",
+   "grid": "A0:A0",
+   "note": "wordmark 'Daren Tan' in black on white top bar"
+  },
+  {
+   "id": "nav-links",
+   "kind": "control",
+   "grid": "G0:I0",
+   "note": "nav links: Key Figures, Group Structure, Profile, Recognition, Media"
+  },
+  {
+   "id": "nav-cta",
+   "kind": "control",
+   "grid": "J0:J0",
+   "note": "solid ultramarine rectangular button 'Connect on LinkedIn'"
+  },
+  {
+   "id": "cover-plate",
+   "kind": "chrome",
+   "grid": "A0:F6",
+   "container": true,
+   "note": "ultramarine cover plate; its swirl of points is a runtime data chart drawn by WebGL from 72,000 points, one per Developer Kaki member",
+   "codeDrawn": true
+  },
+  {
+   "id": "cover-label",
+   "kind": "text",
+   "grid": "A1:B1",
+   "note": "white label 'Report 2016 to 2026'"
+  },
+  {
+   "id": "cover-name",
+   "kind": "text",
+   "grid": "A2:D2",
+   "note": "huge white heavy grotesque 'Daren Tan'"
+  },
+  {
+   "id": "cover-title",
+   "kind": "text",
+   "grid": "A3:C3",
+   "note": "white two-line title 'Founder & Chief Executive Officer, ALPHV Group of Companies'"
+  },
+  {
+   "id": "cover-caption",
+   "kind": "text",
+   "grid": "A6:C6",
+   "note": "small white caption 'Cover art: 72,000 points, one for every Developer Kaki member'"
+  },
+  {
+   "id": "cover-photo",
+   "kind": "image",
+   "grid": "G0:J6",
+   "note": "real stage photograph of Daren on black stage (ships as stage-main.jpg, never regenerated)",
+   "bleed": true
+  },
+  {
+   "id": "fig-1",
+   "kind": "text",
+   "grid": "A7:C7",
+   "snap": false,
+   "note": "large statistic numeral '72,000+' with superscript 1 over label 'Developer Kaki members'"
+  },
+  {
+   "id": "fig-2",
+   "kind": "text",
+   "grid": "D7:E7",
+   "snap": false,
+   "note": "large statistic numeral '4' with superscript 2 over label 'Group companies', thin rule at left"
+  },
+  {
+   "id": "fig-3",
+   "kind": "text",
+   "grid": "F7:G7",
+   "snap": false,
+   "note": "large statistic numeral '10' with superscript 3 over label 'Years in technology', thin rule at left"
+  },
+  {
+   "id": "fig-4",
+   "kind": "text",
+   "grid": "H7:J7",
+   "snap": false,
+   "note": "large statistic numeral '30+' with superscript 4 over label 'Talks delivered', thin rule at left"
+  },
+  {
+   "id": "structure-heading",
+   "kind": "text",
+   "grid": "A8:B9",
+   "note": "section heading 'Group Structure'"
+  },
+  {
+   "id": "structure-chart",
+   "kind": "chrome",
+   "grid": "B8:I9",
+   "note": "org chart of outlined boxes: 'ALPHV Group of Companies' over 'ALPHV Technologies', 'ALPHV Academy', 'ALPHV DevRel', 'ALPHV Recruit' joined by solid lines, and a dashed box 'Developer Kaki' joined by a dashed line",
+   "codeDrawn": true
+  }
+ ]
+}

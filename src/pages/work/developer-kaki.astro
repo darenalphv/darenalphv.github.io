@@ -1,0 +1,38 @@
+---
+// Segment review: Developer Kaki. Same skeleton as /work/alphv-group/.
+// Every figure and date on this page comes from src/components/work/devkaki/data.ts,
+// which cites .source/content.md line by line.
+import Base from '../../layouts/Base.astro';
+import SegmentCover from '../../components/SegmentCover.astro';
+import KeyFigures from '../../components/KeyFigures.astro';
+import Review from '../../components/work/devkaki/Review.astro';
+import Activities from '../../components/work/devkaki/Activities.astro';
+import Signal from '../../components/work/devkaki/Signal.astro';
+import Milestones from '../../components/work/Milestones.astro';
+import Notes from '../../components/Notes.astro';
+import NextSegment from '../../components/work/NextSegment.astro';
+import { milestones, pageNotes, segmentFigures } from '../../components/work/devkaki/data';
+---
+
+<Base
+  title="Developer Kaki · Segment review · Daren Tan"
+  description="Segment review of Developer Kaki, founded by Daren Tan in 2019: Malaysia’s largest developer community, with 72,000+ members, and its licensed jobs portal, JOBS by Developer Kaki."
+>
+  <SegmentCover
+    name="Developer Kaki"
+    line="From a Facebook group to Malaysia’s largest developer community and its own jobs portal."
+    period="Segment review, 2019 to 2026"
+    field={{ count: 72000, arms: 3, caption: 'Cover art: 72,000 points, one for every member' }}
+  />
+  <KeyFigures figures={segmentFigures} id="segment-figures" label="Segment figures" />
+  <Review />
+  <Activities />
+  <Signal />
+  <Milestones rows={milestones} />
+  <Notes notes={pageNotes} />
+  <NextSegment
+    slug="alphv-group"
+    name="ALPHV Group of Companies"
+    line="Four companies, one ecosystem: build, train, convene and hire."
+  />
+</Base>

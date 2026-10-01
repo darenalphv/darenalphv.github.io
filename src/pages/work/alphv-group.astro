@@ -1,0 +1,38 @@
+---
+// Segment review: ALPHV Group of Companies.
+// Every fact on this page is sourced from .source/content.md; page data and notes live in
+// src/components/work/alphv/data.ts, each entry with a `// Source:` comment.
+import Base from '../../layouts/Base.astro';
+import SegmentCover from '../../components/SegmentCover.astro';
+import KeyFigures from '../../components/KeyFigures.astro';
+import Notes from '../../components/Notes.astro';
+import Milestones from '../../components/work/Milestones.astro';
+import NextSegment from '../../components/work/NextSegment.astro';
+import Review from '../../components/work/alphv/Review.astro';
+import GroupTable from '../../components/work/alphv/GroupTable.astro';
+import InPractice from '../../components/work/alphv/InPractice.astro';
+import { pageNotes, segmentFigures, milestones } from '../../components/work/alphv/data';
+---
+
+<Base
+  title="ALPHV Group of Companies · Segment review · Daren Tan"
+  description="A segment review of ALPHV Group of Companies, founded by Daren Tan in April 2023: four companies that build AI, data and cloud solutions, train professionals, convene Malaysia’s largest developer community and recruit technical talent."
+>
+  <SegmentCover
+    name="ALPHV Group of Companies"
+    line="Four companies, one ecosystem: build, train, convene and hire."
+    period="Segment review, 2023 to 2026"
+    field={{ count: 36000, arms: 4, caption: 'Cover art: four arms turning on one centre, one for each company in the group' }}
+  />
+  <KeyFigures figures={segmentFigures} id="segment-figures" label="Segment figures" />
+  <Review />
+  <GroupTable />
+  <InPractice />
+  <Milestones rows={milestones} />
+  <Notes notes={pageNotes} />
+  <NextSegment
+    slug="developer-kaki"
+    name="Developer Kaki"
+    line="From a Facebook group to Malaysia’s largest developer community and its own jobs portal."
+  />
+</Base>

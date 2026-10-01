@@ -1,0 +1,247 @@
+---
+// What the community does, set as a report list: activity at left, the account and its particulars at right.
+// Source: .source/content.md, "Case study: Developer Kaki" (jobs, career sharing, meetups and hackathons,
+// DevRel partners, the IBM event) and "Achievements & recognition" (Hackathon Kaki).
+import { event, partners, sister } from './data';
+---
+
+<section class="activities" aria-labelledby="activities-heading">
+  <h2 id="activities-heading" class="section-heading">What the community does</h2>
+
+  <ul class="list">
+    <li class="row" data-reveal>
+      <h3 class="name">Jobs</h3>
+      <div class="detail">
+        <p>
+          Curated job postings for developers, which have surfaced more than{' '}
+          <span class="tabular">5,000</span> roles.<a class="note-ref" href="#note-2" aria-label="Note 2">2</a>{' '}
+          First shared in the Facebook group, they now also have a home of their own: JOBS by Developer
+          Kaki, a web portal operated under an employment-agency licence.
+        </p>
+      </div>
+    </li>
+
+    <li class="row" data-reveal>
+      <h3 class="name">Career signal</h3>
+      <div class="detail">
+        <p>
+          Members share salaries, their experience of employers and the turns their careers have taken. For a
+          developer weighing an offer, it is a read on the market from the people working in it.
+        </p>
+      </div>
+    </li>
+
+    <li class="row" data-reveal>
+      <h3 class="name">Meetups &amp; hackathons</h3>
+      <div class="detail">
+        <p>In-person meetups and hackathons, run with technology partners.</p>
+        <dl class="particulars">
+          <div>
+            <dt>Recent event</dt>
+            <dd>{event.title}</dd>
+          </div>
+          <div>
+            <dt>With</dt>
+            <dd>{event.with}</dd>
+          </div>
+          <div>
+            <dt>Date</dt>
+            <dd class="tabular">{event.date}</dd>
+          </div>
+          <div>
+            <dt>Venue</dt>
+            <dd>{event.venue}</dd>
+          </div>
+          <div>
+            <dt>Seats</dt>
+            <dd>
+              <span class="tabular">{event.seats}</span><a
+                class="note-ref"
+                href={`#note-${event.note}`}
+                aria-label={`Note ${event.note}`}>{event.note}</a
+              >
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </li>
+
+    <li class="row" data-reveal>
+      <h3 class="name">DevRel partnerships</h3>
+      <div class="detail">
+        <p>
+          Developer relations, run through ALPHV DevRel, that bring technology partners to the community
+          through campaigns, meetups and hackathons. Partners include:
+        </p>
+        <ul class="partners">
+          {partners.map((name) => <li>{name}</li>)}
+        </ul>
+      </div>
+    </li>
+
+    <li class="row" data-reveal>
+      <h3 class="name">Sister community</h3>
+      <div class="detail">
+        <p>
+          {sister.name}, which Daren co-founded in {sister.since}, has{' '}
+          <span class="tabular">{sister.members}</span> members.<a
+            class="note-ref"
+            href={`#note-${sister.note}`}
+            aria-label={`Note ${sister.note}`}>{sister.note}</a
+          >
+        </p>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<style>
+  .activities {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) minmax(0, 1fr);
+    padding: calc(130 * var(--u)) var(--gutter) calc(150 * var(--u));
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .activities .section-heading {
+    margin: 0;
+    padding-right: calc(60 * var(--u));
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: max(calc(2 * var(--u)), 1px) solid var(--color-ink);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: calc(620 * var(--u)) minmax(0, calc(1180 * var(--u)));
+    align-items: baseline;
+    padding-block: calc(40 * var(--u)) calc(48 * var(--u));
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .name {
+    margin: 0;
+    padding-right: calc(40 * var(--u));
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(46 * var(--u)), 22px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .detail {
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.6;
+  }
+
+  .detail > p {
+    margin: 0;
+    max-width: 62ch;
+  }
+
+  .detail .note-ref {
+    font-size: 0.62em;
+  }
+
+  .particulars {
+    display: grid;
+    margin: calc(28 * var(--u)) 0 0;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .particulars div {
+    display: grid;
+    grid-template-columns: max(calc(220 * var(--u)), 112px) 1fr;
+    align-items: baseline;
+    padding-block: calc(14 * var(--u));
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .particulars dt {
+    font-weight: 500;
+    color: var(--color-ink-2);
+  }
+
+  .particulars dd {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .partners {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-content: start;
+    margin: calc(28 * var(--u)) 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .partners li {
+    padding: calc(20 * var(--u)) calc(56 * var(--u)) 0 0;
+    font-weight: 700;
+    font-stretch: 95%;
+    font-size: max(calc(36 * var(--u)), 19px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  .partners li + li {
+    padding-left: calc(56 * var(--u));
+    border-left: 1px solid var(--color-rule-soft);
+  }
+
+  @media (max-width: 1023px) {
+    .activities {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+      padding: 56px var(--gutter) 64px;
+    }
+
+    .activities .section-heading {
+      padding-right: 0;
+    }
+
+    .row {
+      grid-template-columns: 1fr;
+      row-gap: 12px;
+      padding-block: 22px 26px;
+    }
+
+    .name {
+      padding-right: 0;
+    }
+
+    .particulars {
+      margin-top: 16px;
+    }
+
+    .particulars div {
+      padding-block: 9px;
+      column-gap: 12px;
+    }
+
+    .partners {
+      grid-template-columns: 1fr 1fr;
+      margin-top: 16px;
+      border-top: 0;
+    }
+
+    .partners li,
+    .partners li + li {
+      padding: 12px 0;
+      border-left: 0;
+      border-top: 1px solid var(--color-rule-soft);
+    }
+
+    .partners li:nth-child(even) {
+      padding-left: 16px;
+      border-left: 1px solid var(--color-rule-soft);
+    }
+  }
+</style>

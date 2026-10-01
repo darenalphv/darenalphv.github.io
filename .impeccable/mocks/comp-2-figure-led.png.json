@@ -1,0 +1,12 @@
+{
+  "model": "higgsfield gpt_image_2_5",
+  "quality": "medium",
+  "resolution": "2k",
+  "aspect": "16:9",
+  "reference": "https://darentan.my/pics/main.jpg",
+  "seed": "d0b89fc7",
+  "direction": "The Annual Report",
+  "variant": "variation: figure-led cover",
+  "approved": false,
+  "prompt": "Comp-round variation (comp-2-figure-led) of The Annual Report for darentan.my; see session transcript for full prompt"
+}

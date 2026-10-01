@@ -1,0 +1,180 @@
+---
+// Segment review, ALPHV Group of Companies: two dated accounts of the work, on the page's one
+// ultramarine plate (the rhythm break between the group table and the milestones table).
+// Source: ./data.ts `accounts` (from .source/content.md "Case study: ALPHV Group of Companies").
+import { accounts } from './data';
+---
+
+<section class="practice on-plate" aria-labelledby="practice-heading">
+  <h2 id="practice-heading" class="section-heading">In practice</h2>
+
+  <div class="accounts">
+    {
+      accounts.map((a) => (
+        <article class="account" aria-labelledby={`account-${a.id}`} data-reveal>
+          <p class="date tabular">{a.date}</p>
+          <div class="text">
+            <h3 id={`account-${a.id}`} class="title">
+              {a.title}
+            </h3>
+            {a.body.map((para) => (
+              <p class="para">{para}</p>
+            ))}
+          </div>
+          <p class="result">
+            <span class="value tabular">
+              {a.result.value}
+              <a class="note-ref" href={`#note-${a.result.note}`} aria-label={`Note ${a.result.note}`}>
+                {a.result.note}
+              </a>
+            </span>
+            <span class="result-label">{a.result.label}</span>
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .practice {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) 1fr;
+    padding: calc(130 * var(--u)) var(--gutter) calc(150 * var(--u));
+    background: var(--color-plate);
+    color: #fff;
+  }
+
+  .practice .section-heading {
+    margin: 0;
+  }
+
+  .accounts {
+    border-top: max(calc(2 * var(--u)), 1px) solid #fff;
+  }
+
+  .account {
+    display: grid;
+    grid-template-columns: calc(300 * var(--u)) 1fr calc(500 * var(--u));
+    column-gap: calc(60 * var(--u));
+    padding-block: calc(48 * var(--u)) calc(64 * var(--u));
+  }
+
+  .account + .account {
+    border-top: 1px solid var(--color-plate-ink);
+  }
+
+  .date {
+    margin: 0;
+    padding-top: calc(10 * var(--u));
+    font-weight: 600;
+    font-size: max(calc(26 * var(--u)), 15px);
+    color: var(--color-plate-ink);
+    white-space: nowrap;
+  }
+
+  .text {
+    min-width: 0;
+  }
+
+  .title {
+    margin: 0 0 calc(28 * var(--u));
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: calc(68 * var(--u));
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .para {
+    margin: 0 0 0.9em;
+    max-width: 60ch;
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.6;
+  }
+
+  .para:last-child {
+    margin-bottom: 0;
+  }
+
+  .result {
+    display: flex;
+    flex-direction: column;
+    gap: calc(12 * var(--u));
+    margin: 0;
+    padding-left: calc(40 * var(--u));
+    border-left: 1px solid var(--color-plate-ink);
+  }
+
+  .value {
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: calc(150 * var(--u));
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+  }
+
+  .value .note-ref {
+    font-size: 0.24em;
+    vertical-align: 2.4em;
+  }
+
+  .note-ref:hover {
+    color: var(--color-plate-ink);
+    text-decoration: underline;
+  }
+
+  .result-label {
+    max-width: 20ch;
+    font-weight: 500;
+    font-size: max(calc(26 * var(--u)), 15px);
+    line-height: 1.3;
+    color: var(--color-plate-ink);
+  }
+
+  @media (max-width: 1023px) {
+    .practice {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+      padding: 56px var(--gutter) 64px;
+    }
+
+    .account {
+      grid-template-columns: 1fr;
+      row-gap: 12px;
+      padding-block: 24px 32px;
+    }
+
+    .date {
+      padding-top: 0;
+      font-size: 14px;
+    }
+
+    .title {
+      margin-bottom: 14px;
+      font-size: clamp(28px, 8vw, 44px);
+    }
+
+    .para {
+      font-size: 16px;
+    }
+
+    .result {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 14px;
+      margin-top: 12px;
+      padding: 16px 0 0;
+      border-left: 0;
+      border-top: 1px solid var(--color-plate-ink);
+    }
+
+    .value {
+      font-size: clamp(48px, 15vw, 72px);
+    }
+
+    .result-label {
+      font-size: 14px;
+    }
+  }
+</style>

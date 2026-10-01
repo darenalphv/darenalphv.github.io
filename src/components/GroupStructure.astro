@@ -1,0 +1,338 @@
+---
+import { group, caseStudies } from '../data/content';
+---
+
+<section id="group-structure" class="structure" aria-labelledby="structure-heading">
+  <h2 id="structure-heading" class="section-heading">Group Structure</h2>
+
+  <div class="chart" data-structure-chart>
+    <p class="node parent">{group.parent}</p>
+    <span class="stem" aria-hidden="true" data-draw></span>
+    <span class="bus solid" aria-hidden="true" data-draw></span>
+    <span class="bus dashed" aria-hidden="true" data-draw></span>
+    <ul class="members">
+      {
+        group.members.map((m) => (
+          <li class:list={['member', m.kind]}>
+            <span class="drop" aria-hidden="true" data-draw />
+            <p class="node">{m.name}</p>
+            <p class="does">{m.does}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <p class="legend">
+    <span class="key-item"><span class="key solid" aria-hidden="true"></span>Company in the group</span>
+    <span class="key-item"><span class="key dashed" aria-hidden="true"></span>Community run by the group</span>
+  </p>
+
+  <nav class="reviews" aria-label="Segment reviews">
+    <h3 class="reviews-heading">Segment reviews</h3>
+    <ul>
+      {
+        caseStudies.map((c) => (
+          <li>
+            <a href={`/work/${c.slug}/`}>
+              <span class="review-name">{c.name}</span>
+              <span class="review-line">{c.line}</span>
+              <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</section>
+
+<style>
+  .structure {
+    position: relative;
+    padding: calc(29 * var(--u)) var(--gutter) calc(140 * var(--u));
+  }
+
+  .structure .section-heading {
+    margin: 0;
+    position: absolute;
+    top: calc(20 * var(--u));
+    left: var(--gutter);
+  }
+
+  /* Chart geometry follows the approved comp, in comp pixels. */
+  .chart {
+    position: relative;
+    margin-left: calc(411 * var(--u));
+    width: calc(1727 * var(--u));
+    --node-h: calc(57 * var(--u));
+    --line: max(calc(2 * var(--u)), 1px);
+  }
+
+  .node {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--node-h);
+    border: var(--line) solid var(--color-ink);
+    background: var(--color-paper);
+    font-weight: 600;
+    font-size: max(calc(21 * var(--u)), 13px);
+    letter-spacing: -0.005em;
+    text-align: center;
+  }
+
+  .parent {
+    width: calc(430 * var(--u));
+    margin-left: calc(649 * var(--u));
+  }
+
+  .stem {
+    position: absolute;
+    top: var(--node-h);
+    left: calc(864 * var(--u));
+    width: var(--line);
+    height: calc(50 * var(--u));
+    background: var(--color-ink);
+  }
+
+  .bus {
+    position: absolute;
+    top: calc(var(--node-h) + 50 * var(--u));
+    height: var(--line);
+  }
+
+  .bus.solid {
+    left: calc(167 * var(--u));
+    width: calc(1033 * var(--u));
+    background: var(--color-ink);
+  }
+
+  .bus.dashed {
+    left: calc(1200 * var(--u));
+    width: calc(358 * var(--u));
+    background: repeating-linear-gradient(90deg, var(--color-ink) 0 calc(8 * var(--u)), transparent 0 calc(14 * var(--u)));
+  }
+
+  .members {
+    display: grid;
+    grid-template-columns: 334fr 299fr 298fr 298fr 338fr;
+    column-gap: calc(40 * var(--u));
+    margin: calc(77 * var(--u)) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .member {
+    position: relative;
+  }
+
+  .drop {
+    position: absolute;
+    left: 50%;
+    top: calc(-27 * var(--u));
+    width: var(--line);
+    height: calc(27 * var(--u));
+    background: var(--color-ink);
+  }
+
+  .community .node {
+    border-style: dashed;
+  }
+
+  .community .drop {
+    background: repeating-linear-gradient(180deg, var(--color-ink) 0 calc(8 * var(--u)), transparent 0 calc(14 * var(--u)));
+  }
+
+  .does {
+    margin: calc(26 * var(--u)) 0 0;
+    font-size: max(calc(22 * var(--u)), 14px);
+    line-height: 1.45;
+    color: var(--color-ink-2);
+  }
+
+  .legend {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin: calc(70 * var(--u)) 0 0 calc(411 * var(--u));
+    font-size: max(calc(20 * var(--u)), 13px);
+    color: var(--color-ink-2);
+  }
+
+  .key-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    white-space: nowrap;
+  }
+
+  .key-item + .key-item {
+    margin-left: 1.6em;
+  }
+
+  .key {
+    display: inline-block;
+    width: 2.2em;
+    height: 0;
+    border-top: 2px solid var(--color-ink);
+  }
+
+  .key.dashed {
+    border-top-style: dashed;
+  }
+
+  .reviews {
+    display: grid;
+    grid-template-columns: calc(342 * var(--u)) 1fr;
+    margin-top: calc(110 * var(--u));
+    border-top: max(calc(2 * var(--u)), 1px) solid var(--color-ink);
+  }
+
+  .reviews-heading {
+    margin: 0;
+    padding-top: calc(28 * var(--u));
+    font-weight: 700;
+    font-size: max(calc(30 * var(--u)), 18px);
+    letter-spacing: -0.01em;
+  }
+
+  .reviews ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .reviews a {
+    display: grid;
+    grid-template-columns: calc(640 * var(--u)) 1fr auto;
+    align-items: baseline;
+    gap: calc(40 * var(--u));
+    padding-block: calc(28 * var(--u));
+    border-bottom: 1px solid var(--color-rule-soft);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .review-name {
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(52 * var(--u)), 24px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .review-line {
+    font-size: max(calc(24 * var(--u)), 15px);
+    color: var(--color-ink-2);
+  }
+
+  .arrow {
+    width: max(calc(40 * var(--u)), 22px);
+    height: max(calc(40 * var(--u)), 22px);
+    align-self: center;
+    transition: transform 260ms var(--ease-out-expo);
+  }
+
+  .reviews a:hover .review-name {
+    color: var(--color-plate);
+  }
+
+  .reviews a:hover .arrow {
+    transform: translateX(6px);
+    color: var(--color-plate);
+  }
+
+  @media (max-width: 1023px) {
+    .reviews {
+      grid-template-columns: 1fr;
+      margin-top: 48px;
+    }
+
+    .reviews a {
+      grid-template-columns: 1fr auto;
+      gap: 6px 16px;
+      padding-block: 18px;
+    }
+
+    .review-line {
+      grid-column: 1;
+    }
+
+    .arrow {
+      grid-row: 1 / span 2;
+      grid-column: 2;
+    }
+
+    .structure {
+      padding: 48px var(--gutter) 64px;
+    }
+
+    .structure .section-heading {
+      position: static;
+      margin-bottom: 28px;
+    }
+
+    .chart {
+      margin-left: 0;
+      width: auto;
+      padding-top: 0;
+      --node-h: 46px;
+      --line: 1px;
+    }
+
+    .parent {
+      width: auto;
+      margin-left: 0;
+    }
+
+    .stem,
+    .bus {
+      display: none;
+    }
+
+    .members {
+      grid-template-columns: 1fr;
+      row-gap: 0;
+      margin: 0;
+      padding-left: 22px;
+      border-left: 1px solid var(--color-ink);
+      margin-left: 22px;
+    }
+
+    .member {
+      padding-top: 22px;
+    }
+
+    .drop {
+      left: -22px;
+      top: calc(22px + var(--node-h) / 2);
+      width: 22px;
+      height: 1px;
+    }
+
+    .community .drop {
+      background: repeating-linear-gradient(90deg, var(--color-ink) 0 5px, transparent 0 9px);
+    }
+
+    .node {
+      justify-content: flex-start;
+      padding-inline: 14px;
+    }
+
+    .does {
+      margin-top: 10px;
+    }
+
+    .legend {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 32px 0 0;
+    }
+
+    .key-item + .key-item {
+      margin-left: 0;
+    }
+  }
+</style>

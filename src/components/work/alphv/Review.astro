@@ -1,0 +1,199 @@
+---
+// Segment review, ALPHV Group of Companies: the review itself. A lead statement, the account in two
+// report columns, and the founder's stated mission as a pull quote.
+// Sources: .source/content.md "Case study: ALPHV Group of Companies", "Achievements & recognition",
+// "Identity" (LinkedIn headline: AI, data & cloud solutions across SEA); content.ts `group`.
+---
+
+<section class="review" aria-labelledby="review-heading">
+  <h2 id="review-heading" class="section-heading">Review</h2>
+
+  <div class="body">
+    <p class="lead" data-reveal>
+      ALPHV builds AI, data and cloud solutions for businesses across Southeast Asia. Around that work it trains
+      professionals, convenes Malaysia’s largest developer community and recruits technical talent.
+    </p>
+
+    <div class="columns" data-reveal>
+      <p>
+        ALPHV, formerly alphatechlabs, was founded in April 2023 by Daren Tan and co-founder Jeng Yee Khor.<a
+          class="note-ref"
+          href="#note-5"
+          aria-label="Note 5">5</a
+        > The group works to three pillars: Develop. Educate. Innovate.
+      </p>
+      <p>
+        ALPHV Technologies takes projects from concept to deployment across web and mobile, computer vision, data
+        science and engineering, AI/ML and GenAI, and DevOps and MLOps. ALPHV Academy has run HRDC-claimable training
+        since 2023 for engineers, managers and <span class="nowrap">C-suite</span> leaders. ALPHV DevRel runs developer
+        relations, campaigns and hackathons with technology partners, and is home to Developer Kaki. ALPHV Recruit
+        handles tech recruitment and headhunting across Malaysia and Southeast Asia.
+      </p>
+      <p>
+        Partnerships followed within two years. In January 2025 ALPHV became an official authorised reseller of
+        FootfallCam and HIKVision,<a class="note-ref" href="#note-6" aria-label="Note 6">6</a> and in February 2025 the
+        first Malaysian Global Strategic Partner of Alibaba Cloud, a status it also holds with FPT AI Factory.<a
+          class="note-ref"
+          href="#note-2"
+          aria-label="Note 2">2</a
+        > Three ALPHV entities were featured in Konsortium AI Negara 2025.<a
+          class="note-ref"
+          href="#note-3"
+          aria-label="Note 3">3</a
+        >
+      </p>
+    </div>
+
+    <figure class="mission" data-reveal>
+      <blockquote>
+        <p>
+          <span class="open" aria-hidden="true">“</span>…transform both the private and public sectors, particularly in
+          enhancing the delivery of government services to the rakyat through the modern, proven and sustainable
+          technology.<span aria-hidden="true">”</span
+          >
+        </p>
+      </blockquote>
+      <figcaption>
+        Daren Tan, Founder &amp; Chief Executive Officer, on the group’s mission<a
+          class="note-ref"
+          href="#note-7"
+          aria-label="Note 7">7</a
+        >
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .review {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) 1fr;
+    padding: calc(130 * var(--u)) var(--gutter) calc(150 * var(--u));
+  }
+
+  .review .section-heading {
+    margin: 0;
+  }
+
+  .body {
+    min-width: 0;
+  }
+
+  .lead {
+    margin: 0;
+    max-width: 30em;
+    font-weight: 700;
+    font-stretch: 95%;
+    font-size: calc(56 * var(--u));
+    line-height: 1.14;
+    letter-spacing: -0.022em;
+  }
+
+  .columns {
+    columns: 2;
+    column-gap: calc(90 * var(--u));
+    margin-top: calc(90 * var(--u));
+    padding-top: calc(40 * var(--u));
+    border-top: max(calc(2 * var(--u)), 1px) solid var(--color-ink);
+  }
+
+  .columns p {
+    margin: 0 0 1.1em;
+    max-width: 66ch;
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.6;
+  }
+
+  .columns p:last-child {
+    margin-bottom: 0;
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  .columns .note-ref {
+    font-size: 0.62em;
+  }
+
+  .mission {
+    margin: calc(110 * var(--u)) 0 0;
+    padding-top: calc(56 * var(--u));
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  blockquote {
+    margin: 0;
+  }
+
+  blockquote p {
+    margin: 0;
+    max-width: 24em;
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: calc(76 * var(--u));
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .open {
+    display: inline-block;
+    margin-left: -0.42em;
+    width: 0.42em;
+  }
+
+  figcaption {
+    margin-top: calc(36 * var(--u));
+    font-weight: 500;
+    font-size: max(calc(24 * var(--u)), 14px);
+    color: var(--color-ink-2);
+  }
+
+  figcaption .note-ref {
+    font-size: 0.7em;
+  }
+
+  @media (max-width: 1023px) {
+    .review {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+      padding: 56px var(--gutter) 64px;
+    }
+
+    .lead {
+      font-size: clamp(24px, 6.4vw, 34px);
+      line-height: 1.16;
+    }
+
+    .columns {
+      columns: 1;
+      margin-top: 36px;
+      padding-top: 24px;
+    }
+
+    .columns p {
+      font-size: 16px;
+    }
+
+    .mission {
+      margin-top: 48px;
+      padding-top: 28px;
+    }
+
+    blockquote p {
+      font-size: clamp(28px, 8.2vw, 48px);
+      line-height: 1.06;
+    }
+
+    .open {
+      margin-left: 0;
+      width: auto;
+    }
+
+    figcaption {
+      margin-top: 18px;
+      font-size: 14px;
+    }
+  }
+</style>

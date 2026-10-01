@@ -1,0 +1,203 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+
+/* The Annual Report: one committed ultramarine, white report stock, black ink. */
+@theme {
+  --color-plate: #0a22cc;          /* ultramarine: section plates and the LinkedIn action only */
+  --color-plate-deep: #0718a3;     /* pressed / hover state of the action */
+  --color-plate-ink: #d9defb;      /* secondary text on the plate, tinted from its hue */
+  --color-paper: #f8f8f8;          /* report stock */
+  --color-ink: #0d0d0f;            /* body ink */
+  --color-ink-2: #45464d;          /* secondary ink on paper (7.9:1) */
+  --color-rule: #1b1c20;           /* hairline rules */
+  --color-rule-soft: #d6d6da;      /* section dividers */
+  --color-stage: #121317;          /* the stage black photos sit on */
+
+  --font-sans: "Archivo Variable", "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Variable", "Archivo", ui-sans-serif, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* One comp pixel. The approved comp is 2688px wide; desktop sizes are written in comp pixels so the
+   first viewport holds its measured proportions at any desktop width. Text never drops below a
+   legible floor. */
+:root {
+  --u: calc(100vw / 2688);
+  --gutter: calc(69 * var(--u));
+  --nav-h: calc(85 * var(--u));
+  color-scheme: light;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --gutter: 20px;
+    --nav-h: 60px;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scrollbar-color: var(--color-ink) var(--color-paper);
+    scrollbar-width: thin;
+  }
+
+  body {
+    min-height: 100dvh;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  ::selection {
+    background: var(--color-plate);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-plate);
+    outline-offset: 3px;
+  }
+
+  .on-plate :focus-visible,
+  .on-stage :focus-visible {
+    outline-color: #fff;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+
+  /* Superscript note marks: every figure resolves to a numbered note. */
+  .note-ref {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.24em;
+    vertical-align: super;
+    line-height: 0;
+    margin-left: 0.18em;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .note-ref:hover {
+    color: var(--color-plate);
+  }
+
+  /* The single call to action, everywhere. */
+  .btn-linkedin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    background: var(--color-plate);
+    color: #fff;
+    font-weight: 600;
+    font-stretch: 100%;
+    line-height: 1;
+    text-decoration: none;
+    transition: background-color 180ms var(--ease-out-expo);
+  }
+
+  .btn-linkedin:hover {
+    background: var(--color-plate-deep);
+  }
+
+  .btn-linkedin:active {
+    transform: translateY(1px);
+  }
+
+  .on-plate .btn-linkedin {
+    background: #fff;
+    color: var(--color-plate);
+  }
+
+  .on-plate .btn-linkedin:hover {
+    background: var(--color-plate-ink);
+  }
+
+  .section-heading {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    font-size: max(calc(50 * var(--u)), 28px);
+  }
+}
+
+/* Figures that roll: each digit is a 0–9 column clipped to one line, in fixed tabular positions. */
+.roll-cell {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: 1;
+}
+
+.roll-strip {
+  display: block;
+  width: 1ch;
+  line-height: 1;
+  word-break: break-all;
+  white-space: normal;
+}
+
+[data-site-header] {
+  box-shadow: 0 1px 0 transparent;
+  transition: box-shadow 240ms var(--ease-out-expo);
+}
+
+[data-site-header][data-scrolled] {
+  box-shadow: 0 1px 0 var(--color-rule-soft);
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

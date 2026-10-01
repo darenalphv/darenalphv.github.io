@@ -1,0 +1,594 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../../assets/photos/stage-main.jpg';
+import { person, experience, communities, qualifications } from '../data/content';
+
+// Source: .source/content.md, "Deck bio (verbatim facts)" (Daren's key-personnel deck).
+// Used in the two profile paragraphs below; not yet in content.ts.
+const industries = 'financial, health, hospitality, property, insurance, legal and medicolegal';
+const ctoMarkets = 'Singapore, China and Malaysia';
+
+// Community figures that resolve to a home note (content.ts `notes`). Hackathon Kaki's
+// 10,200+ has no home note, so it is stated plainly rather than given an invented number.
+const communityNote: Record<string, number> = { 'Developer Kaki': 1 };
+const memberCount = (size: string) => size.replace(/\s*members$/, '');
+
+// "Qualification, Institution": split at the last comma so the institution sets on its own line.
+const splitQualification = (q: string) => {
+  const i = q.lastIndexOf(', ');
+  return i === -1 ? { title: q, by: '' } : { title: q.slice(0, i), by: q.slice(i + 2) };
+};
+---
+
+<section id="profile" class="profile" aria-labelledby="profile-heading">
+  <div class="text">
+    <h2 id="profile-heading" class="section-heading">Profile of the Founder</h2>
+
+    <div class="ident" data-reveal>
+      <p class="name">{person.name}</p>
+      <p class="role">{person.role}, {person.company}</p>
+      <p class="place">{person.location}</p>
+    </div>
+
+    <div class="bio" data-reveal>
+      <p class="lead">
+        Daren Tan is the Founder and Chief Executive Officer of {person.company}, which builds AI, data
+        and cloud solutions for businesses across Southeast Asia. He has led enterprise digital
+        transformation and practical AI implementation across the {industries} industries.
+      </p>
+      <p class="body">
+        Before founding ALPHV, he built AI/ML and virtual-agent solutions at BASF. His ten years in
+        technology<a class="note-ref" href="#note-3" aria-label="Note 3">3</a> also include roles as Chief
+        Technology Officer of startups in {ctoMarkets}, as Data Science Lead Instructor, and as
+        a <span class="nowrap">TM-sponsored</span> research scholar in big data and machine learning.
+      </p>
+    </div>
+
+    <div class="block" data-reveal>
+      <span class="rule" aria-hidden="true" data-draw></span>
+      <h3 id="profile-experience" class="block-heading">Experience</h3>
+      <table class="ledger experience" aria-labelledby="profile-experience" role="table">
+        <colgroup>
+          <col class="c-years" />
+          <col class="c-org" />
+          <col class="c-role" />
+        </colgroup>
+        <thead role="rowgroup">
+          <tr role="row">
+            <th scope="col" role="columnheader">Years</th>
+            <th scope="col" role="columnheader">Organisation</th>
+            <th scope="col" role="columnheader">Role</th>
+          </tr>
+        </thead>
+        <tbody role="rowgroup">
+          {
+            experience.map((e) => (
+              <tr role="row">
+                <td class="years tabular" role="cell">
+                  {e.from}–<wbr />{e.to}
+                </td>
+                <th scope="row" class="org" role="rowheader">
+                  <span class="org-name">{e.org}</span>
+                  <span class="sr-only">, </span>
+                  <span class="org-place">{e.place}</span>
+                </th>
+                <td class="job" role="cell">{e.role}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block" data-reveal>
+      <span class="rule" aria-hidden="true" data-draw></span>
+      <h3 id="profile-communities" class="block-heading">Communities founded</h3>
+      <table class="ledger communities" aria-labelledby="profile-communities">
+        <colgroup>
+          <col class="c-name" />
+          <col class="c-since" />
+          <col class="c-members" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Community</th>
+            <th scope="col">Founded</th>
+            <th scope="col" class="num">Members</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            communities.map((c) => {
+              const note = communityNote[c.name];
+              return (
+                <tr>
+                  <th scope="row" class="community">
+                    <span class="community-name">{c.name}</span>
+                    <span class="sr-only">, </span>
+                    <span class="community-role">{c.role}</span>
+                  </th>
+                  <td class="since tabular">{c.since}</td>
+                  <td class="num">
+                    <span class="members tabular">
+                      {memberCount(c.size)}
+                      {note && (
+                        <a class="note-ref" href={`#note-${note}`} aria-label={`Note ${note}`}>
+                          {note}
+                        </a>
+                      )}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="block" data-reveal>
+      <span class="rule" aria-hidden="true" data-draw></span>
+      <h3 id="profile-qualifications" class="block-heading">Qualifications</h3>
+      <ul class="quals" aria-labelledby="profile-qualifications">
+        {
+          qualifications.map((q) => {
+            const { title, by } = splitQualification(q);
+            return (
+              <li>
+                <span class="q-title">{title}</span>
+                {by && <span class="sr-only">, </span>}
+                {by && <span class="q-by">{by}</span>}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="stage on-stage">
+    <figure class="photo">
+      <Image
+        src={photo}
+        alt="Daren Tan presenting on stage in a navy blazer and white T-shirt, gesturing as he speaks, with a slide clicker in his other hand"
+        widths={[480, 640, 871]}
+        sizes="(min-width: 1024px) 67vw, 165vw"
+        format="webp"
+        quality={84}
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+  </div>
+</section>
+
+<style>
+  /* A report spread: the stage photo bleeds from the left edge as one page, the profile sets as the other. */
+  .profile {
+    display: grid;
+    grid-template-columns: calc(1075 * var(--u)) 1fr;
+  }
+
+  .stage {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: calc(100svh - var(--nav-h));
+    background: var(--color-stage);
+  }
+
+  /* The photo holds while the profile scrolls past it. CSS only. */
+  .photo {
+    position: sticky;
+    top: var(--nav-h);
+    height: calc(100svh - var(--nav-h));
+    margin: 0;
+    overflow: hidden;
+    container-type: size;
+    background: var(--color-stage);
+  }
+
+  /* Art direction for stage-main.jpg (871 x 1274). The frame always ends at source row 770, above the
+     slide lettering behind Daren, and never shows more than 530 source pixels across (x 212 to 742), which
+     keeps the slide's outer columns of text out of frame. Width is whichever constraint is larger. */
+  .photo :global(img) {
+    --iw: max(113.1cqh, 164.3cqw);
+    position: absolute;
+    top: calc(100cqh - 0.884 * var(--iw));
+    left: clamp(calc(100cqw - var(--iw)), calc(50cqw - 0.547 * var(--iw)), 0px);
+    width: var(--iw);
+    max-width: none;
+    height: auto;
+  }
+
+  .text {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    padding: calc(118 * var(--u)) var(--gutter) calc(176 * var(--u)) calc(150 * var(--u));
+  }
+
+  .section-heading {
+    margin: 0;
+  }
+
+  /* Identity */
+  .ident {
+    margin-top: calc(104 * var(--u));
+  }
+
+  .name {
+    margin: 0;
+    font-weight: 800;
+    font-stretch: 88%;
+    font-size: calc(128 * var(--u));
+    line-height: 0.92;
+    letter-spacing: -0.008em;
+  }
+
+  .role {
+    margin: calc(30 * var(--u)) 0 0;
+    font-weight: 650;
+    font-stretch: 95%;
+    font-size: max(calc(36 * var(--u)), 18px);
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+  }
+
+  .place {
+    margin: calc(8 * var(--u)) 0 0;
+    font-weight: 500;
+    font-size: max(calc(28 * var(--u)), 15px);
+    color: var(--color-ink-2);
+  }
+
+  /* Profile copy */
+  .bio {
+    margin-top: calc(92 * var(--u));
+  }
+
+  /* Lead and body share one right edge, about 72 characters of body text. */
+  .lead {
+    margin: 0;
+    max-width: 31em;
+    font-weight: 500;
+    font-size: max(calc(39 * var(--u)), 19px);
+    line-height: 1.42;
+    letter-spacing: -0.014em;
+  }
+
+  .body {
+    margin: 1.25em 0 0;
+    max-width: 38.5em;
+    font-size: max(calc(30 * var(--u)), 16.5px);
+    line-height: 1.62;
+    color: var(--color-ink-2);
+  }
+
+  .nowrap {
+    white-space: nowrap;
+  }
+
+  .bio .note-ref {
+    font-size: 0.62em;
+    margin-left: 0.12em;
+  }
+
+  /* Report blocks: a strong rule, a heading, then a ruled table. */
+  .block {
+    margin-top: calc(138 * var(--u));
+  }
+
+  .rule {
+    display: block;
+    height: max(calc(2 * var(--u)), 1px);
+    background: var(--color-ink);
+  }
+
+  .block-heading {
+    margin: calc(26 * var(--u)) 0 calc(40 * var(--u));
+    font-weight: 700;
+    font-size: max(calc(30 * var(--u)), 18px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .ledger {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: max(calc(25 * var(--u)), 15px);
+    line-height: 1.4;
+  }
+
+  .ledger thead th {
+    padding: 0 calc(28 * var(--u)) calc(16 * var(--u)) 0;
+    border-bottom: 1px solid var(--color-rule);
+    font-weight: 500;
+    font-size: max(calc(21 * var(--u)), 13px);
+    line-height: 1.2;
+    color: var(--color-ink-2);
+    text-align: left;
+  }
+
+  .ledger tbody th,
+  .ledger tbody td {
+    padding: calc(24 * var(--u)) calc(28 * var(--u)) calc(24 * var(--u)) 0;
+    border-bottom: 1px solid var(--color-rule-soft);
+    vertical-align: baseline;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  /* Astro's attribute scoping weights every compound, so the numeric column names its cells. */
+  .ledger thead th.num,
+  .ledger tbody td.num {
+    text-align: right;
+    padding-right: 1.6em;
+  }
+
+  /* Experience */
+  .experience .c-years {
+    width: 18%;
+  }
+
+  .experience .c-org {
+    width: 38%;
+  }
+
+  .years {
+    font-weight: 500;
+  }
+
+  .org-name {
+    display: block;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .org-place {
+    display: block;
+    margin-top: 0.2em;
+    color: var(--color-ink-2);
+  }
+
+  /* Communities: the two figures set at display weight, like the key figures they extend. */
+  .communities .c-name {
+    width: 52%;
+  }
+
+  .communities .c-since {
+    width: 18%;
+  }
+
+  .communities tbody th,
+  .communities tbody td {
+    padding-block: calc(30 * var(--u)) calc(30 * var(--u));
+  }
+
+  .community-name,
+  .members {
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(54 * var(--u)), 24px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .community-name {
+    display: block;
+  }
+
+  .community-role {
+    display: block;
+    margin-top: calc(14 * var(--u));
+    color: var(--color-ink-2);
+  }
+
+  .since {
+    font-weight: 500;
+  }
+
+  .members {
+    position: relative;
+    white-space: nowrap;
+  }
+
+  /* The note mark hangs outside the figure so the figures still align on the right. */
+  .members .note-ref {
+    position: absolute;
+    left: 100%;
+    top: 0.1em;
+    margin-left: 0.14em;
+    font-size: 0.38em;
+    line-height: 1;
+    vertical-align: baseline;
+  }
+
+  /* Qualifications */
+  .quals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: calc(64 * var(--u));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-rule);
+    font-size: max(calc(25 * var(--u)), 15px);
+    line-height: 1.4;
+  }
+
+  .quals li {
+    padding: calc(24 * var(--u)) 0 calc(28 * var(--u));
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .q-title {
+    display: block;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .q-by {
+    display: block;
+    margin-top: 0.2em;
+    color: var(--color-ink-2);
+  }
+
+  @media (max-width: 1023px) {
+    .profile {
+      grid-template-columns: 1fr;
+    }
+
+    .stage {
+      grid-row: 1;
+      grid-column: 1;
+      min-height: 0;
+    }
+
+    .photo {
+      position: relative;
+      top: auto;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      max-height: 88svh;
+    }
+
+    .text {
+      grid-row: 2;
+      grid-column: 1;
+      padding: 44px var(--gutter) 72px;
+    }
+
+    .ident {
+      margin-top: 28px;
+    }
+
+    .name {
+      font-size: clamp(52px, 15vw, 92px);
+    }
+
+    .role {
+      margin-top: 14px;
+      font-size: 18px;
+    }
+
+    .place {
+      margin-top: 4px;
+      font-size: 15px;
+    }
+
+    .bio {
+      margin-top: 36px;
+    }
+
+    .lead {
+      font-size: 19px;
+    }
+
+    .body {
+      font-size: 16px;
+    }
+
+    .block {
+      margin-top: 56px;
+    }
+
+    .block-heading {
+      margin: 14px 0 20px;
+    }
+
+    .ledger thead th {
+      padding: 0 12px 10px 0;
+    }
+
+    .ledger tbody th,
+    .ledger tbody td {
+      padding: 16px 12px 16px 0;
+    }
+
+    /* Experience reflows to two columns: years, then organisation over role. The table keeps its
+       roles in the markup, so the reflow does not cost it its table semantics. */
+    .experience,
+    .experience tbody {
+      display: block;
+    }
+
+    .experience colgroup {
+      display: none;
+    }
+
+    .experience thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .experience tbody tr {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      column-gap: 12px;
+      padding-block: 16px;
+      border-bottom: 1px solid var(--color-rule-soft);
+    }
+
+    .experience tbody tr:first-child {
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .experience tbody th,
+    .experience tbody td {
+      display: block;
+      padding: 0;
+      border: 0;
+    }
+
+    .experience .years {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
+    .experience .org {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .experience .job {
+      grid-column: 2;
+      grid-row: 2;
+      margin-top: 6px;
+    }
+
+    .communities .c-name {
+      width: 53%;
+    }
+
+    .communities .c-since {
+      width: 14%;
+    }
+
+    .communities tbody th,
+    .communities tbody td {
+      padding-block: 20px;
+    }
+
+    .community-role {
+      margin-top: 8px;
+    }
+
+    .community-name,
+    .members {
+      font-size: 22px;
+    }
+
+    .quals {
+      grid-template-columns: 1fr;
+    }
+
+    .quals li {
+      padding: 14px 0 16px;
+    }
+  }
+</style>

@@ -1,0 +1,491 @@
+---
+import { recognition, press, appearances } from '../data/content';
+
+// Rows whose claim is sourced by a home note (content.ts `notes`), keyed by the conferring body.
+const rowNotes: Record<string, number> = {
+  Favikon: 7,
+  'Alibaba Cloud': 5,
+  'Konsortium AI Negara': 6,
+};
+
+// The table is grouped by year, newest first, in the order content.ts gives.
+const years = [...new Set(recognition.map((r) => r.year))].map((year) => ({
+  year,
+  rows: recognition.filter((r) => r.year === year),
+}));
+
+// Source: .source/content.md, Achievements & recognition: "Retired 10x hackathon podium finisher,
+// 20x+ judge, 30x+ speaker." Cited to home note 4, which covers talks, judging and podiums.
+const hackathons = [
+  { value: '10', label: 'hackathon podiums' },
+  { value: '20+', label: 'hackathons judged' },
+];
+
+// "Technical AI keynote, ASEAN AI Summit 2025 (…)" → lead "Technical AI keynote", detail the rest.
+const stage = appearances.map((a) => {
+  const i = a.indexOf(', ');
+  return { lead: a.slice(0, i), detail: a.slice(i + 2) };
+});
+---
+
+<section id="recognition" class="recognition" aria-labelledby="recognition-heading">
+  <div class="lead">
+    <h2 id="recognition-heading" class="section-heading">Recognition</h2>
+
+    <div class="record">
+      <table class="honours">
+        <thead>
+          <tr>
+            <th scope="col" class="col-year">Year</th>
+            <th scope="col">Award or distinction</th>
+            <th scope="col" class="col-by">Conferred by</th>
+          </tr>
+        </thead>
+        {
+          years.map((group) => (
+            <tbody data-reveal>
+              {group.rows.map((row, i) => (
+                <tr>
+                  {i === 0 && (
+                    <th scope="rowgroup" rowspan={group.rows.length} class="year tabular">
+                      {group.year}
+                    </th>
+                  )}
+                  <td class="award">
+                    {row.title}
+                    {rowNotes[row.by] && (
+                      <a class="note-ref" href={`#note-${rowNotes[row.by]}`} aria-label={`Note ${rowNotes[row.by]}`}>
+                        {rowNotes[row.by]}
+                      </a>
+                    )}
+                  </td>
+                  <td class="by">{row.by}</td>
+                </tr>
+              ))}
+            </tbody>
+          ))
+        }
+      </table>
+
+      <p class="tally" data-reveal>
+        {
+          hackathons.map((h, i) => (
+            <span class="tally-item">
+              <span class="tally-n tabular">{h.value}</span>
+              <span class="tally-label">
+                {h.label}
+                {i < hackathons.length - 1 && <span class="sr-only">,</span>}
+                {i === hackathons.length - 1 && (
+                  <a class="note-ref" href="#note-4" aria-label="Note 4">4</a>
+                )}
+              </span>
+            </span>
+          ))
+        }
+      </p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3 class="block-heading">
+      Media coverage<a class="note-ref" href="#note-8" aria-label="Note 8">8</a>
+    </h3>
+    <ul class="press" data-reveal>
+      {
+        press.map((p) => (
+          <li>
+            <span class="press-name">{p.name}</span>
+            {p.times && (
+              <>
+                <span class="times tabular" aria-hidden="true">{p.times}</span>
+                <span class="sr-only">, {p.times.replace('×', '')} times</span>
+              </>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="block">
+    <h3 class="block-heading">Appearances</h3>
+    <ul class="stage" data-reveal>
+      {
+        stage.map((s) => (
+          <li>
+            <span class="stage-lead">{s.lead}</span>
+            <span class="stage-detail">
+              {s.detail}
+              {/200\+/.test(s.detail) && (
+                <a class="note-ref" href="#note-9" aria-label="Note 9">9</a>
+              )}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .stage-detail .note-ref,
+  .block-heading .note-ref {
+    font-size: 0.6em;
+  }
+
+  .recognition {
+    padding: calc(110 * var(--u)) var(--gutter) calc(140 * var(--u));
+    border-top: 1px solid var(--color-rule-soft);
+    scroll-margin-top: var(--nav-h);
+  }
+
+  .lead,
+  .block {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) 1fr;
+    align-items: start;
+  }
+
+  .recognition .section-heading {
+    margin: 0;
+  }
+
+  /* The honours table, set like a report: year groups divided by ink rules, rows by hairlines. */
+  .honours {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead th {
+    padding: 0 0 calc(16 * var(--u));
+    border-bottom: max(calc(2 * var(--u)), 1px) solid var(--color-ink);
+    font-weight: 500;
+    font-size: max(calc(20 * var(--u)), 13px);
+    line-height: 1.3;
+    color: var(--color-ink-2);
+    text-align: left;
+  }
+
+  .col-year {
+    width: calc(250 * var(--u));
+  }
+
+  .col-by {
+    width: calc(620 * var(--u));
+  }
+
+  tbody + tbody {
+    border-top: 1px solid var(--color-rule);
+  }
+
+  td,
+  .year {
+    padding-block: calc(22 * var(--u));
+    text-align: left;
+    vertical-align: baseline;
+  }
+
+  .year {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(46 * var(--u)), 22px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    padding-top: calc(24 * var(--u));
+  }
+
+  tbody tr + tr td {
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  td {
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.35;
+  }
+
+  .award {
+    padding-right: calc(48 * var(--u));
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  .by {
+    color: var(--color-ink-2);
+  }
+
+  td .note-ref,
+  .tally .note-ref {
+    font-size: 0.62em;
+  }
+
+  .note-ref {
+    padding-inline: 0.1em;
+  }
+
+  /* Hackathon record under the table, in the key-figures register at a smaller scale. */
+  .tally {
+    display: flex;
+    flex-wrap: wrap;
+    margin: calc(56 * var(--u)) 0 0;
+    padding-top: calc(36 * var(--u));
+    border-top: max(calc(2 * var(--u)), 1px) solid var(--color-ink);
+  }
+
+  .tally-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.42em;
+    padding-right: calc(56 * var(--u));
+  }
+
+  .tally-item + .tally-item {
+    padding-left: calc(56 * var(--u));
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .tally-n {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(88 * var(--u)), 40px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .tally-label {
+    font-weight: 500;
+    font-size: max(calc(28 * var(--u)), 16px);
+    letter-spacing: -0.01em;
+  }
+
+  /* Sub-blocks: a strong rule, the label in the left column, the matter to its right. */
+  .block {
+    margin-top: calc(130 * var(--u));
+    padding-top: calc(28 * var(--u));
+    border-top: max(calc(2 * var(--u)), 1px) solid var(--color-ink);
+  }
+
+  .block-heading {
+    margin: 0;
+    font-weight: 700;
+    font-size: max(calc(30 * var(--u)), 18px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .press,
+  .stage {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .press {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: calc(24 * var(--u));
+  }
+
+  .press li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3em;
+    padding-right: calc(60 * var(--u));
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(64 * var(--u)), 30px);
+    line-height: 1.05;
+    letter-spacing: -0.022em;
+  }
+
+  .press li + li {
+    padding-left: calc(60 * var(--u));
+    border-left: 1px solid var(--color-rule);
+  }
+
+  .times {
+    font-weight: 600;
+    font-stretch: 100%;
+    font-size: max(0.48em, 14px);
+    letter-spacing: 0;
+    color: var(--color-ink-2);
+  }
+
+  .stage {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stage li {
+    display: flex;
+    flex-direction: column;
+    gap: calc(8 * var(--u));
+    padding-right: calc(48 * var(--u));
+  }
+
+  .stage li + li {
+    padding-left: calc(48 * var(--u));
+    border-left: 1px solid var(--color-rule-soft);
+  }
+
+  .stage-lead {
+    font-weight: 700;
+    font-size: max(calc(30 * var(--u)), 17px);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .stage-detail {
+    max-width: 40ch;
+    font-size: max(calc(25 * var(--u)), 15px);
+    line-height: 1.45;
+    color: var(--color-ink-2);
+  }
+
+  @media (max-width: 1023px) {
+    .recognition {
+      padding: 56px var(--gutter) 64px;
+    }
+
+    .lead,
+    .block {
+      grid-template-columns: 1fr;
+      row-gap: 24px;
+    }
+
+    .honours,
+    .honours tbody {
+      display: block;
+    }
+
+    .honours thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .honours tbody {
+      padding-block: 4px;
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .honours tbody:first-of-type {
+      border-top: 2px solid var(--color-ink);
+    }
+
+    .honours tr {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      column-gap: 12px;
+      row-gap: 2px;
+      padding-block: 12px;
+    }
+
+    .honours tr + tr {
+      margin-left: 76px;
+      grid-template-columns: 1fr;
+      border-top: 1px solid var(--color-rule-soft);
+    }
+
+    .year {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      padding: 0;
+      font-size: 22px;
+      line-height: 1.15;
+    }
+
+    td {
+      grid-column: 2;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    tr + tr td {
+      grid-column: 1;
+    }
+
+    tbody tr + tr td {
+      border-top: 0;
+    }
+
+    .award {
+      padding-right: 0;
+    }
+
+    .by {
+      font-size: 14px;
+    }
+
+    .tally {
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top-width: 2px;
+    }
+
+    .tally-item,
+    .tally-item + .tally-item {
+      padding: 0;
+      border-left: 0;
+    }
+
+    .tally-n {
+      font-size: 40px;
+    }
+
+    .block {
+      margin-top: 56px;
+      padding-top: 16px;
+      row-gap: 18px;
+      border-top-width: 2px;
+    }
+
+    .press {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 0;
+    }
+
+    .press li,
+    .press li + li {
+      padding: 12px 0;
+      border-left: 0;
+      font-size: clamp(24px, 7vw, 34px);
+    }
+
+    .press li:nth-child(even) {
+      padding-left: 16px;
+      border-left: 1px solid var(--color-rule);
+    }
+
+    .press li:nth-child(n + 3) {
+      border-top: 1px solid var(--color-rule-soft);
+    }
+
+    .stage {
+      grid-template-columns: 1fr;
+    }
+
+    .stage li,
+    .stage li + li {
+      gap: 4px;
+      padding: 14px 0;
+      border-left: 0;
+    }
+
+    .stage li + li {
+      border-top: 1px solid var(--color-rule-soft);
+    }
+
+    .stage li:first-child {
+      padding-top: 0;
+    }
+  }
+</style>
