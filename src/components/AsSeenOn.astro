@@ -1,0 +1,103 @@
+---
+// "As seen on": the outlets from Media coverage, set high on the page under the key figures.
+// Transparent wordmarks (assets/press/, sources noted inside each SVG), greyscale at rest and in
+// full colour on hover. The coverage counts behind them are in note 8.
+import theStar from '../../assets/press/the-star.svg?url';
+import bfm from '../../assets/press/bfm.svg?url';
+import malayMail from '../../assets/press/malay-mail.svg?url';
+import dna from '../../assets/press/digital-news-asia.svg?url';
+
+// Heights in comp units, balanced by eye so each wordmark carries the same visual weight.
+const outlets = [
+  { name: 'The Star', src: theStar, h: 66 },
+  { name: 'BFM 89.9', src: bfm, h: 62 },
+  { name: 'Malay Mail', src: malayMail, h: 40 },
+  { name: 'Digital News Asia', src: dna, h: 82 },
+];
+---
+
+<section class="seen" aria-labelledby="seen-heading">
+  <h2 id="seen-heading" class="seen-heading">
+    As seen on<a class="note-ref" href="#note-8" aria-label="Note 8">8</a>
+  </h2>
+  <ul class="outlets">
+    {
+      outlets.map((o) => (
+        <li style={`--h: ${o.h}`}>
+          <img src={o.src} alt={o.name} loading="lazy" decoding="async" />
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .seen {
+    display: grid;
+    grid-template-columns: calc(411 * var(--u)) 1fr;
+    align-items: center;
+    padding: calc(48 * var(--u)) var(--gutter);
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .seen-heading {
+    margin: 0;
+    font-weight: 700;
+    font-size: max(calc(30 * var(--u)), 18px);
+    letter-spacing: -0.01em;
+  }
+
+  .seen-heading .note-ref {
+    font-size: 0.6em;
+  }
+
+  .outlets {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: calc(48 * var(--u));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .outlets li {
+    display: flex;
+    align-items: center;
+  }
+
+  .outlets img {
+    display: block;
+    width: auto;
+    height: max(calc(var(--h) * var(--u)), calc(var(--h) * 0.42px));
+    filter: grayscale(1);
+    opacity: 0.62;
+    transition:
+      filter 320ms var(--ease-out-expo),
+      opacity 320ms var(--ease-out-expo);
+  }
+
+  .outlets li:hover img {
+    filter: none;
+    opacity: 1;
+  }
+
+  @media (max-width: 1023px) {
+    .seen {
+      grid-template-columns: 1fr;
+      row-gap: 18px;
+      padding: 28px var(--gutter);
+    }
+
+    .outlets {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      justify-items: start;
+      gap: 22px 16px;
+    }
+
+    .outlets img {
+      height: calc(var(--h) * 0.42px);
+    }
+  }
+</style>

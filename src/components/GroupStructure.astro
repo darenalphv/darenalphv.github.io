@@ -15,7 +15,14 @@ import { group, caseStudies } from '../data/content';
         group.members.map((m) => (
           <li class:list={['member', m.kind]}>
             <span class="drop" aria-hidden="true" data-draw />
-            <p class="node">{m.name}</p>
+            <a
+              class="node node-link"
+              href={m.url}
+              {...(m.url.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}
+            >
+              {m.name}
+              {m.url.startsWith('http') && <span class="sr-only"> (opens in a new tab)</span>}
+            </a>
             <p class="does">{m.does}</p>
           </li>
         ))
@@ -138,6 +145,18 @@ import { group, caseStudies } from '../data/content';
 
   .community .node {
     border-style: dashed;
+  }
+
+  /* Each company in the chart opens its own site; hover inverts the box in ink. */
+  .node-link {
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: background-color 200ms var(--ease-out-expo), color 200ms var(--ease-out-expo);
+  }
+
+  .node-link:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
   }
 
   .community .drop {

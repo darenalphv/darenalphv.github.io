@@ -1,0 +1,330 @@
+---
+// Public appearances carousel, on the Media plate. Entries come from the `appearances` collection
+// (edited in Pages CMS). Each card is a poster; the official Instagram or LinkedIn embed loads only
+// when the visitor asks for it, so no third-party script runs on page load.
+import { getCollection } from 'astro:content';
+import { parseEmbed } from '../lib/embeds';
+
+const entries = (await getCollection('appearances', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+// "17 Oct 2026", matching the dates elsewhere on the site.
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const formatDate = (d: Date) => `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+const isoDate = (d: Date) => d.toISOString().slice(0, 10);
+
+const items = entries.map((entry) => ({ id: entry.id, ...entry.data, embed: parseEmbed(entry.data.url) }));
+---
+
+{
+  items.length > 0 && (
+    <div class="carousel" data-carousel>
+      <div class="controls">
+        <button class="nav prev" type="button" data-carousel-prev aria-label="Previous appearances" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+        </button>
+        <button class="nav next" type="button" data-carousel-next aria-label="Next appearances">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+        </button>
+      </div>
+
+      <ul class="track" data-carousel-track tabindex="0" aria-label="Public appearances">
+        {
+          items.map((item) => (
+            <li class="card">
+              <div class="stage" data-embed-stage>
+                {item.embed.embedUrl ? (
+                  <button
+                    class="poster"
+                    type="button"
+                    data-embed-load={item.embed.embedUrl}
+                    data-embed-title={`${item.embed.label}: ${item.title}`}
+                  >
+                    {item.poster && <img src={item.poster} alt="" loading="lazy" decoding="async" />}
+                    {!item.poster && (
+                      <span class="poster-type" aria-hidden="true">
+                        <span class="poster-site">{item.embed.site}</span>
+                        <span class="poster-title">{item.title}</span>
+                      </span>
+                    )}
+                    <span class="load-mark">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13L18.5 12Z" fill="currentColor" /></svg>
+                      <span>View {item.embed.label} here</span>
+                    </span>
+                  </button>
+                ) : (
+                  <a class="poster" href={item.embed.href} target="_blank" rel="noopener">
+                    <span class="poster-type">
+                      <span class="poster-site">{item.embed.site}</span>
+                      <span class="poster-title">{item.title}</span>
+                    </span>
+                  </a>
+                )}
+              </div>
+              <p class="meta tabular">
+                <time datetime={isoDate(item.date)}>{formatDate(item.date)}</time>
+                <span aria-hidden="true">{' · '}</span>
+                {item.embed.label}
+              </p>
+              <h4 class="title">{item.title}</h4>
+              {item.event && <p class="event">{item.event}</p>}
+              <a class="open" href={item.embed.href} target="_blank" rel="noopener">
+                Open on {item.embed.site}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+                <span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  )
+}
+
+<script>
+  import { mountCarousels } from '../scripts/appearances';
+  mountCarousels();
+</script>
+
+<style>
+  .carousel {
+    position: relative;
+    min-width: 0; /* a grid child: let the track scroll instead of widening the column */
+    padding-top: calc(40 * var(--u));
+  }
+
+  /* The arrows sit in the report's side-head column, under the block heading. */
+  .controls {
+    position: absolute;
+    top: calc(150 * var(--u));
+    left: calc(-411 * var(--u));
+    display: flex;
+    gap: calc(14 * var(--u));
+  }
+
+  .nav {
+    display: grid;
+    place-items: center;
+    width: max(calc(64 * var(--u)), 40px);
+    height: max(calc(64 * var(--u)), 40px);
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 180ms var(--ease-out-expo), color 180ms var(--ease-out-expo), opacity 180ms;
+  }
+
+  .nav svg {
+    width: 50%;
+    height: 50%;
+  }
+
+  .nav:hover:not(:disabled) {
+    background: #fff;
+    color: var(--color-plate);
+  }
+
+  .nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: clamp(300px, 26vw, 420px);
+    gap: calc(48 * var(--u));
+    margin: 0;
+    padding: 0 0 calc(12 * var(--u));
+    list-style: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    contain: paint; /* keep the off-screen cards from widening the page */
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .track:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 6px;
+  }
+
+  .card {
+    display: grid;
+    align-content: start;
+    gap: calc(12 * var(--u));
+    scroll-snap-align: start;
+  }
+
+  /* The stage holds the poster, then the embed, at one fixed size so the row never jumps. */
+  .stage {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: var(--color-plate-deep);
+  }
+
+  .stage.is-loaded {
+    aspect-ratio: auto;
+    height: min(78vh, 720px);
+    background: #fff;
+  }
+
+  .stage :global(iframe) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .poster {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out-expo);
+  }
+
+  /* No poster uploaded: a typographic cover in the report's own grammar. */
+  .poster-type {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    padding: max(calc(36 * var(--u)), 20px);
+    border: 1px solid color-mix(in oklab, var(--color-plate-ink) 42%, transparent);
+  }
+
+  .poster-site {
+    font-weight: 600;
+    font-size: max(calc(22 * var(--u)), 14px);
+    color: var(--color-plate-ink);
+  }
+
+  .poster-title {
+    margin-top: auto;
+    margin-bottom: max(calc(70 * var(--u)), 44px);
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(52 * var(--u)), 26px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .load-mark {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+    height: max(calc(64 * var(--u)), 40px);
+    padding-inline: 0 max(calc(22 * var(--u)), 14px);
+    background: #fff;
+    color: var(--color-plate);
+    font-weight: 600;
+    font-size: max(calc(20 * var(--u)), 13.5px);
+    transition: background-color 220ms var(--ease-out-expo);
+  }
+
+  .load-mark svg {
+    width: max(calc(64 * var(--u)), 40px);
+    height: 46%;
+  }
+
+  .poster:hover img {
+    transform: scale(1.04);
+  }
+
+  .poster:hover .load-mark {
+    background: var(--color-plate-ink);
+  }
+
+  .meta {
+    margin: calc(10 * var(--u)) 0 0;
+    font-weight: 500;
+    font-size: max(calc(21 * var(--u)), 13.5px);
+    color: var(--color-plate-ink);
+  }
+
+  .title {
+    margin: 0;
+    font-weight: 600;
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .event {
+    margin: 0;
+    font-size: max(calc(22 * var(--u)), 14px);
+    color: var(--color-plate-ink);
+  }
+
+  .open {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    justify-self: start;
+    margin-top: calc(6 * var(--u));
+    font-weight: 500;
+    font-size: max(calc(21 * var(--u)), 13.5px);
+    color: #fff;
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in oklab, #fff 38%, transparent);
+    text-underline-offset: 0.2em;
+  }
+
+  .open svg {
+    width: 1em;
+    height: 1em;
+  }
+
+  .open:hover {
+    text-decoration-color: #fff;
+  }
+
+  @media (max-width: 1023px) {
+    .carousel {
+      padding-top: 12px;
+    }
+
+    .controls {
+      position: static;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .track {
+      grid-auto-columns: min(82vw, 340px);
+      gap: 16px;
+      margin-inline: calc(-1 * var(--gutter));
+      padding-inline: var(--gutter);
+      scroll-padding-inline: var(--gutter);
+    }
+
+    .stage.is-loaded {
+      height: min(72vh, 620px);
+    }
+  }
+</style>

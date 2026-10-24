@@ -12,8 +12,8 @@ export const pageNotes = [
   { n: 3, text: 'Three ALPHV entities featured in Konsortium AI Negara 2025. Source: Daren Tan, key-personnel deck.' },
   // Source: .source/content.md "Case study: ALPHV Group of Companies" (Selangor AI Hackathon 2026)
   { n: 4, text: 'Selangor AI Hackathon 2026: ALPHV placed 2nd runner-up, third overall, among 26 companies, working a blind dataset on illegal dumping and waste management in three hours. Follow-up focus groups were held with 12 PBTs (local authorities) and Selangor’s waste, water, road and infrastructure departments. Source: ALPHV, 2026.' },
-  // Source: .source/content.md "Case study: ALPHV Group of Companies" (Founded Apr 2023, formerly alphatechlabs, co-founder Jeng Yee Khor) and "Experience"
-  { n: 5, text: 'Founded in April 2023 by Daren Tan with co-founder Jeng Yee Khor; formerly alphatechlabs. Source: Daren Tan, LinkedIn.' },
+  // Source: .source/content.md "Case study: ALPHV Group of Companies" (Founded Apr 2023, formerly alphatechlabs, co-founder Khor Jeng Yee) and "Experience"
+  { n: 5, text: 'Founded in April 2023 by Daren Tan with co-founder Khor Jeng Yee; formerly alphatechlabs. Source: Daren Tan, LinkedIn.' },
   // Source: .source/content.md "Achievements & recognition" (Official Authorized Reseller of FootfallCam & HIKVision (Jan 2025))
   { n: 6, text: 'Official authorised reseller of FootfallCam and HIKVision since January 2025. Source: Daren Tan, LinkedIn.' },
   // Source: .source/content.md "Case study: ALPHV Group of Companies" (Founder's stated mission)
@@ -22,6 +22,12 @@ export const pageNotes = [
   { n: 8, text: 'WIRA AI Training Series 3 with SIDEC: ‘Introduction to Claude’, 4 September 2026, a full house of 50. ALPHV Academy also delivered ‘Unlocking Productivity with Claude’ at PFCC Puchong. Source: ALPHV Academy, September 2026.' },
   // Source: .source/content.md "Case study: ALPHV Group of Companies" (ALPHV Academy: HRDC-claimable training (since 2023))
   { n: 9, text: 'ALPHV Academy training has been HRDC-claimable since 2023, for engineers, managers and C-suite leaders. Source: ALPHV, October 2026.' },
+  // Source: .source/content.md "Fact sheet additions" (15 full-time staff; MDEC Malaysia Digital status; delivery sectors)
+  { n: 10, text: 'ALPHV has 15 full-time staff, holds MDEC Malaysia Digital status, and delivers across financial services, insurance, healthcare, retail, property and government. Source: ALPHV, October 2026.' },
+  // Source: .source/content.md "Fact sheet additions" (2026 programmes)
+  { n: 11, text: '2026 programmes: Great Eastern (more than 500 agency leaders), Amway Malaysia and Silverlake Axis. Source: ALPHV, October 2026.' },
+  // Source: .source/content.md "Fact sheet additions" (SIDEC: 150 SME participants each built a working AI agent)
+  { n: 12, text: 'A SIDEC workshop at which each of 150 SME participants built a working AI agent. Source: ALPHV, October 2026.' },
 ] as const;
 
 // Segment figures: exactly four, each citing a page note.
@@ -71,12 +77,28 @@ export const accounts = [
     ],
     result: { value: '50', label: 'Attendees, a full house', note: 8 },
   },
+  {
+    // Source: .source/content.md "Fact sheet additions" (SIDEC: 150 SME participants each built a working AI agent)
+    id: 'agents',
+    date: '2026',
+    title: 'AI agent workshop with SIDEC',
+    body: ['At a SIDEC workshop for small and medium enterprises, each of the 150 participants left having built a working AI agent.'],
+    result: { value: '150', label: 'SME participants, each with a working AI agent', note: 12 },
+  },
+  {
+    // Source: .source/content.md "Fact sheet additions" (2026 programmes)
+    id: 'programmes',
+    date: '2026',
+    title: 'Corporate programmes',
+    body: ['In 2026 the group ran programmes for Great Eastern, reaching more than 500 agency leaders, and for Amway Malaysia and Silverlake Axis.'],
+    result: { value: '500+', label: 'Great Eastern agency leaders', note: 11 },
+  },
 ] as const;
 
 // Milestones, in date order.
 export const milestones = [
-  // Source: .source/content.md "Case study" (Founded Apr 2023, formerly alphatechlabs, co-founder Jeng Yee Khor)
-  { date: 'Apr 2023', text: 'ALPHV founded with co-founder Jeng Yee Khor (formerly alphatechlabs)', note: 5 },
+  // Source: .source/content.md "Case study" (Founded Apr 2023, formerly alphatechlabs, co-founder Khor Jeng Yee)
+  { date: 'Apr 2023', text: 'ALPHV founded with co-founder Khor Jeng Yee (formerly alphatechlabs)', note: 5 },
   // Source: .source/content.md "Case study" (ALPHV Academy, HRDC-claimable training since 2023)
   { date: '2023', text: 'ALPHV Academy begins HRDC-claimable training', note: 9 },
   // Source: .source/content.md "Achievements & recognition" (Official Authorized Reseller, Jan 2025)
@@ -89,4 +111,6 @@ export const milestones = [
   { date: 'Aug–Sep 2026', text: '2nd runner-up among 26 companies, Selangor AI Hackathon', note: 4 },
   // Source: .source/content.md "Case study" (Introduction to Claude with SIDEC, 4 Sep 2026)
   { date: 'Sep 2026', text: '‘Introduction to Claude’ with SIDEC, WIRA AI Training Series 3', note: 8 },
+  // Source: .source/content.md "Fact sheet additions" (2026 programmes)
+  { date: '2026', text: 'Programmes for Great Eastern, Amway Malaysia and Silverlake Axis', note: 11 },
 ] as const;

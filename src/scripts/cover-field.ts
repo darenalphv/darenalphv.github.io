@@ -1,4 +1,4 @@
-// The cover art: 72,000 points, one for every Developer Kaki member, turning slowly in an
+// The cover art: 82,000 points, one for every Developer Kaki member, turning slowly in an
 // off-centre swirl on the ultramarine plate. The pointer parts the field. Static under reduced motion.
 import { Renderer, Geometry, Program, Mesh } from 'ogl';
 
@@ -98,7 +98,7 @@ function buildSeeds(count: number, arms: number, armContrast: number) {
 }
 
 export function mountCoverField(canvas: HTMLCanvasElement, options: FieldOptions = {}) {
-  const { count = 72000, arms = 3, armContrast = 0.35, center = [0.67, 0.63], compWidth = 1540 } = options;
+  const { count = 82000, arms = 3, armContrast = 0.35, center = [0.67, 0.63], compWidth = 1540 } = options;
   const host = canvas.parentElement as HTMLElement;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);

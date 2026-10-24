@@ -1,0 +1,78 @@
+---
+// A small square mark for an organisation: its logo in full colour, or a lettered tile when no
+// reliable logo exists. Decorative: the organisation's name is always set beside it.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { logoFor } from '../data/logos';
+
+interface Props {
+  name: string;
+  size?: 'sm' | 'md' | 'lg';
+}
+const { name, size = 'md' } = Astro.props;
+
+const files = import.meta.glob<ImageMetadata>('../../assets/logos/*', { eager: true, import: 'default' });
+const file = logoFor(name);
+const img = file ? files[`../../assets/logos/${file}`] : undefined;
+// Logos published below 96px are shown near their natural size instead of being stretched.
+const smallSource = img ? img.width < 96 : false;
+// Wordmarks (much wider than tall) get less padding so they stay legible in the square.
+const wide = img ? img.width / img.height > 1.6 : false;
+const initials = name
+  .split(/\s+/)
+  .map((w) => w.replace(/[^A-Za-z0-9]/g, ''))
+  .filter(Boolean)
+  .slice(0, 2)
+  .map((w) => w[0])
+  .join('')
+  .toUpperCase();
+---
+
+<span class:list={['mark', size, { lettered: !img, 'small-source': smallSource, wide }]} aria-hidden="true">
+  {img ? <Image src={img} alt="" width={Math.min(img.width, 128)} format="webp" quality={92} loading="lazy" decoding="async" /> : initials}
+</span>
+
+<style>
+  .mark {
+    --mark: max(calc(52 * var(--u)), 34px);
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    width: var(--mark);
+    height: var(--mark);
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--color-rule-soft);
+  }
+
+  .sm {
+    --mark: max(calc(40 * var(--u)), 28px);
+  }
+
+  .lg {
+    --mark: max(calc(72 * var(--u)), 44px);
+  }
+
+  .mark :global(img) {
+    width: 100%;
+    height: 100%;
+    padding: 9%;
+    object-fit: contain;
+  }
+
+  .small-source :global(img) {
+    padding: 22%;
+  }
+
+  .wide :global(img) {
+    padding: 3%;
+  }
+
+  .lettered {
+    background: var(--color-paper);
+    font-weight: 700;
+    font-size: calc(var(--mark) * 0.34);
+    letter-spacing: -0.02em;
+    color: var(--color-ink-2);
+  }
+</style>

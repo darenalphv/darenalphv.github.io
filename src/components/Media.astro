@@ -1,5 +1,16 @@
 ---
-import { onAir, talks } from '../data/content';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { getCollection } from 'astro:content';
+import { onAir, talks, articles } from '../data/content';
+import OrgMark from './OrgMark.astro';
+import Appearances from './Appearances.astro';
+import { getTalkViews } from '../lib/youtube';
+
+// Thumbnails, downloaded once and served optimised: BFM episode images and YouTube thumbnails.
+// Sources and provenance are embedded in each file under assets/media/.
+const thumbs = import.meta.glob<ImageMetadata>('../../assets/media/*', { eager: true, import: 'default' });
+const thumb = (name: string) => thumbs[`../../assets/media/${name}`];
 
 // "27 Feb 2025" → "2025-02-27" for <time datetime>; "37 min" → "PT37M".
 const MONTHS: Record<string, string> = {
@@ -11,6 +22,17 @@ const isoDate = (d: string) => {
   return `${year}-${MONTHS[mon]}-${day.padStart(2, '0')}`;
 };
 const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
+
+// YouTube only has HD thumbnails for some videos; the rest are 4:3 with letterbox bars, cropped tighter.
+const HD_THUMBS = new Set(['UjIK6tLkzZY', 'OtYHCp77dEs', 'fds4s_FjLlA']);
+
+// The appearances block shows only when the CMS holds at least one visible entry.
+const hasAppearances = (await getCollection('appearances', ({ data }) => !data.draft)).length > 0;
+
+// YouTube view counts, per talk and in total; the total cites home note 10 (src/pages/index.astro).
+const talkViews = await getTalkViews();
+const fmt = (n: number) => n.toLocaleString('en-US');
+const VIEWS_NOTE = 10;
 ---
 
 <section id="media" class="media on-plate" aria-labelledby="media-heading">
@@ -26,6 +48,21 @@ const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
       {
         onAir.map((ep) => (
           <li class="episode" data-reveal>
+            <figure class="frame ep-frame">
+              <Image
+                src={thumb(`bfm-${isoDate(ep.date)}.png`)}
+                alt=""
+                widths={[480, 800, 1178]}
+                sizes="(min-width: 1024px) 24vw, 100vw"
+                format="webp"
+                quality={80}
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="play" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 5.5v13L18.5 12Z" fill="currentColor" /></svg>
+              </span>
+            </figure>
             <p class="ep-meta tabular">
               <span>
                 <time datetime={isoDate(ep.date)}>{ep.date}</time>
@@ -54,37 +91,95 @@ const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
 
   <div class="block">
     <div class="block-head">
-      <h3 class="block-heading">Selected talks</h3>
-      <p class="block-sub">Recorded on YouTube</p>
+      <h3 class="block-heading">In the press</h3>
+      <p class="block-sub">Interviews and features</p>
     </div>
 
-    <table class="talks">
-      <thead class="sr-only">
-        <tr>
-          <th scope="col">Date</th>
-          <th scope="col">Talk</th>
-          <th scope="col">Venue</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          talks.map((t) => (
-            <tr data-reveal>
-              <td class="date tabular">
-                <time datetime={isoDate(t.date)}>{t.date}</time>
-              </td>
-              <th scope="row" class="talk">
-                <a href={`https://www.youtube.com/watch?v=${t.youtube}`} target="_blank" rel="noopener">
-                  {t.title}
-                  <span class="sr-only"> (YouTube, opens in a new tab)</span>
-                </a>
-              </th>
-              <td class="venue">{t.venue}</td>
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
+    <ul class="articles">
+      {
+        articles.map((a) => (
+          <li class="article" data-reveal>
+            <a class="article-link" href={a.url} target="_blank" rel="noopener">
+              <span class="article-source">
+                <OrgMark name={a.outlet} size="sm" />
+                <span class="article-meta tabular">
+                  <span class="article-outlet">{a.outlet}</span>
+                  <time datetime={isoDate(a.date)}>{a.date}</time>
+                </span>
+              </span>
+              <span class="article-title">{a.title}</span>
+              <svg class="article-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.6" />
+              </svg>
+              <span class="sr-only"> ({a.outlet}, opens in a new tab)</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  {
+    hasAppearances && (
+      <div class="block">
+        <div class="block-head">
+          <h3 class="block-heading">Public appearances</h3>
+          <p class="block-sub">On Instagram and LinkedIn</p>
+        </div>
+        <Appearances />
+      </div>
+    )
+  }
+
+  <div class="block">
+    <div class="block-head">
+      <h3 class="block-heading">Selected talks</h3>
+      <p class="block-sub">Recorded on YouTube</p>
+      <p class="views-total">
+        <span class="views-total-value tabular">
+          {fmt(talkViews.total)}<a class="note-ref" href={`#note-${VIEWS_NOTE}`} aria-label={`Note ${VIEWS_NOTE}`}
+            >{VIEWS_NOTE}</a
+          >
+        </span>
+        <span class="views-total-label">views in total</span>
+      </p>
+    </div>
+
+    <ul class="talks">
+      {
+        talks.map((t) => (
+          <li class="talk" data-reveal>
+            <a class="talk-link" href={`https://www.youtube.com/watch?v=${t.youtube}`} target="_blank" rel="noopener">
+              <span class:list={['frame', 'talk-frame', { letterboxed: !HD_THUMBS.has(t.youtube) }]}>
+                <Image
+                  src={thumb(`yt-${t.youtube}.jpg`)}
+                  alt=""
+                  widths={[320, 480]}
+                  sizes="(min-width: 1024px) 24vw, 40vw"
+                  format="webp"
+                  quality={78}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M8 5.5v13L18.5 12Z" fill="currentColor" /></svg>
+                </span>
+              </span>
+              <span class="talk-text">
+                <span class="talk-meta tabular">
+                  <time datetime={isoDate(t.date)}>{t.date}</time>
+                  <span aria-hidden="true">{' · '}</span>
+                  {t.venue}
+                </span>
+                <span class="talk-title">{t.title}</span>
+                <span class="talk-views tabular">{fmt(talkViews.views[t.youtube] ?? 0)} views</span>
+                <span class="sr-only"> (YouTube, opens in a new tab)</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
 
@@ -134,10 +229,45 @@ const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
     color: var(--color-plate-ink);
   }
 
+  /* Thumbnails: square frames on the plate, a slow zoom on hover, a white play mark. */
+  .frame {
+    position: relative;
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    background: var(--color-plate-deep);
+  }
+
+  .frame :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out-expo);
+  }
+
+  .play {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: grid;
+    place-items: center;
+    width: max(calc(64 * var(--u)), 34px);
+    height: max(calc(64 * var(--u)), 34px);
+    background: #fff;
+    color: var(--color-plate);
+    transition: background-color 220ms var(--ease-out-expo), color 220ms var(--ease-out-expo);
+  }
+
+  .play svg {
+    width: 46%;
+    height: 46%;
+  }
+
   /* On air: the dominant element, three episodes as a row of ruled columns. */
   .episodes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    column-gap: calc(96 * var(--u));
     margin: 0;
     padding: 0;
     list-style: none;
@@ -147,20 +277,30 @@ const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: calc(600 * var(--u));
-    padding: calc(28 * var(--u)) calc(48 * var(--u)) calc(8 * var(--u));
+    padding: calc(40 * var(--u)) 0 calc(8 * var(--u));
   }
 
-  .episode:first-child {
-    padding-left: 0;
-  }
-
-  .episode:last-child {
-    padding-right: 0;
-  }
-
-  .episode + .episode {
+  /* Column rules sit in the gutters, so every episode gets the same width and its image the same height. */
+  .episode + .episode::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(-48 * var(--u));
     border-left: 1px solid var(--plate-rule-soft);
+  }
+
+  .ep-frame {
+    aspect-ratio: 1178 / 617;
+    margin-bottom: calc(30 * var(--u));
+  }
+
+  .episode:hover .frame :global(img) {
+    transform: scale(1.04);
+  }
+
+  .episode:hover .play {
+    background: var(--color-plate-ink);
   }
 
   .ep-meta {
@@ -179,11 +319,11 @@ const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
   }
 
   .ep-title {
-    margin: calc(86 * var(--u)) 0 0;
+    margin: calc(36 * var(--u)) 0 0;
     font-family: var(--font-display);
     font-weight: 800;
     font-stretch: 90%;
-    font-size: max(calc(70 * var(--u)), 30px);
+    font-size: max(calc(62 * var(--u)), 28px);
     line-height: 1.02;
     letter-spacing: -0.022em;
   }
@@ -214,7 +354,7 @@ const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
     align-items: center;
     gap: 0.55em;
     margin-top: auto;
-    padding-top: calc(64 * var(--u));
+    padding-top: calc(48 * var(--u));
     font-weight: 500;
     font-size: max(calc(22 * var(--u)), 14px);
     color: var(--color-plate-ink);
@@ -235,56 +375,170 @@ const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
     transform: translateX(5px);
   }
 
-  /* Selected talks: the quieter table below. */
-  .talks {
-    width: 100%;
-    border-collapse: collapse;
+  /* In the press: ruled rows, outlet and date at left, the headline as the link. */
+  .articles {
+    margin: 0;
+    padding: calc(16 * var(--u)) 0 0;
+    list-style: none;
   }
 
-  .talks tr + tr {
+  .article + .article {
     border-top: 1px solid var(--plate-rule-soft);
   }
 
-  .talks td,
-  .talks th {
-    padding-block: calc(22 * var(--u));
-    text-align: left;
-    vertical-align: baseline;
-    font-size: max(calc(25 * var(--u)), 15px);
-    line-height: 1.4;
+  .article-link {
+    display: grid;
+    grid-template-columns: calc(380 * var(--u)) 1fr auto;
+    align-items: center;
+    column-gap: calc(40 * var(--u));
+    padding-block: calc(26 * var(--u));
+    color: #fff;
+    text-decoration: none;
   }
 
-  .talks tr:first-child > * {
-    padding-top: calc(30 * var(--u));
+  .article-source {
+    display: flex;
+    align-items: center;
+    gap: max(calc(16 * var(--u)), 10px);
   }
 
-  .date {
-    width: calc(260 * var(--u));
-    white-space: nowrap;
-    font-weight: 500;
+  .article-meta {
+    display: grid;
+    gap: 0.15em;
+    font-size: max(calc(21 * var(--u)), 13.5px);
     color: var(--color-plate-ink);
   }
 
-  .talk {
-    padding-right: calc(48 * var(--u));
-    font-weight: 500;
+  .article-outlet {
+    font-weight: 600;
+    color: #fff;
   }
 
-  .talk a {
-    color: #fff;
+  .article-title {
+    font-weight: 700;
+    font-stretch: 95%;
+    font-size: max(calc(36 * var(--u)), 18px);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
     text-decoration-line: underline;
-    text-decoration-color: var(--plate-underline);
+    text-decoration-color: transparent;
+    text-decoration-thickness: max(calc(2 * var(--u)), 1px);
+    text-underline-offset: 0.16em;
     transition: text-decoration-color 220ms var(--ease-out-expo);
   }
 
-  .talk a:hover {
-    text-decoration-color: #fff;
-    text-decoration-thickness: 2px;
+  .article-arrow {
+    width: max(calc(36 * var(--u)), 20px);
+    height: max(calc(36 * var(--u)), 20px);
+    color: var(--color-plate-ink);
+    transition: transform 260ms var(--ease-out-expo), color 220ms var(--ease-out-expo);
   }
 
-  .venue {
-    width: calc(700 * var(--u));
+  .article-link:hover .article-title,
+  .article-link:focus-visible .article-title {
+    text-decoration-color: #fff;
+  }
+
+  .article-link:hover .article-arrow {
+    color: #fff;
+    transform: translate(3px, -3px);
+  }
+
+  /* Selected talks: a contact sheet of the recordings. */
+  .talks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(56 * var(--u)) calc(48 * var(--u));
+    margin: 0;
+    padding: calc(40 * var(--u)) 0 0;
+    list-style: none;
+  }
+
+  .talk-link {
+    display: grid;
+    gap: calc(20 * var(--u));
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .talk-frame {
+    aspect-ratio: 16 / 9;
+  }
+
+  .talk-frame.letterboxed :global(img) {
+    transform: scale(1.12);
+  }
+
+  .talk-link:hover .frame :global(img) {
+    transform: scale(1.05);
+  }
+
+  .talk-link:hover .talk-frame.letterboxed :global(img) {
+    transform: scale(1.17);
+  }
+
+  .talk-link:hover .play {
+    background: var(--color-plate-ink);
+  }
+
+  .talk-text {
+    display: grid;
+    gap: calc(8 * var(--u));
+  }
+
+  .talk-meta {
+    font-weight: 500;
+    font-size: max(calc(21 * var(--u)), 13.5px);
+    line-height: 1.35;
     color: var(--color-plate-ink);
+  }
+
+  .views-total {
+    display: grid;
+    gap: calc(4 * var(--u));
+    margin: calc(48 * var(--u)) 0 0;
+  }
+
+  .views-total-value {
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(84 * var(--u)), 40px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .views-total-value .note-ref {
+    font-size: 0.3em;
+    vertical-align: 1.9em;
+  }
+
+  .views-total-label {
+    font-weight: 500;
+    font-size: max(calc(22 * var(--u)), 14px);
+    color: var(--color-plate-ink);
+  }
+
+  .talk-views {
+    font-weight: 500;
+    font-size: max(calc(21 * var(--u)), 13.5px);
+    color: var(--color-plate-ink);
+  }
+
+  .talk-title {
+    font-weight: 600;
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 220ms var(--ease-out-expo);
+  }
+
+  .talk-link:hover .talk-title,
+  .talk-link:focus-visible .talk-title {
+    text-decoration-color: #fff;
   }
 
   @media (max-width: 1023px) {
@@ -317,67 +571,99 @@ const isoLength = (len: string) => `PT${parseInt(len, 10)}M`;
       margin: 0;
     }
 
+    .block-head {
+      flex-wrap: wrap;
+    }
+
+    .views-total {
+      flex-basis: 100%;
+      grid-auto-flow: column;
+      justify-content: start;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .views-total-value {
+      font-size: 40px;
+    }
+
+    .talk-views {
+      font-size: 13px;
+    }
+
     .episodes {
       grid-template-columns: 1fr;
       margin-top: 8px;
     }
 
-    .episode,
-    .episode:first-child,
-    .episode:last-child {
-      min-height: 0;
+    .episode {
       padding: 20px 0 24px;
     }
 
+    .episode + .episode::before {
+      display: none;
+    }
+
     .episode + .episode {
-      border-left: 0;
       border-top: 1px solid var(--plate-rule-soft);
     }
 
+    .ep-frame {
+      margin-bottom: 16px;
+    }
+
     .ep-title {
-      margin-top: 18px;
-      font-size: clamp(28px, 7.6vw, 40px);
+      margin-top: 14px;
+      font-size: clamp(26px, 7.2vw, 38px);
       text-wrap: pretty;
     }
 
     .ep-listen {
-      padding-top: 18px;
+      padding-top: 16px;
     }
 
-    .talks,
-    .talks tbody {
-      display: block;
-      margin-top: 8px;
+    .article-link {
+      grid-template-columns: 1fr auto;
+      row-gap: 10px;
+      padding-block: 16px;
     }
 
-    .talks tbody {
-      margin-top: 0;
+    .article-source {
+      grid-column: 1 / -1;
     }
 
-    .talks tr {
-      display: grid;
-      row-gap: 4px;
+    .article-title {
+      font-size: 18px;
+    }
+
+    .talks {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding-top: 8px;
+    }
+
+    .talk + .talk {
+      border-top: 1px solid var(--plate-rule-soft);
+    }
+
+    .talk-link {
+      grid-template-columns: 40% 1fr;
+      align-items: start;
+      gap: 14px;
       padding-block: 14px;
     }
 
-    .talks td,
-    .talks th,
-    .talks tr:first-child > * {
-      padding: 0;
+    .talk-text {
+      gap: 4px;
     }
 
-    .date {
-      width: auto;
-      font-size: 14px;
+    .talk-meta {
+      font-size: 13px;
     }
 
-    .talk {
+    .talk-title {
       font-size: 16px;
-    }
-
-    .venue {
-      width: auto;
-      font-size: 14px;
     }
   }
 </style>

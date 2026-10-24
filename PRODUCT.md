@@ -20,11 +20,11 @@ A personal home base for a mixed audience, confirmed by Daren:
 - event organisers and partners checking Daren's track record;
 - peers and the developer community following Daren's work.
 
-Their shared job is to understand quickly who Daren Tan is, see real proof, and then connect on LinkedIn.
+Their shared job is to understand quickly who Daren Tan is, see real proof, and then connect on LinkedIn or message Daren directly on WhatsApp.
 
 ## Product Purpose
 
-darentan.my is the canonical home for Daren Tan. It works when a visitor leaves with a clear one-line understanding of Daren, has seen evidence behind it, and has moved to LinkedIn to connect or message.
+darentan.my is the canonical home for Daren Tan. It works when a visitor leaves with a clear one-line understanding of Daren, has seen evidence behind it, and has moved to LinkedIn to connect or to WhatsApp to message Daren directly.
 
 ## Positioning
 
@@ -34,7 +34,7 @@ What a neighbouring consultant cannot truthfully copy is the whole ecosystem Dar
 
 - a company that builds (ALPHV Technologies);
 - an academy that trains (ALPHV Academy);
-- Malaysia's largest developer community (Developer Kaki, 72,000+ members);
+- Malaysia's largest developer community (Developer Kaki, 82,000+ members);
 - a recruitment arm (ALPHV Recruit).
 
 The ecosystem rests on ten years as an engineer, CTO, instructor and researcher. ALPHV's own motto is "Develop. Educate. Innovate."
@@ -48,7 +48,7 @@ The ecosystem rests on ten years as an engineer, CTO, instructor and researcher.
 ## Capabilities and Constraints
 
 - Scope for v1: a home page plus two case-study pages, Developer Kaki and ALPHV Group of Companies.
-- The only call to action is the LinkedIn profile. There is no email call to action, no contact form and no booking flow.
+- Two calls to action: the LinkedIn profile (primary) and a direct WhatsApp link to Daren (https://wa.me/60165187740, added at Daren's request on 2026-10-24; the number is not printed on the page). There is no email call to action, no contact form and no booking flow.
 - Talks and BFM episodes appear as proof only, not as a speaking-services pitch.
 - The site is static, with content authored in the repo. Language: English.
 - Voice: polished and professional (Daren's choice), not the casual register of Daren's LinkedIn posts.
@@ -84,7 +84,7 @@ Rules:
 ## Product Principles
 
 1. **Proof over adjectives.** Every claim points to a real company, number, award, talk or episode.
-2. **One door out.** Every path ends at LinkedIn.
+2. **Two doors out.** Every path ends at LinkedIn first, with WhatsApp as the direct line.
 3. **The ecosystem is the story.** Build, train, convene and hire: show how the pieces connect rather than listing titles.
 4. **Taste is the credential.** The craft of the site is itself evidence of Daren's judgment, so nothing on it should feel templated.
 5. **Grasped in seconds.** Identity and first proof land in the first viewport.

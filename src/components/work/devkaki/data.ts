@@ -5,11 +5,11 @@
 // Notes to this page's figures, numbered from 1 in order of first appearance.
 // Every superscript on the page resolves here.
 export const pageNotes = [
-  // Source: .source/content.md, "Case study: Developer Kaki" (founded Feb 2019; 72,000+ members;
+  // Source: .source/content.md, "Case study: Developer Kaki" (founded Feb 2019; 82,000+ members;
   // anchored on Facebook, spilling into LinkedIn, WhatsApp, XiaoHongShu and in-person events)
   {
     n: 1,
-    text: 'Developer Kaki membership, 72,000+, anchored on its Facebook group and extending to LinkedIn, WhatsApp, XiaoHongShu and in-person events. Founded February 2019. Source: Developer Kaki, October 2026.',
+    text: 'Developer Kaki membership, 82,000+, anchored on its Facebook group and extending to LinkedIn, WhatsApp, XiaoHongShu and in-person events. Founded February 2019. Source: Developer Kaki, October 2026.',
   },
   // Source: .source/content.md, "Case study: Developer Kaki" (curated job postings, 5,000+ roles surfaced)
   {
@@ -51,8 +51,8 @@ export const pageNotes = [
 // The segment figures strip: exactly four, each citing a page note.
 // "MYR 50.5k" is too wide for the strip at phone width, so the currency moves into the label.
 export const segmentFigures = [
-  // Source: .source/content.md, "Case study: Developer Kaki" (72,000+ members)
-  { value: '72,000+', label: 'Members', note: 1 },
+  // Source: .source/content.md, "Case study: Developer Kaki" (82,000+ members)
+  { value: '82,000+', label: 'Members', note: 1 },
   // Source: .source/content.md, "Case study: Developer Kaki" (5,000+ roles surfaced)
   { value: '5,000+', label: 'Roles surfaced through curated job postings', note: 2 },
   // Source: .source/content.md, "Case study: Developer Kaki" (JOBS by Developer Kaki: 5,000 registered users)

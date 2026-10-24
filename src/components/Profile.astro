@@ -1,11 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import photo from '../../assets/photos/stage-main.jpg';
-import { person, experience, communities, qualifications } from '../data/content';
+import OrgMark from './OrgMark.astro';
+import { person, experience, communities, qualifications, certifications, languages } from '../data/content';
 
-// Source: .source/content.md, "Deck bio (verbatim facts)" (Daren's key-personnel deck).
-// Used in the two profile paragraphs below; not yet in content.ts.
-const industries = 'financial, health, hospitality, property, insurance, legal and medicolegal';
+// Sources: .source/content.md, "Deck bio (verbatim facts)" (financial, health, hospitality, property,
+// insurance, legal, medicolegal) and "Fact sheet additions" (financial services, insurance, healthcare,
+// retail, property, government). Used in the profile paragraphs below.
+const industries = 'financial services, insurance, healthcare, retail, property, hospitality, legal and medicolegal';
 const ctoMarkets = 'Singapore, China and Malaysia';
 
 // Community figures that resolve to a home note (content.ts `notes`). Hackathon Kaki's
@@ -13,11 +15,6 @@ const ctoMarkets = 'Singapore, China and Malaysia';
 const communityNote: Record<string, number> = { 'Developer Kaki': 1 };
 const memberCount = (size: string) => size.replace(/\s*members$/, '');
 
-// "Qualification, Institution": split at the last comma so the institution sets on its own line.
-const splitQualification = (q: string) => {
-  const i = q.lastIndexOf(', ');
-  return i === -1 ? { title: q, by: '' } : { title: q.slice(0, i), by: q.slice(i + 2) };
-};
 ---
 
 <section id="profile" class="profile" aria-labelledby="profile-heading">
@@ -34,7 +31,8 @@ const splitQualification = (q: string) => {
       <p class="lead">
         Daren Tan is the Founder and Chief Executive Officer of {person.company}, which builds AI, data
         and cloud solutions for businesses across Southeast Asia. He has led enterprise digital
-        transformation and practical AI implementation across the {industries} industries.
+        transformation and practical AI implementation across the {industries} industries, and
+        for government.
       </p>
       <p class="body">
         Before founding ALPHV, he built AI/ML and virtual-agent solutions at BASF. His ten years in
@@ -65,12 +63,17 @@ const splitQualification = (q: string) => {
             experience.map((e) => (
               <tr role="row">
                 <td class="years tabular" role="cell">
-                  {e.from}–<wbr />{e.to}
+                  {e.from === e.to ? e.from : <>{e.from}–<wbr />{e.to}</>}
                 </td>
                 <th scope="row" class="org" role="rowheader">
-                  <span class="org-name">{e.org}</span>
-                  <span class="sr-only">, </span>
-                  <span class="org-place">{e.place}</span>
+                  <span class="org-row">
+                    <OrgMark name={e.org} size="sm" />
+                    <span class="org-text">
+                      <span class="org-name">{e.org}</span>
+                      <span class="sr-only">, </span>
+                      <span class="org-place">{e.place}</span>
+                    </span>
+                  </span>
                 </th>
                 <td class="job" role="cell">{e.role}</td>
               </tr>
@@ -131,16 +134,55 @@ const splitQualification = (q: string) => {
       <h3 id="profile-qualifications" class="block-heading">Qualifications</h3>
       <ul class="quals" aria-labelledby="profile-qualifications">
         {
-          qualifications.map((q) => {
-            const { title, by } = splitQualification(q);
-            return (
-              <li>
-                <span class="q-title">{title}</span>
-                {by && <span class="sr-only">, </span>}
-                {by && <span class="q-by">{by}</span>}
-              </li>
-            );
-          })
+          qualifications.map((q) => (
+            <li>
+              <OrgMark name={q.by} />
+              <span class="q-text">
+                <span class="q-title">{q.title}</span>
+                <span class="sr-only">, </span>
+                <span class="q-by">
+                  {q.by}, <span class="tabular">{q.years}</span>
+                </span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="block" data-reveal>
+      <span class="rule" aria-hidden="true" data-draw></span>
+      <h3 id="profile-certifications" class="block-heading">Certifications</h3>
+      <ul class="quals" aria-labelledby="profile-certifications">
+        {
+          certifications.map((c) => (
+            <li>
+              <OrgMark name={c.org} />
+              <span class="q-text">
+                <span class="q-title">
+                  {c.title} <span class="q-year tabular">{c.years}</span>
+                </span>
+                <span class="sr-only">, </span>
+                <span class="q-by">{c.by}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="block" data-reveal>
+      <span class="rule" aria-hidden="true" data-draw></span>
+      <h3 id="profile-languages" class="block-heading">Languages</h3>
+      <ul class="langs" aria-labelledby="profile-languages">
+        {
+          languages.map((l) => (
+            <li>
+              <span class="lang-name">{l.name}</span>
+              <span class="sr-only">, </span>
+              <span class="lang-level">{l.level}</span>
+            </li>
+          ))
         }
       </ul>
     </div>
@@ -339,6 +381,12 @@ const splitQualification = (q: string) => {
     font-weight: 500;
   }
 
+  .org-row {
+    display: flex;
+    align-items: flex-start;
+    gap: max(calc(18 * var(--u)), 12px);
+  }
+
   .org-name {
     display: block;
     font-weight: 600;
@@ -418,6 +466,10 @@ const splitQualification = (q: string) => {
   }
 
   .quals li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    column-gap: max(calc(20 * var(--u)), 12px);
     padding: calc(24 * var(--u)) 0 calc(28 * var(--u));
     border-bottom: 1px solid var(--color-rule-soft);
   }
@@ -431,6 +483,40 @@ const splitQualification = (q: string) => {
   .q-by {
     display: block;
     margin-top: 0.2em;
+    color: var(--color-ink-2);
+  }
+
+  .q-year {
+    margin-left: 0.4em;
+    font-weight: 500;
+    color: var(--color-ink-2);
+  }
+
+  /* Languages */
+  .langs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: calc(64 * var(--u));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-rule);
+    font-size: max(calc(25 * var(--u)), 15px);
+    line-height: 1.4;
+  }
+
+  .langs li {
+    padding: calc(20 * var(--u)) 0 calc(22 * var(--u));
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .lang-name {
+    display: block;
+    font-weight: 600;
+  }
+
+  .lang-level {
+    display: block;
     color: var(--color-ink-2);
   }
 
@@ -589,6 +675,14 @@ const splitQualification = (q: string) => {
 
     .quals li {
       padding: 14px 0 16px;
+    }
+
+    .langs {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .langs li {
+      padding: 12px 0 14px;
     }
   }
 </style>

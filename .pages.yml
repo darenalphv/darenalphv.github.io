@@ -1,0 +1,45 @@
+# Pages CMS (https://app.pagescms.org): edit darentan.my content from the browser.
+# Saving an entry commits to `main`; the "Deploy to GitHub Pages" workflow then rebuilds the site.
+
+media:
+  input: public/appearances
+  output: /appearances
+  categories: [image]
+
+content:
+  - name: appearances
+    label: Public appearances
+    type: collection
+    path: src/content/appearances
+    format: yaml-frontmatter
+    filename: "{year}-{month}-{day}-{primary}.md"
+    view:
+      primary: title
+      fields: [title, date, event]
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: url
+        label: Instagram or LinkedIn link
+        description: Paste the link to an Instagram reel or post, or a LinkedIn post. The site turns it into the official embed.
+        type: string
+        required: true
+      - name: event
+        label: Event or venue
+        type: string
+      - name: date
+        label: Date
+        type: date
+        required: true
+      - name: poster
+        label: Poster image (optional)
+        description: Shown on the card until a visitor opens the post. A JPG about 1080 px wide, portrait (4:5) works best. Without one, the card shows the title instead.
+        type: image
+      - name: draft
+        label: Hide from the site
+        type: boolean
+        default: false

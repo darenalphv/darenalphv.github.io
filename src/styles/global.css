@@ -134,6 +134,33 @@
     transform: translateY(1px);
   }
 
+  /* The direct line: WhatsApp, outlined in ink so ultramarine stays with the primary LinkedIn action. */
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6em;
+    border: 1px solid var(--color-ink);
+    background: transparent;
+    color: var(--color-ink);
+    font-weight: 600;
+    font-stretch: 100%;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      background-color 180ms var(--ease-out-expo),
+      color 180ms var(--ease-out-expo);
+  }
+
+  .btn-whatsapp:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .btn-whatsapp:active {
+    transform: translateY(1px);
+  }
+
   .on-plate .btn-linkedin {
     background: #fff;
     color: var(--color-plate);

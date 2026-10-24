@@ -29,7 +29,10 @@ import { groupRoles } from './data';
         group.members.map((m) => (
           <tr class:list={[m.kind]} data-reveal>
             <th scope="row" class="name">
-              {m.kind === 'community' ? <a href="/work/developer-kaki/">{m.name}</a> : m.name}
+              <a href={m.url} {...(m.url.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
+                {m.name}
+                {m.url.startsWith('http') && <span class="sr-only"> (opens in a new tab)</span>}
+              </a>
             </th>
             <td class="role">{groupRoles[m.name]}</td>
             <td class="does">{m.does}</td>

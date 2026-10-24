@@ -86,3 +86,22 @@ Collected 2026-10-01 from: Daren_Tan_Key_Personnel.pptx (Daren's own deck), Dare
 - .source/photos/stage-main.jpg (871×1274), stage-about.jpg (924×1024) — Daren's own, from old darentan.my/pics.
 - .source/photos/deck-portrait.png (740×1008) — from deck.
 - .source/deck-logos/*.png — press (thestar, bfm, malaymail, dna), awards (apicta, aseanyec, yea2025), employers/edu (basf, magic, mmu). Low-res raster.
+
+## Fact sheet additions (daren-tan-bio skill, verified, October 2026)
+Added 2026-10-24 on Daren's instruction ("yes to all").
+- Co-founder name, canonical order: Khor Jeng Yee (LinkedIn shows "Jeng Yee Khor").
+- ALPHV: 15 full-time staff; MDEC Malaysia Digital status.
+- ALPHV delivery sectors: financial services, insurance, healthcare, retail, property and government.
+- 2026 programmes: Great Eastern (500+ agency leaders), Amway Malaysia, Silverlake Axis, SIDEC (150 SME participants each built a working AI agent).
+- Career additions: CTO & Co-Founder, Bitcurate, Shanghai, Jun–Dec 2018 (crypto market intelligence and sentiment analysis); Technical Specialist ("Technical Guru" on LinkedIn), BIBIT.COM.MY, Jun 2017 – Mar 2018.
+- Forward School: Data Science Instructor, then Lead Instructor, Oct 2020 – Apr 2023.
+- Education years: MSc IT (Data Science) by Research, MMU, 2016–2020; BSc Computer Science, UTAR, 2012–2016; Digital Disruption: Digital Transformation Strategies, University of Cambridge, 2020.
+- Certifications: 5× Microsoft Certified (Azure AI Engineer Associate, Azure Data Scientist Associate, Azure Fundamentals, AI Fundamentals, Data Fundamentals), 2022–2023; Anthropic courses: Building with the Claude API, Claude Code in Action, Introduction to Model Context Protocol (May 2026); Malaysian Mensa Certified Member (2024).
+- Recognition additions, 2016: 1st Runner-Up, Startup Weekend KL; 2nd Runner-Up, AngelHack KL (Big Data Analytics).
+- Languages: English and Bahasa Malaysia (native/bilingual); Mandarin, Cantonese, Hokkien, French (limited working).
+- WhatsApp (Daren asked for a direct WhatsApp button): +60 16-518 7740 → https://wa.me/60165187740
+- Recognition naming (Daren, 2026-10-24): RICES is written in full as "MMU-Research, Innovation, Commercialization, Entrepreneurship, Showcase (MMU-RICES)".
+- Developer Kaki membership update (Daren, 2026-10-24): 82,000+ members (was 72,000+). The cover art now draws 82,000 points.
+- Public appearances seeded 2026-10-24 from Daren's LinkedIn activity (with his go-ahead): Gigabyte × Nvidia ACE AI Day, Asia School of Business, 17 Oct 2026 (urn:li:activity:7518098328060973056); RAMEN TECH 2026 exhibition, Fukuoka, from 7 Oct 2026 (7516282243149942785); Selangor AI Hackathon award, 9 Sep 2026 (7505053060629688320); 'Introduction to Claude' with SIDEC, 4 Sep 2026 (7503634232817221632).
+- YouTube view counts, read 2026-10-24: UjIK6tLkzZY 256, _3sm0zq-620 581, 0BVkL-26ZGw 1004, FK6OgNyYpR4 87, PMRyNZWMclU 77, ohfWBAdBiww 328, 2pdrLFn8RUo 297, OtYHCp77dEs 1237, fds4s_FjLlA 33 (total 3,900).
+- Press articles (links given by Daren, 2026-10-24): The Star 1 Sep 2025 'The rise of vibe coding'; The Star 17 Mar 2025 'Coding 101: Is AI rewriting the rules?'; The Star 10 Feb 2025 'Reporting bugs without backlash'; Malay Mail 7 Aug 2024 'Navigating the tech startup challenge: Two technopreneurs share their stories'; The Star 26 Jun 2023 'Thriving together: How social media is helping communities cultivate connections'.

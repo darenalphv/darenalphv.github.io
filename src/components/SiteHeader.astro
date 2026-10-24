@@ -1,5 +1,5 @@
 ---
-import { LINKEDIN, nav, person } from '../data/content';
+import { LINKEDIN, WHATSAPP, nav, person } from '../data/content';
 ---
 
 <header class="site-header" data-site-header>
@@ -14,6 +14,10 @@ import { LINKEDIN, nav, person } from '../data/content';
   <button class="contents-toggle" type="button" popovertarget="contents" aria-haspopup="true">
     Contents
   </button>
+
+  <a class="btn-whatsapp header-wa" href={WHATSAPP} rel="noopener" target="_blank">
+    Message on WhatsApp
+  </a>
 
   <a class="btn-linkedin header-cta" href={LINKEDIN} rel="me noopener" target="_blank">
     Connect on LinkedIn
@@ -34,6 +38,10 @@ import { LINKEDIN, nav, person } from '../data/content';
     <li><a href="/work/alphv-group/">ALPHV Group of Companies</a></li>
     <li><a href="/work/developer-kaki/">Developer Kaki</a></li>
   </ol>
+  <div class="menu-actions">
+    <a class="btn-whatsapp menu-btn" href={WHATSAPP} rel="noopener" target="_blank">Message on WhatsApp</a>
+    <a class="btn-linkedin menu-btn" href={LINKEDIN} rel="me noopener" target="_blank">Connect on LinkedIn</a>
+  </div>
 </nav>
 
 <style>
@@ -83,8 +91,15 @@ import { LINKEDIN, nav, person } from '../data/content';
     background-size: 100% 1px;
   }
 
-  .header-cta {
+  .header-wa {
     margin-left: calc(28 * var(--u));
+    height: calc(43 * var(--u));
+    min-height: 34px;
+    padding-inline: max(calc(18 * var(--u)), 14px);
+    font-size: max(calc(18 * var(--u)), 13px);
+  }
+
+  .header-cta {
     height: calc(43 * var(--u));
     min-height: 34px;
     padding-inline: max(calc(18 * var(--u)), 14px);
@@ -121,7 +136,7 @@ import { LINKEDIN, nav, person } from '../data/content';
     list-style: none;
   }
 
-  .contents-menu a {
+  .contents-menu ol a {
     display: block;
     padding-block: 14px;
     border-bottom: 1px solid var(--color-rule-soft);
@@ -133,6 +148,19 @@ import { LINKEDIN, nav, person } from '../data/content';
     text-decoration: none;
   }
 
+  .menu-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .menu-btn {
+    height: 52px;
+    padding-inline: 16px;
+    font-size: 16px;
+  }
+
   .contents-menu::backdrop {
     background: color-mix(in oklab, var(--color-ink) 30%, transparent);
   }
@@ -141,7 +169,8 @@ import { LINKEDIN, nav, person } from '../data/content';
     .site-header {
       gap: 8px;
     }
-    .site-nav {
+    .site-nav,
+    .header-wa {
       display: none;
     }
     .contents-toggle {

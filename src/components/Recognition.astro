@@ -1,5 +1,6 @@
 ---
 import { recognition, press, appearances } from '../data/content';
+import OrgMark from './OrgMark.astro';
 
 // Rows whose claim is sourced by a home note (content.ts `notes`), keyed by the conferring body.
 const rowNotes: Record<string, number> = {
@@ -59,7 +60,12 @@ const stage = appearances.map((a) => {
                       </a>
                     )}
                   </td>
-                  <td class="by">{row.by}</td>
+                  <td class="by">
+                    <span class="by-row">
+                      <OrgMark name={row.by} size="sm" />
+                      <span>{row.by}</span>
+                    </span>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -94,6 +100,7 @@ const stage = appearances.map((a) => {
       {
         press.map((p) => (
           <li>
+            <OrgMark name={p.name} />
             <span class="press-name">{p.name}</span>
             {p.times && (
               <>
@@ -214,6 +221,16 @@ const stage = appearances.map((a) => {
     color: var(--color-ink-2);
   }
 
+  .by-row {
+    display: inline-flex;
+    align-items: center;
+    gap: max(calc(16 * var(--u)), 10px);
+  }
+
+  .honours td {
+    vertical-align: middle;
+  }
+
   td .note-ref,
   .tally .note-ref {
     font-size: 0.62em;
@@ -281,28 +298,40 @@ const stage = appearances.map((a) => {
     list-style: none;
   }
 
+  /* Four columns that never re-flow into a ragged second row: a long name wraps inside its column. */
   .press {
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: calc(24 * var(--u));
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-content: start;
+    align-items: center;
   }
 
   .press li {
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     gap: 0.3em;
-    padding-right: calc(60 * var(--u));
+    padding-right: calc(48 * var(--u));
     font-family: var(--font-display);
     font-weight: 800;
     font-stretch: 90%;
-    font-size: max(calc(64 * var(--u)), 30px);
+    font-size: max(calc(52 * var(--u)), 21px);
     line-height: 1.05;
     letter-spacing: -0.022em;
   }
 
+  @media (min-width: 1024px) {
+    .press-name {
+      white-space: nowrap;
+    }
+  }
+
   .press li + li {
-    padding-left: calc(60 * var(--u));
+    padding-left: calc(48 * var(--u));
     border-left: 1px solid var(--color-rule);
+  }
+
+  .press li :global(.mark) {
+    margin-right: 0.18em;
   }
 
   .times {
@@ -457,7 +486,8 @@ const stage = appearances.map((a) => {
     .press li + li {
       padding: 12px 0;
       border-left: 0;
-      font-size: clamp(24px, 7vw, 34px);
+      font-size: clamp(19px, 5.4vw, 28px);
+      gap: 8px;
     }
 
     .press li:nth-child(even) {

@@ -89,6 +89,15 @@ components:
   button-linkedin-on-plate-hover:
     backgroundColor: "{colors.plate-ink}"
     textColor: "{colors.plate-ultramarine}"
+  button-whatsapp:
+    backgroundColor: "transparent"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    padding: "0 max(calc(18 * 100vw / 2688), 14px)"
+    height: "max(calc(43 * 100vw / 2688), 34px)"
+  button-whatsapp-hover:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.report-paper}"
   structure-node:
     backgroundColor: "{colors.report-paper}"
     textColor: "{colors.ink}"
@@ -187,20 +196,22 @@ Everything is square. No element has a border radius. Rules come in two weights:
 ## Components
 
 ### Buttons
-Only one action exists: "Connect on LinkedIn."
+Two actions exist: "Connect on LinkedIn" (primary) and "Message on WhatsApp" (the direct line, secondary).
 - **Shape:** square (0px).
 - **Primary:** ultramarine with white text, weight 600 at 100% width. In the header it is 43 units tall (minimum 34px). In the closing section it is 104 units tall (minimum 52px) with a diagonal arrow.
 - **Hover / Focus:** the fill deepens to Pressed Ultramarine over 180ms on the expo-out ease, and the closing arrow nudges up and right by 2px. The button drops 1px on press. Focus shows a 2px ultramarine outline offset by 3px.
 - **On a plate:** the button inverts to white with ultramarine text, and hover turns it plate ink.
+- **WhatsApp (secondary):** a 1px ink outline on transparent with ink text, weight 600, the same height as the LinkedIn button beside it. It always sits next to the LinkedIn button and never on its own. Hover fills it ink with paper text (180ms). It never takes ultramarine.
 - **Contents toggle (mobile only):** a 1px ink outline on transparent, 38px tall, that opens the Contents popover.
 
 ### Navigation
-The sticky header sits on paper. The wordmark is set at 700, and five section links at 500 with a 1px underline that grows from the left on hover (260ms). The LinkedIn button sits at the far right. A Soft Rule hairline appears under the header after scrolling. Below 1023px, the links become a full-width Contents popover: ruled rows at 700 / 90% / 24px over a 30% ink scrim.
+The sticky header sits on paper. The wordmark is set at 700, and five section links at 500 with a 1px underline that grows from the left on hover (260ms). The WhatsApp button and then the LinkedIn button sit at the far right; below 1023px the WhatsApp button moves into the Contents popover, which ends with both actions side by side. A Soft Rule hairline appears under the header after scrolling. Below 1023px, the links become a full-width Contents popover: ruled rows at 700 / 90% / 24px over a 30% ink scrim.
 
 ### Key Figures Strip
 Up to four figures, each centred over its label, separated by vertical Rule hairlines, with a Soft Rule beneath the strip. Each digit rolls through a 0–9 column into a fixed tabular slot, while separators stay put. On mobile the strip becomes a ruled two-by-two grid with left-aligned figures.
 
 ### Group Structure Chart
+Each company box links to that company's own site (alphv.com, academy., devrel., recruit.alphv.com) in a new tab, and Developer Kaki links to its segment review; on hover a box inverts to ink with paper text. The same links appear in the ALPHV company table and the footer's Group companies row.
 A parent node, a stem, and solid and dashed buses with drops to five member nodes. Each node has a short description beneath it in secondary ink, and a legend follows the chart. On entry the connectors draw in order (stem, then buses, then drops) and the nodes fade up.
 
 ### Ruled Tables and Lists
@@ -209,8 +220,40 @@ Experience, recognition, talks, milestones and corporate information are all set
 ### Notes
 A Notes block closes each page: the side head "Notes" sits in the left column, and the notes run as two ruled columns of numbered entries in secondary ink. A targeted note takes an 8% ultramarine wash. Every note mark on the page resolves here.
 
+### Media Thumbnails
+The Media plate shows each BFM 89.9 episode and each recorded talk with its own thumbnail. The images are downloaded once into `assets/media/`, with their source embedded in each file, and served as optimised WebP.
+- **Frames:** square, with no radius, border or shadow. Episodes use the BFM preview ratio (1178:617); talks crop to 16:9, and YouTube's 4:3 letterboxed thumbnails are scaled 1.12× so the bars fall outside the frame.
+- **Play mark:** a white square at the frame's bottom-left (64 units, minimum 34px) holding an ultramarine filled triangle. On hover it turns plate ink.
+- **Hover:** the image zooms slowly (1.04–1.05× over 700ms, expo-out), and the episode title underline or talk title underline turns solid white.
+- **On air:** three equal columns divided by soft plate rules in the gutters, so every image is the same height. **Selected talks:** a three-across contact sheet on desktop; below 1023px each talk is a row with the thumbnail at 40% width.
+
+### As Seen On
+A slim strip on paper directly under the key figures, closed by a Soft Rule. The side head "As seen on" (700, max(30 units, 18px), citing note 8) sits in the 411-unit column; the four outlets follow as their own transparent wordmarks (SVG, `assets/press/`, source noted inside each file), spread across the row on desktop and set two by two below 1023px.
+- **At rest:** greyscale at 62% opacity, so the strip stays inside the black-white-ultramarine palette.
+- **Hover:** the hovered wordmark returns to full colour and full opacity over 320ms on the expo-out ease.
+- **Sizing:** heights are balanced by eye per wordmark (40–82 units) so each carries the same visual weight; images carry the outlet name as alt text.
+
+### Organisation Marks
+Entries in Experience, Qualifications, Certifications, Recognition and Media coverage carry the organisation's logo as a small square mark beside its name (`src/components/OrgMark.astro`, logos in `assets/logos/`, mapped in `src/data/logos.ts`).
+- **Tile:** square, white, 1px Soft Rule border, no radius or shadow. Sizes: small 40 units (minimum 28px) in tables, medium 52 units (minimum 34px) in lists and the press row.
+- **Logo:** full colour, contained with 9% padding. Logos published below 96px sit at near-natural size (22% padding) instead of being stretched; wordmarks (wider than 1.6:1) take 3% padding.
+- **No reliable logo:** a lettered tile (the first letters of up to two words, 700 weight, Secondary Ink on paper).
+- The mark is decorative (`aria-hidden`); the name is always set beside it.
+
+### In the Press
+A block on the Media plate after On air. News interviews and features are set as ruled rows on the plate: the outlet's small mark with its name (600) and date (plate ink, tabular) in a 380-unit column; the headline (700 / 95%, max(36 units, 18px)) as the link; and a north-east arrow that nudges on hover while the headline underlines in white. Rows open the article in a new tab. Below 1023px the outlet line sits above the headline. Articles live in `articles` in `src/data/content.ts`, newest first.
+
+### Public Appearances Carousel
+A block on the Media plate between On air and Selected talks, fed by the `appearances` content collection and edited in Pages CMS (`.pages.yml`).
+- **Cards:** clamp(300px, 26vw, 420px) wide, scroll-snapped in a horizontal track with paint containment; previous and next are square 1px white outline buttons in the side-head column (inline above the track below 1023px).
+- **Poster first:** each card shows an uploaded poster or a typographic cover (site name, then the title at 800 / 90%); a white "View … here" mark loads the official Instagram or LinkedIn embed in place only on click. No third-party script runs on page load.
+- **Meta:** date in tabular figures, the platform label, the title at 600, the event in plate ink, and an "Open on …" link.
+
+### Talk Views
+Each recorded talk shows its YouTube view count under the title, and the Selected talks side head carries the total as an 800 / 90% figure citing a dated note. Counts are read from YouTube at build time, with a stored snapshot as the fallback (`src/lib/youtube.ts`).
+
 ### Cover Point Field (signature)
-A WebGL field of white points on the ultramarine plate forms an off-centre logarithmic swirl, with bright arms and a crescent core. The pointer parts the field. The home cover draws 72,000 points with 3 arms at arm contrast 0.35, captioned "one for every Developer Kaki member." Segment covers reuse the field with their own count and arms: Developer Kaki uses 72,000 points and 3 arms, ALPHV uses 36,000 points and 4 arms, both at arm contrast 0.78. On entry the field fades in over 2.4s, the name unclips upward, and the cover lines stagger in. Under reduced motion the field is static.
+A WebGL field of white points on the ultramarine plate forms an off-centre logarithmic swirl, with bright arms and a crescent core. The pointer parts the field. The home cover draws 82,000 points with 3 arms at arm contrast 0.35, captioned "one for every Developer Kaki member." Segment covers reuse the field with their own count and arms: Developer Kaki uses 82,000 points and 3 arms, ALPHV uses 36,000 points and 4 arms, both at arm contrast 0.78. On entry the field fades in over 2.4s, the name unclips upward, and the cover lines stagger in. Under reduced motion the field is static.
 
 ### Segment Cover and Next Segment
 Case-study pages open on a full-bleed ultramarine plate with no photo: a back link and the period across the top, the segment name in the display cut, the line as a title, the field behind, and a caption. They end with a "Next segment review" hand-off: a strong rule, a side head, the other segment's name at 150 units, and a large arrow. The name turns ultramarine on hover.
@@ -222,6 +265,7 @@ Case-study pages open on a full-bleed ultramarine plate with no photo: a back li
 - **Do** cite every figure with a numbered note mark that resolves to that page's Notes list.
 - **Do** set figures at Archivo 800, 90% width, with tabular and lining numerals.
 - **Do** keep ultramarine (#0a22cc) for full-bleed plates and the LinkedIn action only.
+- **Do** keep the press row and the As Seen On wordmarks on one line at desktop widths: four fixed columns, names unbroken from 1024px up.
 - **Do** separate content with 1px Soft Rule hairlines, and open blocks with a strong ink rule that draws from the left.
 - **Do** bleed stage photography to an edge on stage black (#121317).
 - **Do** use the expo-out ease (`cubic-bezier(0.16, 1, 0.3, 1)`), keep every element visible without script, and provide a reduced-motion path for every motion.
@@ -229,7 +273,7 @@ Case-study pages open on a full-bleed ultramarine plate with no photo: a back li
 ### Don't:
 - **Don't** round corners, add shadows for elevation, or use glass or decorative gradient fills. The only gradients allowed are the functional ones that draw dashed connectors and link underlines.
 - **Don't** put content in cards. Use ruled rows and the side-head column.
-- **Don't** add a second call to action. "Connect on LinkedIn" is the only one.
+- **Don't** add a third call to action. "Connect on LinkedIn" leads and "Message on WhatsApp" follows as the outlined direct line.
 - **Don't** introduce a second typeface or a light display weight.
 - **Don't** frame, box or round a photograph.
 - **Don't** show a figure without a note behind it.

@@ -28,3 +28,6 @@ dist/
 # impeccable runtime state
 .impeccable/hook.cache.json
 .impeccable/questions/
+
+# local Claude Code tooling (browser preview config)
+.claude/

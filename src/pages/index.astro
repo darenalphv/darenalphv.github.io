@@ -2,20 +2,30 @@
 import Base from '../layouts/Base.astro';
 import Cover from '../components/Cover.astro';
 import KeyFigures from '../components/KeyFigures.astro';
+import AsSeenOn from '../components/AsSeenOn.astro';
 import GroupStructure from '../components/GroupStructure.astro';
 import Profile from '../components/Profile.astro';
 import Recognition from '../components/Recognition.astro';
 import Media from '../components/Media.astro';
 import Notes from '../components/Notes.astro';
 import { notes } from '../data/content';
+import { getTalkViews, formatAsOf } from '../lib/youtube';
+
+// Note 10 is dated by the build: the talk view counts are read from YouTube when the site is built.
+const { asOf } = await getTalkViews();
+const homeNotes = [
+  ...notes,
+  { n: 10, text: `Total YouTube views of the nine recorded talks listed, read from YouTube on ${formatAsOf(asOf)}.` },
+];
 ---
 
 <Base>
   <Cover />
   <KeyFigures />
+  <AsSeenOn />
   <GroupStructure />
   <Profile />
   <Recognition />
   <Media />
-  <Notes notes={notes} />
+  <Notes notes={homeNotes} />
 </Base>
