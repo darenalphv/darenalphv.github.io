@@ -1,8 +1,10 @@
 # Pages CMS (https://app.pagescms.org): edit darentan.my content from the browser.
 # Saving an entry commits to `main`; the "Deploy to GitHub Pages" workflow then rebuilds the site.
 
+# Posters are stored in src/assets/appearances; the site resizes and compresses them at build time,
+# so uploads straight from a phone are fine. `output` is only the path written into each entry.
 media:
-  input: public/appearances
+  input: src/assets/appearances
   output: /appearances
   categories: [image]
 
@@ -37,7 +39,7 @@ content:
         required: true
       - name: poster
         label: Poster image (optional)
-        description: Shown on the card until a visitor opens the post. A JPG about 1080 px wide, portrait (4:5) works best. Without one, the card shows the title instead.
+        description: Shown on the card until a visitor opens the post. Portrait (4:5) works best; any size is fine, the site resizes it. Without one, the card shows the title instead.
         type: image
       - name: draft
         label: Hide from the site

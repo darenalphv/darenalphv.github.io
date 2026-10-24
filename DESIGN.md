@@ -246,7 +246,7 @@ A block on the Media plate after On air. News interviews and features are set as
 ### Public Appearances Carousel
 A block on the Media plate between On air and Selected talks, fed by the `appearances` content collection and edited in Pages CMS (`.pages.yml`).
 - **Cards:** clamp(300px, 26vw, 420px) wide, scroll-snapped in a horizontal track with paint containment; previous and next are square 1px white outline buttons in the side-head column (inline above the track below 1023px).
-- **Poster first:** each card shows an uploaded poster or a typographic cover (site name, then the title at 800 / 90%); a white "View … here" mark loads the official Instagram or LinkedIn embed in place only on click. No third-party script runs on page load.
+- **Poster first:** each card shows an uploaded poster (stored in `src/assets/appearances/`, matched by file name and served as resized WebP at 320–840px) or a typographic cover (site name, then the title at 800 / 90%); a white "View … here" mark loads the official Instagram or LinkedIn embed in place only on click. No third-party script runs on page load.
 - **Meta:** date in tabular figures, the platform label, the title at 600, the event in plate ink, and an "Open on …" link.
 
 ### Talk Views
