@@ -1,0 +1,5 @@
+# darentan.my is public: search engines and AI assistants are welcome to read and cite it.
+User-agent: *
+Allow: /
+
+Sitemap: https://darentan.my/sitemap.xml

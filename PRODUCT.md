@@ -92,3 +92,12 @@ Rules:
 ## Accessibility & Inclusion
 
 WCAG 2.2 AA is the default standard (not a requirement Daren set). Because the stack is motion-heavy (GSAP, Lenis, WebGL), every authored motion needs a `prefers-reduced-motion` path, and content must stay readable if scripts or WebGL fail.
+
+## Discoverability
+
+Added 2026-10-24 so that Google, Bing and AI assistants (ChatGPT, Gemini, Claude) can match Daren to searches such as "AI speaker Malaysia" and "AI trainer Malaysia":
+- Page titles and descriptions name him as a Malaysian AI speaker and trainer; the profile states it in visible text, backed by note 4 (30+ talks), the ASEAN AI Summit 2025 keynote and ALPHV Academy.
+- Every page carries schema.org JSON-LD (`src/lib/schema.ts`): a Person (Daren Tan, also Tan De Zhern) with occupations, topics, awards and his social profiles, Developer Kaki as an organisation he founded, and the page itself. It is built from `src/data/content.ts`.
+- `/sitemap.xml` and `/llms.txt` are generated from the pages and data at build time; `robots.txt` allows every crawler, AI crawlers included.
+- `public/og.jpg` is a capture of the home cover and key figures; recapture it when the cover changes.
+- Still to do by Daren: verify the site in Google Search Console and Bing Webmaster Tools and submit the sitemap; use the same wording on LinkedIn and ALPHV Academy and ask organisers to link bios to darentan.my.

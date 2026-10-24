@@ -5,15 +5,17 @@ import Base from '../layouts/Base.astro';
 import SegmentCover from '../components/SegmentCover.astro';
 import SpeakerBios from '../components/kit/SpeakerBios.astro';
 import SpeakerPhotos from '../components/kit/SpeakerPhotos.astro';
+import { pageNode } from '../lib/schema';
 ---
 
 <Base
-  title="Media kit · Daren Tan"
-  description="Speaker bios and photos of Daren Tan, Founder and CEO of ALPHV Group of Companies, for event organisers: copy a bio, download full-size photos."
+  title="Media kit · Daren Tan, AI Speaker & Trainer in Malaysia"
+  description="Media kit for Daren Tan, Malaysian AI expert, speaker and trainer and Founder & CEO of ALPHV Group of Companies: speaker bios to copy and full-size photos to download."
+  schema={[pageNode('WebPage', '/media-kit/', 'Media kit: Daren Tan')]}
 >
   <SegmentCover
     name="Media kit"
-    line="Speaker bios and photos for event organisers, ready to copy and download."
+    line="Bios and photos of Daren Tan, AI speaker and trainer in Malaysia, ready for event organisers to copy and download."
     period="For event organisers"
     compact
   >

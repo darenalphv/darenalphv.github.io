@@ -2,15 +2,19 @@
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { graphFor } from '../lib/schema';
 
 interface Props {
   title?: string;
   description?: string;
+  // extra schema.org nodes for this page (src/lib/schema.ts), added to the site-wide Person graph
+  schema?: object[];
 }
 
 const {
-  title = 'Daren Tan · Founder & CEO, ALPHV Group of Companies',
-  description = 'Daren Tan is the Founder and CEO of ALPHV Group of Companies, building AI, data and cloud solutions across Southeast Asia, and founder of Developer Kaki, Malaysia’s largest developer community.',
+  title = 'Daren Tan · AI Speaker & Trainer in Malaysia · Founder & CEO, ALPHV',
+  description = 'Daren Tan is a Malaysian AI expert, speaker and trainer: Founder & CEO of ALPHV Group of Companies and founder of Developer Kaki, Malaysia’s largest developer community.',
+  schema = [],
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -24,7 +28,9 @@ const ogImage = new URL('/og.jpg', Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#0a22cc" />
     <meta property="og:type" content="profile" />
@@ -33,6 +39,7 @@ const ogImage = new URL('/og.jpg', Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={graphFor(schema)} />
   </head>
   <body>
     <a
