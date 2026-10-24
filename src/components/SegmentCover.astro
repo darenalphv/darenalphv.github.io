@@ -6,11 +6,13 @@ interface Props {
   period: string;
   // the cover's point field, set for this segment
   field?: { count: number; arms: number; caption: string };
+  // a shorter plate, for working pages such as the media kit
+  compact?: boolean;
 }
-const { name, line, period, field } = Astro.props;
+const { name, line, period, field, compact = false } = Astro.props;
 ---
 
-<section class="segment-cover on-plate" aria-labelledby="segment-name">
+<section class:list={['segment-cover', 'on-plate', { compact }]} aria-labelledby="segment-name">
   {
     field && (
       <canvas
@@ -22,7 +24,10 @@ const { name, line, period, field } = Astro.props;
       />
     )
   }
-  <a class="back" href="/">Daren Tan · Annual report</a>
+  <a class="back" href="/">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+    Daren Tan
+  </a>
   <p class="period">{period}</p>
   <h1 id="segment-name" class="name">{name}</h1>
   <p class="line">{line}</p>
@@ -59,6 +64,10 @@ const { name, line, period, field } = Astro.props;
     color: #fff;
   }
 
+  .segment-cover.compact {
+    min-height: calc(560 * var(--u));
+  }
+
   .field {
     position: absolute;
     inset: 0;
@@ -86,11 +95,24 @@ const { name, line, period, field } = Astro.props;
 
   .back {
     left: var(--gutter);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
     text-decoration: none;
+  }
+
+  .back svg {
+    width: 1.1em;
+    height: 1.1em;
+    transition: transform 260ms var(--ease-out-expo);
   }
 
   .back:hover {
     text-decoration: underline;
+  }
+
+  .back:hover svg {
+    transform: translateX(-4px);
   }
 
   .period {
@@ -138,6 +160,11 @@ const { name, line, period, field } = Astro.props;
 
     .name {
       font-size: clamp(52px, 15vw, 120px);
+    }
+
+    .segment-cover.compact {
+      min-height: 0;
+      padding-top: 120px;
     }
   }
 </style>

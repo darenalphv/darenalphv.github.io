@@ -7,7 +7,6 @@ import { person } from '../data/content';
 <section class="cover" aria-labelledby="cover-name">
   <div class="plate on-plate" data-cover-plate>
     <canvas class="field" aria-hidden="true" data-cover-field></canvas>
-    <p class="period">{person.period}</p>
     <h1 id="cover-name" class="name">{person.name}</h1>
     <p class="title">
       <span>{person.role},</span>
@@ -60,20 +59,12 @@ import { person } from '../data/content';
     z-index: -1;
   }
 
-  .period,
   .name,
   .title,
   .caption {
     position: absolute;
     left: var(--gutter);
     margin: 0;
-  }
-
-  .period {
-    top: calc(52 * var(--u));
-    font-weight: 500;
-    font-size: max(calc(32 * var(--u)), 14px);
-    letter-spacing: -0.005em;
   }
 
   .name {
@@ -132,15 +123,10 @@ import { person } from '../data/content';
       padding: 28px var(--gutter) 22px;
     }
 
-    .period,
     .name,
     .title,
     .caption {
       position: static;
-    }
-
-    .period {
-      font-size: 14px;
     }
 
     .name {

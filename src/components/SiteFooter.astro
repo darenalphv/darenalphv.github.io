@@ -37,6 +37,9 @@ const companies = group.members.filter((m) => m.kind === 'company');
           <span class="tabular">{linkedinFollowers}</span> followers on LinkedIn, as of{' '}
           <time datetime="2026-10">October 2026</time>
         </p>
+        <p class="kit-line">
+          Inviting Daren to speak? <a href="/media-kit/">Get the media kit</a>, with bios and photos.
+        </p>
       </div>
     </div>
   </section>
@@ -223,6 +226,22 @@ const companies = group.members.filter((m) => m.kind === 'company');
   .followers .tabular {
     font-weight: 700;
     color: var(--color-ink);
+  }
+
+  .kit-line {
+    margin: 0;
+    font-size: max(calc(26 * var(--u)), 15px);
+    color: var(--color-ink-2);
+  }
+
+  .kit-line a {
+    font-weight: 600;
+    color: var(--color-ink);
+    text-underline-offset: 0.2em;
+  }
+
+  .kit-line a:hover {
+    color: var(--color-plate);
   }
 
   /* Corporate Information */

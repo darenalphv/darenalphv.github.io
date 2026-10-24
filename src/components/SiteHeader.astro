@@ -1,5 +1,7 @@
 ---
 import { LINKEDIN, WHATSAPP, nav, person } from '../data/content';
+
+const onKit = Astro.url.pathname.startsWith('/media-kit');
 ---
 
 <header class="site-header" data-site-header>
@@ -14,6 +16,11 @@ import { LINKEDIN, WHATSAPP, nav, person } from '../data/content';
   <button class="contents-toggle" type="button" popovertarget="contents" aria-haspopup="true">
     Contents
   </button>
+
+  <a class="header-kit" href="/media-kit/" aria-current={onKit ? 'page' : undefined}>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+    Media kit
+  </a>
 
   <a class="btn-whatsapp header-wa" href={WHATSAPP} rel="noopener" target="_blank">
     Message on WhatsApp
@@ -37,6 +44,7 @@ import { LINKEDIN, WHATSAPP, nav, person } from '../data/content';
     }
     <li><a href="/work/alphv-group/">ALPHV Group of Companies</a></li>
     <li><a href="/work/developer-kaki/">Developer Kaki</a></li>
+    <li><a href="/media-kit/">Media kit</a></li>
   </ol>
   <div class="menu-actions">
     <a class="btn-whatsapp menu-btn" href={WHATSAPP} rel="noopener" target="_blank">Message on WhatsApp</a>
@@ -89,6 +97,55 @@ import { LINKEDIN, WHATSAPP, nav, person } from '../data/content';
 
   .site-nav a:hover {
     background-size: 100% 1px;
+  }
+
+  /* For organisers: the media kit, set apart from the section links by a hairline. */
+  .header-kit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    margin-left: calc(4 * var(--u));
+    padding: 0.5em 0 0.5em calc(48 * var(--u));
+    border-left: 1px solid var(--color-rule-soft);
+    font-weight: 600;
+    font-size: max(calc(20 * var(--u)), 13px);
+    color: var(--color-ink);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .header-kit svg {
+    width: 1.15em;
+    height: 1.15em;
+    transition: transform 260ms var(--ease-out-expo);
+  }
+
+  .header-kit:hover,
+  .header-kit[aria-current='page'] {
+    color: var(--color-plate);
+  }
+
+  .header-kit:hover svg {
+    transform: translateY(2px);
+  }
+
+  .wordmark,
+  .site-nav a,
+  .header-wa,
+  .header-cta {
+    white-space: nowrap;
+  }
+
+  /* Narrow desktops: the header holds nine items, so the spacing tightens before anything wraps. */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .site-header,
+    .site-nav ul {
+      gap: calc(32 * var(--u));
+    }
+
+    .header-kit {
+      padding-left: calc(32 * var(--u));
+    }
   }
 
   .header-wa {
@@ -170,6 +227,7 @@ import { LINKEDIN, WHATSAPP, nav, person } from '../data/content';
       gap: 8px;
     }
     .site-nav,
+    .header-kit,
     .header-wa {
       display: none;
     }

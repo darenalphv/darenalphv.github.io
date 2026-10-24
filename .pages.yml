@@ -1,12 +1,19 @@
 # Pages CMS (https://app.pagescms.org): edit darentan.my content from the browser.
 # Saving an entry commits to `main`; the "Deploy to GitHub Pages" workflow then rebuilds the site.
 
-# Posters are stored in src/assets/appearances; the site resizes and compresses them at build time,
-# so uploads straight from a phone are fine. `output` is only the path written into each entry.
+# Images are stored under src/assets; the site resizes and compresses them at build time, so uploads
+# straight from a phone are fine. `output` is only the path written into each entry.
 media:
-  input: src/assets/appearances
-  output: /appearances
-  categories: [image]
+  - name: posters
+    label: Appearance posters
+    input: src/assets/appearances
+    output: /appearances
+    categories: [image]
+  - name: speaker-photos
+    label: Speaker photos
+    input: src/assets/speaker-photos
+    output: /speaker-photos
+    categories: [image]
 
 content:
   - name: appearances
@@ -26,10 +33,9 @@ content:
         type: string
         required: true
       - name: url
-        label: Instagram or LinkedIn link
-        description: Paste the link to an Instagram reel or post, or a LinkedIn post. The site turns it into the official embed.
+        label: Instagram or LinkedIn link (optional)
+        description: Paste the link to an Instagram reel or post, or a LinkedIn post. The site turns it into the official embed. Leave it empty for a talk with only stage photos; the card then shows the poster alone.
         type: string
-        required: true
       - name: event
         label: Event or venue
         type: string
@@ -37,10 +43,90 @@ content:
         label: Date
         type: date
         required: true
+      - name: precision
+        label: Show the date as
+        description: When only the month or year is known, pick it here and set the date to any day in it.
+        type: select
+        default: day
+        options:
+          values:
+            - { value: day, label: "Full date (2 Nov 2024)" }
+            - { value: month, label: "Month and year (Nov 2024)" }
+            - { value: year, label: "Year only (2024)" }
       - name: poster
         label: Poster image (optional)
-        description: Shown on the card until a visitor opens the post. Portrait (4:5) works best; any size is fine, the site resizes it. Without one, the card shows the title instead.
+        description: Shown on the card until a visitor opens the post, or on its own when there is no link. Portrait (4:5) works best; any size is fine, the site resizes it. Without one, the card shows the title instead.
         type: image
+        options:
+          media: posters
+      - name: draft
+        label: Hide from the site
+        type: boolean
+        default: false
+
+  - name: bios
+    label: "Media kit: speaker bios"
+    type: collection
+    path: src/content/bios
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: label
+      fields: [label, note]
+      sort: order
+      order: asc
+    fields:
+      - name: label
+        label: Version
+        description: Shown above the bio, e.g. "Short" or "Emcee introduction".
+        type: string
+        required: true
+      - name: note
+        label: What it's for
+        type: string
+      - name: order
+        label: Position on the page
+        description: Lower numbers come first.
+        type: number
+        default: 10
+      - name: body
+        label: Bio text
+        description: Third person, as organisers will paste it.
+        type: text
+        required: true
+
+  - name: speaker-photos
+    label: "Media kit: speaker photos"
+    type: collection
+    path: src/content/speaker-photos
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      primary: caption
+      fields: [caption, image]
+      sort: order
+      order: asc
+    fields:
+      - name: caption
+        label: Caption
+        description: Where the photo was taken, e.g. "Speaking at SEEKscapes by JobStreet, 2024".
+        type: string
+        required: true
+      - name: image
+        label: Photo
+        description: Upload the original, full-size file. Visitors download it as uploaded; the page shows a resized preview.
+        type: image
+        required: true
+        options:
+          media: speaker-photos
+      - name: credit
+        label: Photo credit (optional)
+        type: string
+      - name: order
+        label: Position on the page
+        description: Lower numbers come first.
+        type: number
+        default: 10
       - name: draft
         label: Hide from the site
         type: boolean

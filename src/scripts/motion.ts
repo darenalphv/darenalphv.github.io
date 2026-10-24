@@ -34,7 +34,7 @@ function coverEntrance() {
   const plate = document.querySelector<HTMLElement>('[data-cover-plate]');
   if (!plate || reduce) return;
   const name = plate.querySelector('.name');
-  const lines = plate.querySelectorAll('.period, .title span, .caption');
+  const lines = plate.querySelectorAll('.title span, .caption');
   const field = plate.querySelector('[data-cover-field]');
   const tl = gsap.timeline({ defaults: { ease: EASE } });
   if (field) tl.from(field, { opacity: 0, duration: 2.4, ease: 'power2.out' }, 0);

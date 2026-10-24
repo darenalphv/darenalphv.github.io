@@ -166,7 +166,7 @@ Report stock and ink with a single saturated ultramarine. The palette is restrai
 - **Headline** (700, max(50 units, 28px), line-height 1.05): every section heading ("Group Structure", "Profile of the Founder", "Recognition", "Media", "Corporate Information").
 - **Side head** (700, max(30 units, 18px)): sub-block heads set in the left side-head column, for example Notes, Segment reviews, On air, and Next segment review.
 - **Body** (400, 1rem base, line-height 1.55): running text, which scales up to max(30 units, 16px) in reading blocks. Measure stays at or under 62ch.
-- **Label** (500, max(30 units, 14px)): figure captions, table metadata, and the cover's period line and caption (minimum 12–14px).
+- **Label** (500, max(30 units, 14px)): figure captions, table metadata, and the cover caption (minimum 12–14px).
 - **Note mark** (600, 0.24em of its figure, superscript): numbered link to the Notes list.
 
 ### Named Rules
@@ -205,7 +205,7 @@ Two actions exist: "Connect on LinkedIn" (primary) and "Message on WhatsApp" (th
 - **Contents toggle (mobile only):** a 1px ink outline on transparent, 38px tall, that opens the Contents popover.
 
 ### Navigation
-The sticky header sits on paper. The wordmark is set at 700, and five section links at 500 with a 1px underline that grows from the left on hover (260ms). The WhatsApp button and then the LinkedIn button sit at the far right; below 1023px the WhatsApp button moves into the Contents popover, which ends with both actions side by side. A Soft Rule hairline appears under the header after scrolling. Below 1023px, the links become a full-width Contents popover: ruled rows at 700 / 90% / 24px over a 30% ink scrim.
+The sticky header sits on paper. The wordmark is set at 700, and five section links at 500 with a 1px underline that grows from the left on hover (260ms). A "Media kit" link for event organisers (600, with a download glyph that drops 2px on hover, ultramarine on hover and on its own page) follows the section links behind a Soft Rule hairline. The WhatsApp button and then the LinkedIn button sit at the far right. Between 1024px and 1279px the header and link gaps tighten from 48 to 32 units so nothing wraps. Below 1023px the media kit and the WhatsApp button move into the Contents popover, which ends with both actions side by side. A Soft Rule hairline appears under the header after scrolling. Below 1023px, the links become a full-width Contents popover: ruled rows at 700 / 90% / 24px over a 30% ink scrim.
 
 ### Key Figures Strip
 Up to four figures, each centred over its label, separated by vertical Rule hairlines, with a Soft Rule beneath the strip. Each digit rolls through a 0–9 column into a fixed tabular slot, while separators stay put. On mobile the strip becomes a ruled two-by-two grid with left-aligned figures.
@@ -247,7 +247,8 @@ A block on the Media plate after On air. News interviews and features are set as
 A block on the Media plate between On air and Selected talks, fed by the `appearances` content collection and edited in Pages CMS (`.pages.yml`).
 - **Cards:** clamp(300px, 26vw, 420px) wide, scroll-snapped in a horizontal track with paint containment; previous and next are square 1px white outline buttons in the side-head column (inline above the track below 1023px).
 - **Poster first:** each card shows an uploaded poster (stored in `src/assets/appearances/`, matched by file name and served as resized WebP at 320–840px) or a typographic cover (site name, then the title at 800 / 90%); a white "View … here" mark loads the official Instagram or LinkedIn embed in place only on click. No third-party script runs on page load.
-- **Meta:** date in tabular figures, the platform label, the title at 600, the event in plate ink, and an "Open on …" link.
+- **Photo-only cards:** the link is optional. A talk known only from stage photos (posters cropped 4:5 from Daren's ALPHV Academy deck) shows its poster as a plain image, with no load mark, no hover zoom and no "Open on …" link.
+- **Meta:** date in tabular figures, the platform label when there is a post, the title at 600, the event in plate ink, and an "Open on …" link. The date shows only what is known: "2 Nov 2024", "Apr 2024" or "2024" (the entry's `precision`).
 
 ### Talk Views
 Each recorded talk shows its YouTube view count under the title, and the Selected talks side head carries the total as an 800 / 90% figure citing a dated note. Counts are read from YouTube at build time, with a stored snapshot as the fallback (`src/lib/youtube.ts`).
@@ -255,8 +256,15 @@ Each recorded talk shows its YouTube view count under the title, and the Selecte
 ### Cover Point Field (signature)
 A WebGL field of white points on the ultramarine plate forms an off-centre logarithmic swirl, with bright arms and a crescent core. The pointer parts the field. The home cover draws 82,000 points with 3 arms at arm contrast 0.35, captioned "one for every Developer Kaki member." Segment covers reuse the field with their own count and arms: Developer Kaki uses 82,000 points and 3 arms, ALPHV uses 36,000 points and 4 arms, both at arm contrast 0.78. On entry the field fades in over 2.4s, the name unclips upward, and the cover lines stagger in. Under reduced motion the field is static.
 
+### Media Kit
+A working page at /media-kit/ for event organisers, reached from the header, the Contents popover and a line under the footer's buttons ("Inviting Daren to speak? Get the media kit"). It opens on a compact segment cover (560 units; on phones it drops the minimum height) with two outline jump links on the plate, then three blocks on paper, each opening on a strong ink rule with its side head in the 411-unit column:
+- **Billing:** name, title as it should be printed (Founder & CEO, ALPHV Group of Companies), base and speaking languages, as ruled rows.
+- **Speaker bio:** one version per row (one line, short, full, emcee introduction): the version name at 800 / 90%, its word count and use, the text at max(28 units, 16px) with a 64ch measure, and a Copy button. Copying uses the clipboard and falls back to selecting the text.
+- **Speaker photos:** three columns (two below 1023px, one below 560px), portraits first, at their own proportions and never framed. Each has its caption, shape, pixel size and file size, and a Download button that serves the uploaded original under a "daren-tan-…" file name; the page shows WebP previews.
+Copy and Download are square ink-outline buttons that invert on hover. Bios and photos are edited in Pages CMS (`bios`, `speaker-photos`; photos upload to `src/assets/speaker-photos`).
+
 ### Segment Cover and Next Segment
-Case-study pages open on a full-bleed ultramarine plate with no photo: a back link and the period across the top, the segment name in the display cut, the line as a title, the field behind, and a caption. They end with a "Next segment review" hand-off: a strong rule, a side head, the other segment's name at 150 units, and a large arrow. The name turns ultramarine on hover.
+Case-study pages open on a full-bleed ultramarine plate with no photo: a back link (a left arrow and "Daren Tan", to the home page) and the period across the top, the segment name in the display cut, the line as a title, the field behind, and a caption. They end with a "Next segment review" hand-off: a strong rule, a side head, the other segment's name at 150 units, and a large arrow. The name turns ultramarine on hover.
 
 ## Do's and Don'ts
 

@@ -48,7 +48,7 @@ The ecosystem rests on ten years as an engineer, CTO, instructor and researcher.
 ## Capabilities and Constraints
 
 - Scope for v1: a home page plus two case-study pages, Developer Kaki and ALPHV Group of Companies.
-- Two calls to action: the LinkedIn profile (primary) and a direct WhatsApp link to Daren (https://wa.me/60165187740, added at Daren's request on 2026-10-24; the number is not printed on the page). There is no email call to action, no contact form and no booking flow.
+- Two calls to action: the LinkedIn profile (primary) and a direct WhatsApp link to Daren (https://wa.me/60165187740, added at Daren's request on 2026-10-24; the number is not printed on the page). There is no email call to action, no contact form and no booking flow. A media kit page (/media-kit/) gives event organisers speaker bios to copy and speaker photos to download; it is a resource, not a third call to action.
 - Talks and BFM episodes appear as proof only, not as a speaking-services pitch.
 - The site is static, with content authored in the repo. Language: English.
 - Voice: polished and professional (Daren's choice), not the casual register of Daren's LinkedIn posts.

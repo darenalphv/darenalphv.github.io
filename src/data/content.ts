@@ -10,7 +10,6 @@ export const person = {
   role: 'Founder & Chief Executive Officer',
   company: 'ALPHV Group of Companies',
   location: 'Kuala Lumpur, Malaysia',
-  period: 'Report 2016 to 2026',
   summary:
     'Daren Tan leads ALPHV Group of Companies, which builds AI, data and cloud solutions for businesses across Southeast Asia, and founded Developer Kaki, Malaysia’s largest developer community.',
 };
@@ -24,7 +23,7 @@ export const notes = [
   { n: 5, text: 'First Malaysian ‘Global Strategic Partner’ of Alibaba Cloud (February 2025) and of FPT AI Factory.' },
   { n: 6, text: 'Three ALPHV entities featured in Konsortium AI Negara 2025.' },
   { n: 7, text: 'Ranked #7 in Favikon’s Top 50 Tech Creators on LinkedIn, Malaysia, 2026.' },
-  { n: 8, text: 'Press coverage: five features in The Star and three interviews on BFM 89.9, as listed on Daren’s previous site and LinkedIn profile, October 2026.' },
+  { n: 8, text: 'Press coverage: eight features in The Star (2016 to 2026) and three interviews on BFM 89.9, each linked in the Media section, October 2026.' },
   { n: 9, text: 'Technical AI keynote, ASEAN AI Summit 2025, to more than 200 attendees. Source: Daren Tan, LinkedIn, October 2026.' },
 ] as const;
 
@@ -114,7 +113,7 @@ export const recognition = [
 ] as const;
 
 export const press = [
-  { name: 'The Star', times: '5×' },
+  { name: 'The Star', times: '8×' },
   { name: 'BFM 89.9', times: '3×' },
   { name: 'Malay Mail', times: '' },
   { name: 'Digital News Asia', times: '' },
@@ -122,11 +121,15 @@ export const press = [
 
 // News articles and interviews featuring Daren (links given by Daren, 2026-10-24; dates from the URLs).
 export const articles = [
+  { outlet: 'The Star', date: '29 Jun 2026', title: 'The role of AI agents in the workplace: Expectations vs reality', url: 'https://www.thestar.com.my/tech/tech-news/2026/06/29/the-role-of-ai-agents-in-the-workplace-expectations-vs-reality' },
   { outlet: 'The Star', date: '1 Sep 2025', title: 'The rise of vibe coding: Programming made easy with AI', url: 'https://www.thestar.com.my/tech/tech-news/2025/09/01/the-rise-of-vibe-coding-programming-made-easy-with-ai' },
   { outlet: 'The Star', date: '17 Mar 2025', title: 'Coding 101: Is AI rewriting the rules?', url: 'https://www.thestar.com.my/tech/2025/03/17/coding-101-is-ai-rewriting-the-rules' },
   { outlet: 'The Star', date: '10 Feb 2025', title: 'Reporting bugs without backlash: Towards fixing flaws without fear', url: 'https://www.thestar.com.my/tech/tech-news/2025/02/10/reporting-bugs-without-backlash-towards-fixing-flaws-without-fear' },
   { outlet: 'Malay Mail', date: '7 Aug 2024', title: 'Navigating the tech startup challenge: Two technopreneurs share their stories', url: 'https://www.malaymail.com/news/malaysia/2024/08/07/navigating-the-tech-startup-challenge-two-technopreneurs-share-their-stories/145060' },
+  { outlet: 'The Star', date: '27 Nov 2023', title: 'Cracking the code: Meet the Malaysians programming a new career path for themselves', url: 'https://www.thestar.com.my/tech/tech-news/2023/11/27/cracking-the-code-meet-the-malaysians-programming-a-new-career-path-for-themselves' },
   { outlet: 'The Star', date: '26 Jun 2023', title: 'Thriving together: How social media is helping communities cultivate connections', url: 'https://www.thestar.com.my/tech/tech-news/2023/06/26/thriving-together-how-social-media-is-helping-communities-cultivate-connections' },
+  { outlet: 'The Star', date: '11 Dec 2017', title: 'Hackathon heroes emerge', url: 'https://www.thestar.com.my/metro/metro-news/2017/12/11/hackathon-heroes-emerge-team-of-former-utar-students-take-the-crown-in-tadhack-kl-2017-with-marketin' },
+  { outlet: 'The Star', date: '14 Nov 2016', title: 'Former varsity student creates travel app to assist senior citizens and the handicapped', url: 'https://www.thestar.com.my/metro/community/2016/11/14/former-varsity-student-creates-travel-app-to-assist-senior-citizens-and-the-handicapped' },
 ] as const;
 
 export const appearances = [

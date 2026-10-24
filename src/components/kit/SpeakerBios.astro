@@ -1,0 +1,182 @@
+---
+// Media kit: how to bill Daren, then the speaker bios (Pages CMS `bios`), each with a copy button.
+// The bios follow the daren-tan-bio fact sheet; refresh the drifting numbers (members) from the site.
+import { getCollection } from 'astro:content';
+import { person } from '../../data/content';
+
+const bios = (await getCollection('bios'))
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((entry) => {
+    const text = (entry.body ?? '').trim();
+    return { id: `bio-${entry.id}`, ...entry.data, text, words: text.split(/\s+/).length };
+  });
+
+const billing = [
+  { label: 'Name', value: person.name },
+  { label: 'Title', value: `Founder & CEO, ${person.company}` },
+  { label: 'Based in', value: person.location },
+  { label: 'Speaks in', value: 'English and Bahasa Malaysia' },
+];
+---
+
+<section class="kit-block" aria-labelledby="billing-heading">
+  <div class="side">
+    <h2 id="billing-heading" class="side-heading">Billing</h2>
+    <p class="side-sub">As it should appear on the programme</p>
+  </div>
+  <dl class="billing">
+    {
+      billing.map((row) => (
+        <div class="billing-row">
+          <dt>{row.label}</dt>
+          <dd>{row.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<section id="bio" class="kit-block" aria-labelledby="bio-heading">
+  <div class="side">
+    <h2 id="bio-heading" class="side-heading">Speaker bio</h2>
+    <p class="side-sub">Third person. Copy the length you need.</p>
+  </div>
+  <div class="bios">
+    {
+      bios.map((bio) => (
+        <article class="bio" aria-labelledby={`${bio.id}-label`}>
+          <div class="bio-head">
+            <h3 id={`${bio.id}-label`} class="bio-label">{bio.label}</h3>
+            <p class="bio-meta">
+              <span><span class="tabular">{bio.words}</span> words</span>
+              {bio.note && <span class="bio-note">{bio.note}</span>}
+            </p>
+          </div>
+          <p id={bio.id} class="bio-text">{bio.text}</p>
+          <button class="kit-btn copy" type="button" data-copy={bio.id}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 8h11v12H8zM5 16V4h11" fill="none" stroke="currentColor" stroke-width="1.6" /></svg>
+            <span data-copy-label aria-live="polite">Copy</span>
+            <span class="sr-only"> the {bio.label.toLowerCase()} bio</span>
+          </button>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  // Copy a bio to the clipboard; where the clipboard API is blocked, select the text and fall back
+  // to the older copy command, leaving the text selected if that fails too.
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    const label = button.querySelector<HTMLElement>('[data-copy-label]')!;
+    let timer: number | undefined;
+    button.addEventListener('click', async () => {
+      const text = document.getElementById(button.dataset.copy!);
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text.innerText.trim());
+        label.textContent = 'Copied';
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(text);
+        getSelection()?.removeAllRanges();
+        getSelection()?.addRange(range);
+        const copied = document.execCommand('copy');
+        if (copied) getSelection()?.removeAllRanges();
+        label.textContent = copied ? 'Copied' : 'Text selected';
+      }
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => (label.textContent = 'Copy'), 2400);
+    });
+  });
+</script>
+
+<style>
+  .billing {
+    margin: 0;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .billing-row {
+    display: grid;
+    grid-template-columns: calc(340 * var(--u)) 1fr;
+    gap: calc(40 * var(--u));
+    padding-block: calc(22 * var(--u));
+    border-bottom: 1px solid var(--color-rule-soft);
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.35;
+  }
+
+  .billing-row dt {
+    color: var(--color-ink-2);
+  }
+
+  .billing-row dd {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .bio {
+    display: grid;
+    grid-template-columns: calc(340 * var(--u)) minmax(0, 1fr) auto;
+    gap: calc(40 * var(--u));
+    align-items: start;
+    padding-block: calc(36 * var(--u));
+    border-bottom: 1px solid var(--color-rule-soft);
+  }
+
+  .bio:first-child {
+    padding-top: 0;
+  }
+
+  .bio-label {
+    margin: 0;
+    font-weight: 800;
+    font-stretch: 90%;
+    font-size: max(calc(40 * var(--u)), 22px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .bio-meta {
+    display: grid;
+    gap: 0.35em;
+    margin: calc(12 * var(--u)) 0 0;
+    font-size: max(calc(20 * var(--u)), 13.5px);
+    line-height: 1.4;
+    color: var(--color-ink-2);
+  }
+
+  .bio-text {
+    max-width: 64ch;
+    margin: 0;
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.55;
+  }
+
+  .copy {
+    min-width: 7.5em;
+  }
+
+  @media (max-width: 1023px) {
+    .billing-row {
+      grid-template-columns: 110px 1fr;
+      gap: 12px;
+      padding-block: 14px;
+    }
+
+    .bio {
+      grid-template-columns: 1fr;
+      gap: 14px;
+      padding-block: 28px;
+    }
+
+    .bio:first-child {
+      padding-top: 4px;
+    }
+
+    .copy {
+      justify-self: start;
+    }
+  }
+</style>
