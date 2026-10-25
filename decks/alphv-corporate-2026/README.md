@@ -21,7 +21,9 @@ on darentan.my.
 Medium and Poppins SemiBold, which are in `fonts/` (SIL Open Font License, `fonts/OFL.txt`). Without
 them PowerPoint substitutes another font and lines will wrap differently. The theme's heading and
 body fonts are set to Poppins, so new text boxes match. Pictures keep their rounded corners as
-rounded-rectangle picture shapes, so you can crop or replace them in place.
+rounded-rectangle picture shapes, so you can crop or replace them in place. Where the HTML balances
+lines (titles, and paragraphs PowerPoint would otherwise wrap differently), the text keeps those exact
+line breaks as soft returns; delete them if you rewrite a paragraph.
 
 ## Storyline
 

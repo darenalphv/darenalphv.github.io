@@ -78,6 +78,13 @@ function extractSlide(index) {
           color: c, width: Math.min(w, h), dash: /repeating/.test(bgImg), op, name: "Connector" });
       } else if (!/conic/.test(bgImg)) warnings.push(`background image on ${el.className || el.tagName}${label || ""}: ${bgImg.slice(0, 80)}`);
     }
+    const ring = s.boxShadow && s.boxShadow !== "none" && s.boxShadow.match(/(rgba?\([^)]*\))\s+0px\s+0px\s+0px\s+([\d.]+)px/);
+    if (ring && parseFloat(ring[2]) > 0) {
+      const sp = parseFloat(ring[2]), c = rgba(ring[1]);
+      const circ = rad >= Math.min(w, h) / 2 - 0.5 && Math.abs(w - h) < 1;
+      shapes.push({ type: "shape", kind: circ ? "ellipse" : rad > 0.5 ? "roundRect" : "rect", x: x - sp, y: y - sp, w: w + 2 * sp, h: h + 2 * sp,
+        radius: rad + sp, fill: c, op, line: null, name: "Ring" });
+    }
     const fill = bg && bg.a > 0.01 ? bg : null;
     if (fill || uniform) {
       const bw = uniform ? sides[0].w : 0;
@@ -251,14 +258,14 @@ function extractSlide(index) {
     for (const it of g.items) {
       if (it.br) { words.push({ br: true }); space = false; continue; }
       const n = it.node, raw = n.nodeValue, st = styleOf(n.parentElement);
-      const re = /(\s+)|(\S+)/g; let m;
+      const re = /([ \t\n\r\f]+)|([^ \t\n\r\f]+)/g; let m;
       while ((m = re.exec(raw))) {
         if (m[1]) { space = true; continue; }
         range.setStart(n, m.index); range.setEnd(n, m.index + m[2].length);
         const rects = [...range.getClientRects()].filter((q) => q.width > 0);
         if (!rects.length) continue;
         // A word broken across lines (at a hyphen) is split where the break fell.
-        let parts = [{ text: m[2], rect: rects[0] }];
+        let parts = [{ text: m[2], rect: rects[0], n, s0: m.index, s1: m.index + m[2].length }];
         if (rects.length > 1) {
           parts = []; let start = 0, top = rects[0].top;
           for (let i = 1; i < m[2].length; i++) {
@@ -266,11 +273,11 @@ function extractSlide(index) {
             const q = range.getClientRects()[0];
             if (q && q.top > top + q.height / 2) {
               range.setStart(n, m.index + start); range.setEnd(n, m.index + i);
-              parts.push({ text: m[2].slice(start, i), rect: range.getClientRects()[0] }); start = i; top = q.top;
+              parts.push({ text: m[2].slice(start, i), rect: range.getClientRects()[0], n, s0: m.index + start, s1: m.index + i }); start = i; top = q.top;
             }
           }
           range.setStart(n, m.index + start); range.setEnd(n, m.index + m[2].length);
-          parts.push({ text: m[2].slice(start), rect: range.getClientRects()[0] });
+          parts.push({ text: m[2].slice(start), rect: range.getClientRects()[0], n, s0: m.index + start, s1: m.index + m[2].length });
         }
         // Inline margins and padding open gaps the source has no space for (label + value rows).
         const prev = words.length ? words[words.length - 1] : null;
@@ -279,7 +286,7 @@ function extractSlide(index) {
           const gap = parts[0].rect.left - prev.rect.right;
           if (gap > st.size * 0.15) spaces = Math.max(1, Math.round(gap / (st.size * 0.26)));
         }
-        parts.forEach((p, i) => words.push({ text: p.text, style: st, rect: p.rect, spaces: i === 0 ? spaces : 0, glue: i > 0 }));
+        parts.forEach((p, i) => words.push({ text: p.text, style: st, rect: p.rect, spaces: i === 0 ? spaces : 0, glue: i > 0, n: p.n, s0: p.s0, s1: p.s1 }));
         space = false;
       }
     }
@@ -288,6 +295,19 @@ function extractSlide(index) {
     if (!real.length) continue;
     // Lines from word positions.
     let lineTops = [], line = -1;
+    const assign = (list, key) => {
+      let tops = [], ln = -1;
+      for (const w of list) {
+        if (w.br) { ln += 1; tops.push(null); continue; }
+        if (!w.r2) { w[key] = Math.max(ln, 0); continue; }
+        const cur = tops[ln], base = w.r2.top + 1.05 * w.style.size;
+        if (ln < 0 || cur === null || base > cur.base + 0.45 * Math.min(cur.size, w.style.size) || base < cur.base - 0.45 * Math.min(cur.size, w.style.size) - cur.size) {
+          if (ln < 0 || cur !== null) ln += 1;
+          tops[ln] = { base, size: w.style.size };
+        }
+        w[key] = ln;
+      }
+    };
     for (const w of words) {
       if (w.br) { line += 1; lineTops.push(null); continue; }
       if (!w.rect) { w.line = Math.max(line, 0); continue; }
@@ -309,7 +329,9 @@ function extractSlide(index) {
     const maxSize = Math.max(...real.map((w) => w.style.size));
     if (maxSize > fs0 && bs.lineHeight !== "normal") LH = Math.max(LH, maxSize * (LH / fs0));
     const firstH = Math.max(...real.filter((w) => w.line === real[0].line).map((w) => w.rect.height));
-    const top = Math.min(...real.filter((w) => w.line === real[0].line).map((w) => w.rect.top)) - (LH - firstH) / 2;
+    const firstSize = Math.max(...real.filter((w) => w.line === real[0].line).map((w) => w.style.size));
+    const top = Math.min(...real.filter((w) => w.line === real[0].line).map((w) => w.rect.top)) - (LH - firstH) / 2
+      + (0.35 * firstSize - 0.3 * LH);
     const r = blk.getBoundingClientRect();
     const cl = r.left + parseFloat(bs.borderLeftWidth) + parseFloat(bs.paddingLeft);
     const cr = r.right - parseFloat(bs.borderRightWidth) - parseFloat(bs.paddingRight);
@@ -321,11 +343,37 @@ function extractSlide(index) {
     if (align === "left") { x = pt && pt["::before"] ? Math.min(cl, U.l) : U.l; w = Math.max(cr, U.r) - x; }
     else if (align === "right") { const xr = Math.max(cr, U.r); x = Math.min(cl, U.l); w = xr - x; }
     else { x = Math.min(cl, U.l); w = Math.max(cr, U.r) - x; }
+    // PowerPoint wraps greedily and breaks at hyphens; the HTML balances lines and keeps
+    // hyphenated words whole. Where that would change the line breaks, keep the browser's.
+    let greedyDiffers = false;
+    if (nLines > 1) {
+      const saved = blk.style.cssText, nowraps = [...blk.querySelectorAll("*")].filter((e) => cs(e).whiteSpace === "nowrap");
+      const savedNw = nowraps.map((e) => e.style.cssText);
+      blk.style.textWrap = "wrap"; nowraps.forEach((e) => (e.style.whiteSpace = "normal"));
+      for (const w of words) if (w.n) { range.setStart(w.n, w.s0); range.setEnd(w.n, w.s1); w.r2 = range.getClientRects()[0]; }
+      assign(words, "gline");
+      greedyDiffers = words.some((w) => w.n && (w.gline !== w.line || range.getClientRects().length > 1));
+      for (const w of words) if (w.n) { range.setStart(w.n, w.s0); range.setEnd(w.n, w.s1); if (range.getClientRects().length > 1) greedyDiffers = true; }
+      blk.style.cssText = saved; nowraps.forEach((e, i) => (e.style.cssText = savedNw[i]));
+    }
+    let tight = false;
+    if (nLines > 1) {
+      const avail = cr - cl;
+      for (let ln = 0; ln < nLines; ln++) {
+        const on = real.filter((w) => w.line === ln);
+        if (!on.length) continue;
+        const lineW = Math.max(...on.map((w) => w.rect.right)) - Math.min(...on.map((w) => w.rect.left));
+        if (lineW > avail * 0.985) tight = true;
+        const next = real.find((w) => w.line === ln + 1);
+        if (next && lineW + next.style.size * 0.26 + next.rect.width <= avail * 1.04) tight = true;
+      }
+    }
     let mode;
     if (nLines === 1) mode = (cr - cl) >= (U.r - U.l) + Math.max(8, 0.06 * (U.r - U.l)) && bs.whiteSpace !== "nowrap" ? "wrap" : "single";
-    else mode = heading || bs.whiteSpace === "nowrap" ? "breaks" : "wrap";
+    else mode = heading || bs.whiteSpace === "nowrap" || greedyDiffers || tight ? "breaks" : "wrap";
     if (mode === "single") { w = Math.max(w, U.r - U.l) + 4; if (align === "left") x = Math.min(x, U.l); }
     if (mode === "wrap" && align === "left") w = w * 1.004 + 2;
+    if (mode === "breaks" && align === "left") w = w * 1.04 + 4; // explicit breaks: slack only stops stray wraps
     texts.push({
       x: x - S.left, y: top - S.top, w, h: nLines * LH, lh: LH, align, mode, lines: nLines,
       title: blk.matches("h2.title"), tag: blk.tagName.toLowerCase(), cls: typeof blk.className === "string" ? blk.className : "",
