@@ -24,7 +24,8 @@ const LOGOS: Record<string, string> = {
   Maybank: 'maybank.png',
   AngelHack: 'angelhack.png',
   MDEC: 'mdec.png',
-  VHacks: 'vatican-flag.png',
+  HackTrain: 'hacktrain.png',
+  VHacks: 'vhacks.png',
   // Media coverage
   'The Star': 'the-star.png',
   'BFM 89.9': 'bfm.png',

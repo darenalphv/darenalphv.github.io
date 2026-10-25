@@ -18,8 +18,6 @@ const img = file ? files[`../../assets/logos/${file}`] : undefined;
 const smallSource = img ? img.width < 96 : false;
 // Wordmarks (much wider than tall) get less padding so they stay legible in the square.
 const wide = img ? img.width / img.height > 1.6 : false;
-// Flags (files named *-flag.*) fill the square edge to edge, so a white field doesn't melt into the padding.
-const flag = file ? /-flag\.\w+$/.test(file) : false;
 const initials = name
   .split(/\s+/)
   .map((w) => w.replace(/[^A-Za-z0-9]/g, ''))
@@ -30,7 +28,7 @@ const initials = name
   .toUpperCase();
 ---
 
-<span class:list={['mark', size, { lettered: !img, 'small-source': smallSource, wide, flag }]} aria-hidden="true">
+<span class:list={['mark', size, { lettered: !img, 'small-source': smallSource, wide }]} aria-hidden="true">
   {img ? <Image src={img} alt="" width={Math.min(img.width, 128)} format="webp" quality={92} loading="lazy" decoding="async" /> : initials}
 </span>
 
@@ -68,10 +66,6 @@ const initials = name
 
   .wide :global(img) {
     padding: 3%;
-  }
-
-  .flag :global(img) {
-    padding: 0;
   }
 
   .lettered {
