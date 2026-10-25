@@ -1,0 +1,1693 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ALPHV Corporate Deck</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="ALPHV Technologies corporate overview 2026: an AI systems integration and consulting deck built from alphv.com.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+<style>
+/* Cobalt Editorial deck — one cobalt accent on white, Poppins 600/500/300,
+   24px cards with hairlines, liquid gradient only on cover, dividers and close.
+   Slides are a fixed 1920×1080 print-like canvas; only the viewer chrome follows the theme. */
+:root {
+  /* slide palette (fixed: slides are a printed artefact) */
+  --accent: #044BD9;
+  --accent-bright: #155DFC;
+  --accent-deep: #0236A8;
+  --ink: #000000;
+  --body: #1F2937;
+  --muted: #6B6B6B;
+  --surface: #F8F9FA;
+  --card: #FBFBFB;
+  --line: #F0F0F0;
+  --line-strong: #E3E6EC;
+  --tint: rgba(4, 75, 217, .08);
+  --tint-2: rgba(4, 75, 217, .20);
+  --on-accent: #FFFFFF;
+  --on-accent-body: rgba(255, 255, 255, .88);
+  --on-accent-muted: rgba(255, 255, 255, .75);
+  --on-accent-line: rgba(255, 255, 255, .22);
+  --glass: rgba(255, 255, 255, .08);
+
+  /* viewer chrome (theme-aware) */
+  --page-bg: #E8EBF1;
+  --page-fg: #1F2937;
+  --page-muted: #5B6472;
+  --chrome-bg: rgba(255, 255, 255, .86);
+  --chrome-line: rgba(15, 23, 42, .10);
+  --chrome-btn: #FFFFFF;
+
+  --font: "Poppins", "Helvetica Neue", Arial, sans-serif;
+  --r-card: 24px;
+  --r-small: 16px;
+  --r-tile: 18px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page-bg: #0B1020; --page-fg: #E6EAF2; --page-muted: #9AA4B5;
+    --chrome-bg: rgba(16, 22, 40, .86); --chrome-line: rgba(255, 255, 255, .12); --chrome-btn: #18213A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --page-bg: #0B1020; --page-fg: #E6EAF2; --page-muted: #9AA4B5;
+  --chrome-bg: rgba(16, 22, 40, .86); --chrome-line: rgba(255, 255, 255, .12); --chrome-btn: #18213A;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--page-bg);
+  color: var(--page-fg);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ───────── viewer chrome ───────── */
+.viewer-bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding-block: 10px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--chrome-bg);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--chrome-line);
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--chrome-bg); }
+.viewer-bar .vb-title { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 14px; font-weight: 500; }
+.viewer-bar .vb-title span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.viewer-bar .vb-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--accent); flex: none; }
+.viewer-bar .vb-sub { color: var(--page-muted); font-weight: 400; }
+@media (max-width: 600px) { .viewer-bar .vb-sub { display: none; } }
+.viewer-bar .vb-actions { display: flex; align-items: center; gap: 8px; flex: none; }
+.vb-count { font-size: 13px; color: var(--page-muted); font-variant-numeric: tabular-nums; }
+.vb-btn {
+  font: 500 13px/1 var(--font); color: var(--page-fg);
+  background: var(--chrome-btn); border: 1px solid var(--chrome-line);
+  border-radius: 20px; padding: 9px 14px; cursor: pointer;
+}
+.vb-btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.vb-btn:hover { border-color: var(--accent-bright); }
+.vb-btn:focus-visible, .slide-frame:focus-visible { outline: 3px solid var(--accent-bright); outline-offset: 3px; }
+
+.reel {
+  display: flex; flex-direction: column; align-items: center; gap: 28px;
+  padding-block: 28px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.slide-frame {
+  position: relative; width: 100%; max-width: 1440px; aspect-ratio: 16 / 9;
+  overflow: hidden; border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 12px 32px rgba(15, 23, 42, .10);
+  background: #fff;
+}
+.slide-frame > .slide { position: absolute; top: 0; left: 0; transform-origin: 0 0; transform: scale(var(--k, .5)); }
+
+/* present mode: one slide, fitted to the window */
+body.presenting { overflow: hidden; background: #000; }
+body.presenting .viewer-bar { display: none; }
+body.presenting .reel { padding: 0; gap: 0; height: 100vh; justify-content: center; }
+body.presenting .slide-frame { display: none; border-radius: 0; box-shadow: none; max-width: none; }
+body.presenting .slide-frame.current { display: block; }
+.present-hint {
+  position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  font: 400 12px/1 var(--font); color: rgba(255, 255, 255, .7);
+  background: rgba(0, 0, 0, .5); padding: 8px 12px; border-radius: 20px; z-index: 40;
+}
+
+/* ───────── the slide canvas ───────── */
+.slide {
+  position: relative; width: 1920px; height: 1080px; overflow: hidden;
+  display: flex; flex-direction: column; gap: 44px;
+  padding: 84px 112px 132px;
+  background: #fff; color: var(--body);
+  font-family: var(--font); font-weight: 300; font-size: 24px; line-height: 1.55;
+}
+.slide.s-surface { background: var(--surface); }
+.slide.s-accent { background: var(--accent) center / cover no-repeat; color: var(--on-accent-body); }
+.slide.s-accent.bg-cover { background-image: url("bg/liquid-cover.jpg"); }
+.slide.s-accent.bg-divider { background-image: url("bg/liquid-divider.jpg"); }
+.slide.s-accent.bg-close { background-image: linear-gradient(to top, rgba(2, 40, 140, .55), rgba(2, 40, 140, 0) 42%), url("bg/liquid-close.jpg"); }
+.slide.s-accent.bg-flat { background-image: none; }
+.slide.s-ink { background: #050B1F url("bg/liquid-dark.jpg") center / cover no-repeat; color: var(--on-accent-body); }
+
+.slide h1, .slide h2, .slide h3, .slide h4, .slide p, .slide ul, .slide ol, .slide figure, .slide blockquote { margin: 0; }
+.slide h1, .slide h2, .slide h3, .slide h4 { color: var(--ink); text-wrap: balance; }
+.s-accent h1, .s-accent h2, .s-accent h3, .s-accent h4,
+.s-ink h1, .s-ink h2, .s-ink h3, .s-ink h4 { color: var(--on-accent); }
+.slide p { text-wrap: pretty; }
+.slide b, .slide strong { font-weight: 500; color: var(--ink); }
+.s-accent b, .s-accent strong, .s-ink b, .s-ink strong { color: #fff; }
+
+/* head: badge + action title, always at the same place */
+.s-head { display: flex; flex-direction: column; gap: 22px; max-width: 1480px; }
+.s-head.row { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 72px; max-width: none; }
+.s-head.row > div { display: flex; flex-direction: column; gap: 22px; max-width: 1060px; }
+.s-head.row > p { max-width: 520px; }
+.title { font-size: 60px; font-weight: 500; line-height: 1.13; letter-spacing: -.015em; }
+.title .hl { color: var(--accent); }
+.s-accent .title .hl, .s-ink .title .hl { color: #fff; text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 10px; text-decoration-color: rgba(255,255,255,.5); }
+.lede { font-size: 29px; font-weight: 300; line-height: 1.5; color: var(--body); max-width: 1120px; }
+.s-accent .lede, .s-ink .lede { color: var(--on-accent-body); }
+.small { font-size: 22px; line-height: 1.55; }
+.muted { color: var(--muted); }
+.s-accent .muted, .s-ink .muted { color: var(--on-accent-muted); }
+
+.badge {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 10px;
+  font-size: 19px; font-weight: 500; line-height: 1; letter-spacing: .01em;
+  color: var(--accent-bright); border: 1.5px solid var(--accent-bright);
+  padding: 10px 20px; border-radius: 40px; white-space: nowrap;
+}
+.badge .no { font-variant-numeric: tabular-nums; opacity: .8; }
+.s-accent .badge, .s-ink .badge { color: #fff; border-color: rgba(255, 255, 255, .55); }
+.badge.solid { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* body region fills the rest */
+.s-body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 32px; }
+.s-body.center { justify-content: center; }
+.s-body.end { justify-content: flex-end; }
+
+/* footer: brand · source · page — one row pinned at the bottom */
+.s-foot {
+  position: absolute; left: 112px; right: 112px; bottom: 46px;
+  display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 48px;
+  font-size: 17px; font-weight: 400; line-height: 1.4; color: var(--muted);
+}
+.s-foot .src { max-width: 1300px; }
+.s-foot .meta { display: flex; align-items: center; gap: 22px; white-space: nowrap; }
+.s-foot .meta .mark { font-weight: 600; color: var(--ink); letter-spacing: .04em; }
+.s-foot .meta .pg { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 500; }
+.s-accent .s-foot, .s-ink .s-foot { color: var(--on-accent-muted); }
+.s-accent .s-foot .mark, .s-accent .s-foot .pg, .s-ink .s-foot .mark, .s-ink .s-foot .pg { color: #fff; }
+
+/* section tracker, top right */
+.tracker {
+  position: absolute; top: 44px; right: 112px; display: flex; gap: 26px;
+  font-size: 17px; font-weight: 500; line-height: 1; color: #A0A6AF; letter-spacing: .01em;
+}
+.tracker span { display: inline-flex; align-items: center; gap: 8px; }
+.tracker span::before { content: ""; width: 7px; height: 7px; background: currentColor; opacity: .55; }
+.tracker .on { color: var(--accent); }
+.tracker .on::before { opacity: 1; }
+.s-accent .tracker, .s-ink .tracker { display: none; }
+
+/* ───────── layout helpers ───────── */
+.row { display: flex; gap: 32px; }
+.col { display: flex; flex-direction: column; gap: 24px; }
+.grow { flex: 1; min-width: 0; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; }
+.grid-6 { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; }
+.split { display: grid; grid-template-columns: 7fr 5fr; gap: 72px; flex: 1; min-height: 0; }
+.split.even { grid-template-columns: 1fr 1fr; }
+.split.rev { grid-template-columns: 5fr 7fr; }
+.split.wide { grid-template-columns: 8fr 4fr; }
+.split > * { min-width: 0; min-height: 0; }
+.stretch { align-items: stretch; }
+.fill { flex: 1; min-height: 0; }
+
+/* ───────── components ───────── */
+.card {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--r-card);
+  padding: 36px; display: flex; flex-direction: column; gap: 16px; min-width: 0;
+}
+.slide:not(.s-surface):not(.s-accent):not(.s-ink) .card { background: var(--card); }
+.card.tight { padding: 28px; gap: 12px; }
+.card.blue { background: var(--accent) !important; border-color: var(--accent); color: var(--on-accent-body); }
+.card.blue h3, .card.blue h4, .card.blue b { color: #fff; }
+.card.tint { background: var(--tint) !important; border-color: transparent; }
+.s-accent .card, .s-ink .card { background: var(--glass); border-color: var(--on-accent-line); color: var(--on-accent-body); }
+.card h3 { font-size: 30px; font-weight: 500; line-height: 1.22; }
+.card h4 { font-size: 25px; font-weight: 500; line-height: 1.28; }
+.card p { font-size: 22px; line-height: 1.55; }
+.card .k { font-size: 17px; font-weight: 500; letter-spacing: .02em; color: var(--accent); }
+.s-accent .card .k, .s-ink .card .k, .card.blue .k { color: rgba(255, 255, 255, .8); }
+.card .foot { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 19px; color: var(--muted); }
+.card.blue .foot, .s-accent .card .foot { border-color: var(--on-accent-line); color: var(--on-accent-muted); }
+
+.tile {
+  width: 60px; height: 60px; border-radius: var(--r-tile); flex: none;
+  display: grid; place-items: center; background: var(--accent); color: #fff;
+}
+.tile svg { width: 28px; height: 28px; stroke-width: 2; }
+.tile.soft { background: var(--tint); color: var(--accent); }
+.s-accent .tile, .s-ink .tile, .card.blue .tile { background: rgba(255, 255, 255, .14); color: #fff; }
+.ico svg { width: 26px; height: 26px; stroke-width: 2; vertical-align: -5px; }
+
+.bullets { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.bullets li { position: relative; padding-left: 26px; font-size: 22px; line-height: 1.5; }
+.bullets li::before { content: ""; position: absolute; left: 0; top: .62em; width: 9px; height: 9px; background: var(--accent); }
+.s-accent .bullets li::before, .s-ink .bullets li::before, .card.blue .bullets li::before { background: #fff; }
+.bullets.lg li { font-size: 25px; padding-left: 30px; }
+.bullets.lg li::before { width: 10px; height: 10px; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.tag {
+  font-size: 17px; font-weight: 500; line-height: 1; color: var(--body);
+  border: 1px solid var(--line-strong); border-radius: 40px; padding: 9px 16px; background: #fff; white-space: nowrap;
+}
+.s-accent .tag, .s-ink .tag, .card.blue .tag { color: #fff; border-color: rgba(255, 255, 255, .35); background: transparent; }
+
+/* stats */
+.stats { display: grid; gap: 32px; }
+.stat { display: flex; flex-direction: column; gap: 14px; padding-top: 22px; border-top: 1px solid var(--line-strong); min-width: 0; }
+.stat .n { font-size: 112px; font-weight: 500; line-height: 1; letter-spacing: -.02em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat .n small { font-size: .5em; font-weight: 500; letter-spacing: 0; }
+.stat .l { font-size: 22px; line-height: 1.45; color: var(--muted); text-wrap: pretty; }
+.stat.md .n { font-size: 80px; }
+.stat.sm .n { font-size: 60px; }
+.s-accent .stat, .s-ink .stat { border-color: var(--on-accent-line); }
+.s-accent .stat .n, .s-ink .stat .n { color: #fff; }
+.s-accent .stat .l, .s-ink .stat .l { color: var(--on-accent-muted); }
+
+/* photos */
+.photo { width: 100%; height: 100%; object-fit: cover; border-radius: var(--r-card); display: block; min-height: 0; }
+.photo-wrap { position: relative; border-radius: var(--r-card); overflow: hidden; min-height: 0; }
+.photo-wrap > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-wrap .cap {
+  position: absolute; left: 20px; bottom: 20px; right: 20px; display: flex; gap: 10px; flex-wrap: wrap;
+}
+.photo-wrap .cap .tag { background: rgba(255, 255, 255, .92); border-color: transparent; }
+
+/* numbered process */
+.steps { display: grid; gap: 24px; position: relative; }
+.step { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.step .num {
+  width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center;
+  font-size: 24px; font-weight: 600; color: #fff; background: var(--accent); position: relative; z-index: 1;
+  font-variant-numeric: tabular-nums;
+}
+.steps.linked::before {
+  content: ""; position: absolute; left: 32px; right: 32px; top: 31px; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--tint-2) 0 10px, transparent 10px 18px);
+}
+.step .phase { font-size: 18px; font-weight: 500; color: var(--accent); letter-spacing: .02em; }
+.step h4 { font-size: 29px; font-weight: 500; line-height: 1.25; color: var(--ink); }
+.step p { font-size: 22px; line-height: 1.55; }
+
+/* tables */
+.tbl { width: 100%; border-collapse: collapse; font-size: 21px; line-height: 1.45; }
+.tbl th { text-align: left; font-size: 17px; font-weight: 500; color: var(--muted); letter-spacing: .02em; padding: 0 20px 14px 0; border-bottom: 1px solid var(--line-strong); vertical-align: bottom; }
+.tbl td { padding: 16px 20px 16px 0; border-bottom: 1px solid var(--line-strong); vertical-align: top; }
+.tbl td:first-child { font-weight: 500; color: var(--ink); }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl .acc { color: var(--accent); font-weight: 500; }
+.tbl col.us, .tbl td.us { background: var(--tint); }
+.tbl th.us { color: var(--accent); }
+
+/* quote */
+.quote { font-size: 40px; font-weight: 300; line-height: 1.4; color: var(--ink); letter-spacing: -.005em; text-wrap: pretty; }
+.quote::before { content: "“"; } .quote::after { content: "”"; }
+.s-accent .quote, .s-ink .quote { color: #fff; }
+.attrib { display: flex; flex-direction: column; gap: 4px; font-size: 21px; }
+.attrib b { font-size: 23px; }
+
+/* logos */
+.logo-wall { display: grid; gap: 16px; }
+.logo-cell {
+  background: #fff; border: 1px solid var(--line); border-radius: var(--r-small);
+  height: 112px; display: grid; place-items: center; padding: 18px 26px;
+}
+.logo-cell img { max-width: 100%; max-height: 62px; object-fit: contain; }
+.logo-cell.dark { background: var(--accent); border-color: var(--accent); }
+.logo-cell .wordmark { font-size: 22px; font-weight: 600; color: var(--ink); text-align: center; line-height: 1.2; }
+
+/* implication / so-what band */
+.sowhat {
+  display: flex; align-items: center; gap: 28px; padding: 28px 36px; border-radius: var(--r-card);
+  background: var(--accent); color: #fff; font-size: 25px; line-height: 1.45; font-weight: 400;
+}
+.sowhat .lbl { flex: none; font-size: 17px; font-weight: 500; letter-spacing: .04em; padding: 8px 16px; border: 1.5px solid rgba(255,255,255,.55); border-radius: 40px; }
+.sowhat b { color: #fff; }
+
+/* cover / divider / close specifics */
+.cover-logo { height: 46px; width: auto; display: block; }
+.display { font-size: 112px; font-weight: 600; line-height: 1.04; letter-spacing: -.025em; color: #fff; max-width: 1500px; }
+.divider-no { font-size: 220px; font-weight: 600; line-height: .9; letter-spacing: -.04em; color: rgba(255, 255, 255, .95); font-variant-numeric: tabular-nums; }
+.divider-title { font-size: 96px; font-weight: 600; line-height: 1.05; letter-spacing: -.025em; color: #fff; max-width: 1400px; }
+.kv { display: flex; gap: 64px; }
+.kv > div { display: flex; flex-direction: column; gap: 6px; }
+.kv .k { font-size: 17px; font-weight: 500; letter-spacing: .03em; color: var(--on-accent-muted); }
+.kv .v { font-size: 24px; font-weight: 400; color: #fff; }
+
+/* exec summary rows */
+.exec { display: flex; flex-direction: column; }
+.exec .xr { display: grid; grid-template-columns: 72px 380px 1fr; gap: 32px; padding: 30px 0; border-top: 1px solid var(--line-strong); align-items: baseline; }
+.exec .xr:last-child { border-bottom: 1px solid var(--line-strong); }
+.exec .xn { font-size: 22px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+.exec .xh { font-size: 30px; font-weight: 500; line-height: 1.25; color: var(--ink); }
+.exec .xt { font-size: 24px; line-height: 1.55; }
+
+/* contents list */
+.toc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 48px; }
+.toc a, .toc div.item { display: grid; grid-template-columns: 64px 1fr; gap: 18px; padding: 26px 0; border-top: 1px solid var(--line-strong); text-decoration: none; color: inherit; }
+.toc .tn { font-size: 22px; font-weight: 600; color: var(--accent); font-variant-numeric: tabular-nums; }
+.toc .tt { font-size: 28px; font-weight: 500; color: var(--ink); line-height: 1.25; }
+.toc .td { font-size: 19px; color: var(--muted); line-height: 1.45; margin-top: 6px; }
+
+/* print: one slide per page */
+@page { size: 1920px 1080px; margin: 0; }
+@media print {
+  body { background: #fff; }
+  .viewer-bar, .present-hint { display: none !important; }
+  .reel { padding: 0; gap: 0; display: block; }
+  .slide-frame { width: 1920px; height: 1080px; max-width: none; aspect-ratio: auto; border-radius: 0; box-shadow: none; break-after: page; overflow: hidden; }
+  .slide-frame > .slide { transform: none !important; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .slide-frame { transition: box-shadow .3s var(--ease); }
+}
+
+/* ───────── consulting exhibits ───────── */
+/* Harvey balls: .hb.q0 … .hb.q4 (empty → full) */
+.hb { display: inline-block; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--accent); vertical-align: middle; flex: none; }
+.hb.q1 { background: conic-gradient(var(--accent) 0 25%, transparent 0); }
+.hb.q2 { background: conic-gradient(var(--accent) 0 50%, transparent 0); }
+.hb.q3 { background: conic-gradient(var(--accent) 0 75%, transparent 0); }
+.hb.q4 { background: var(--accent); }
+.hb.grey { border-color: #9AA1AC; }
+.hb.grey.q1 { background: conic-gradient(#9AA1AC 0 25%, transparent 0); }
+.hb.grey.q2 { background: conic-gradient(#9AA1AC 0 50%, transparent 0); }
+.hb.grey.q3 { background: conic-gradient(#9AA1AC 0 75%, transparent 0); }
+.hb.grey.q4 { background: #9AA1AC; }
+.tbl td.c, .tbl th.c { text-align: center; }
+
+/* coverage dots for matrices */
+.dot { display: inline-block; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); vertical-align: middle; }
+.dot.half { background: transparent; border: 2px solid var(--accent); }
+.dot.none { background: var(--line-strong); width: 8px; height: 8px; }
+
+/* capability house: roof, pillars, foundation */
+.house { display: flex; flex-direction: column; gap: 14px; flex: 1; min-height: 0; }
+.house .roof { background: var(--accent); color: #fff; border-radius: var(--r-card); padding: 26px 36px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.house .roof h3 { color: #fff; font-size: 32px; font-weight: 500; }
+.house .roof p { color: var(--on-accent-body); font-size: 21px; max-width: 760px; }
+.house .pillars { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; flex: 1; min-height: 0; }
+.house .pillar { background: #fff; border: 1px solid var(--line); border-radius: var(--r-card); padding: 24px 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.slide:not(.s-surface) .house .pillar { background: var(--card); }
+.house .pillar h4 { font-size: 23px; font-weight: 500; line-height: 1.25; color: var(--ink); }
+.house .pillar ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.house .pillar li { font-size: 19px; line-height: 1.4; padding-left: 18px; position: relative; }
+.house .pillar li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; background: var(--accent); }
+.house .base { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.house .base > div { border: 1.5px solid var(--tint-2); background: var(--tint); border-radius: var(--r-small); padding: 16px 22px; font-size: 19px; line-height: 1.35; color: var(--ink); font-weight: 500; }
+.house .base > div span { display: block; font-weight: 300; color: var(--body); font-size: 18px; margin-top: 4px; }
+
+/* flow: cards joined by arrows */
+.flow { display: grid; align-items: stretch; gap: 0; }
+.flow .arrow { display: grid; place-items: center; color: var(--accent); width: 56px; }
+.flow .arrow svg { width: 32px; height: 32px; }
+
+/* case study template */
+.case-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+.case-grid { display: grid; grid-template-columns: 1fr 1fr 1.05fr; gap: 24px; flex: 1; min-height: 0; }
+.case-col { display: flex; flex-direction: column; gap: 14px; padding-top: 20px; border-top: 2px solid var(--ink); min-width: 0; }
+.case-col.impact { border-top-color: var(--accent); }
+.case-col .h { font-size: 18px; font-weight: 500; letter-spacing: .04em; color: var(--muted); }
+.case-col.impact .h { color: var(--accent); }
+.case-col p { font-size: 22px; line-height: 1.55; }
+.hero-num { font-size: 96px; font-weight: 500; line-height: 1; letter-spacing: -.02em; color: var(--accent); }
+.hero-num small { font-size: .45em; }
+
+.nowrap { white-space: nowrap; }
+
+</style>
+</head>
+<body>
+<header class="viewer-bar">
+  <div class="vb-title"><span class="vb-dot"></span><span>ALPHV Technologies</span><span class="vb-sub">Corporate overview 2026</span></div>
+  <div class="vb-actions"><span class="vb-count" aria-live="polite">01 / 35</span><button class="vb-btn primary" id="present-btn" type="button">Present</button></div>
+</header>
+<main class="reel">
+<div class="slide-frame" id="cover" tabindex="0" role="group" aria-roledescription="slide" aria-label="1: Build AI into the systems that run your business">
+<section class="slide s-accent bg-cover" data-id="cover" data-nofoot>
+  <div class="row" style="justify-content:space-between;align-items:center">
+    <img class="cover-logo" src="img/logos/alphv-white.png" alt="ALPHV">
+    <span class="badge">Corporate overview · October 2026</span>
+  </div>
+  <div class="s-body end" style="gap:40px">
+    <span class="badge">AI systems integration and consulting</span>
+    <h1 class="display">Build AI into the systems that run your business</h1>
+    <p class="lede" style="max-width:1080px">ALPHV designs, integrates and runs production AI for legal, insurance, healthcare, hospitality, finance and retail teams, from first model to measurable outcomes.</p>
+  </div>
+  <div class="kv" style="padding-top:28px;border-top:1px solid var(--on-accent-line)">
+    <div><span class="k">Founded</span><span class="v">2023</span></div>
+    <div><span class="k">Headquarters</span><span class="v">Kuala Lumpur</span></div>
+    <div><span class="k">Office</span><span class="v">Singapore</span></div>
+    <div><span class="k">Clients in</span><span class="v">Malaysia, Singapore and Vietnam</span></div>
+  </div>
+
+</section>
+</div>
+<div class="slide-frame" id="exec" tabindex="0" role="group" aria-roledescription="slide" aria-label="2: ALPHV takes AI past the pilot and into the systems that earn revenue">
+<section class="slide" data-id="exec" data-source="Source: alphv.com; alphv.com/about; alphv.com/industries; alphv.com/news/ai-for-insurance-challenge-tasco-winner (October 2026).">
+  <header class="s-head"><span class="badge">Executive summary</span><h2 class="title">ALPHV takes AI past the pilot and into the systems that <span class="hl">earn revenue</span></h2></header>
+  <div class="s-body">
+    <div class="exec">
+      <div class="xr" style="grid-template-columns:64px 250px 1fr;padding:24px 0"><span class="xn">01</span><span class="xh">Situation</span><p class="xt"><b>Most companies have tried AI. Far fewer run it inside the systems that earn their revenue.</b> AI pays off after the pilot, not in it.</p></div>
+      <div class="xr" style="grid-template-columns:64px 250px 1fr;padding:24px 0"><span class="xn">02</span><span class="xh">Complication</span><p class="xt"><b>Three barriers keep pilots from reaching production.</b> Data sits in silos, legacy systems resist change and pilots stall at integration.</p></div>
+      <div class="xr" style="grid-template-columns:64px 250px 1fr;padding:24px 0"><span class="xn">03</span><span class="xh">Answer</span><p class="xt"><b>ALPHV is an AI-native systems integrator.</b> The engineers who scope your AI ship and improve it, with models, hosting and guardrails chosen to fit your systems, data and regulator.</p></div>
+      <div class="xr" style="grid-template-columns:64px 250px 1fr;padding:24px 0"><span class="xn">04</span><span class="xh">Evidence</span><p class="xt"><b>12 projects delivered and in delivery.</b> 90+ portal automations for a 36-year-old law firm, 80% less manual data entry time for a Singapore hospitality group, and first of nine at the AI for Insurance Challenge × Tasco.</p></div>
+      <div class="xr" style="grid-template-columns:64px 250px 1fr;padding:24px 0"><span class="xn">05</span><span class="xh">Next step</span><p class="xt"><b>Every engagement starts from the business case.</b> Tech advisory, a data audit and AI strategy research find where AI pays back, before any build starts.</p></div>
+    </div>
+  </div>
+<footer class="s-foot"><span class="src">Source: alphv.com; alphv.com/about; alphv.com/industries; alphv.com/news/ai-for-insurance-challenge-tasco-winner (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">02</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="contents" tabindex="0" role="group" aria-roledescription="slide" aria-label="3: Contents">
+<section class="slide s-surface" data-id="contents">
+  <header class="s-head"><span class="badge">Six sections</span><h2 class="title">Contents</h2></header>
+  <div class="s-body end">
+    <div class="toc" style="grid-template-columns:1fr">
+      <a href="#div-pov" class="item" style="grid-template-columns:96px 470px 1fr 170px;align-items:baseline;padding:30px 0"><span class="tn">01</span><span class="tt" style="font-size:34px">Point of view</span><span class="td" style="margin-top:0;font-size:22px">Why AI pays off after the pilot, and the principles we work by</span><span class="td" style="margin-top:0;text-align:right">Slides 04–06</span></a>
+      <a href="#div-who" class="item" style="grid-template-columns:96px 470px 1fr 170px;align-items:baseline;padding:30px 0"><span class="tn">02</span><span class="tt" style="font-size:34px">Who we are</span><span class="td" style="margin-top:0;font-size:22px">The team, the people, and the platforms and partners we build with</span><span class="td" style="margin-top:0;text-align:right">Slides 07–10</span></a>
+      <a href="#div-what" class="item" style="grid-template-columns:96px 470px 1fr 170px;align-items:baseline;padding:30px 0"><span class="tn">03</span><span class="tt" style="font-size:34px">What we do</span><span class="td" style="margin-top:0;font-size:22px">Six services, one team, from the first model to the last integration</span><span class="td" style="margin-top:0;text-align:right">Slides 11–17</span></a>
+      <a href="#div-sectors" class="item" style="grid-template-columns:96px 470px 1fr 170px;align-items:baseline;padding:30px 0"><span class="tn">04</span><span class="tt" style="font-size:34px">Sectors and products</span><span class="td" style="margin-top:0;font-size:22px">Six sectors with work to show, and five products ready to deploy</span><span class="td" style="margin-top:0;text-align:right">Slides 18–21</span></a>
+      <a href="#div-proof" class="item" style="grid-template-columns:96px 470px 1fr 170px;align-items:baseline;padding:30px 0"><span class="tn">05</span><span class="tt" style="font-size:34px">Proof</span><span class="td" style="margin-top:0;font-size:22px">Nine engagements and a case note, what clients say, and the wins and stages around them</span><span class="td" style="margin-top:0;text-align:right">Slides 22–31</span></a>
+      <a href="#div-engage" class="item" style="grid-template-columns:96px 470px 1fr 170px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--line-strong)"><span class="tn">06</span><span class="tt" style="font-size:34px">Engage</span><span class="td" style="margin-top:0;font-size:22px">How our model differs, and how a first message turns into a plan</span><span class="td" style="margin-top:0;text-align:right">Slides 32–35</span></a>
+    </div>
+  </div>
+<footer class="s-foot"><span class="src"></span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">03</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="div-pov" tabindex="0" role="group" aria-roledescription="slide" aria-label="4: AI pays off after the pilot. Not in it.">
+<section class="slide s-accent bg-divider" data-id="div-pov" data-section="Point of view" data-nofoot>
+  <div class="s-body end" style="gap:36px">
+    <span class="divider-no">01</span>
+    <h2 class="divider-title">AI pays off after the pilot. Not in it.</h2>
+    <p class="lede">Most companies have tried AI. Far fewer have it running inside the systems that earn their revenue.</p>
+  </div>
+
+</section>
+</div>
+<div class="slide-frame" id="gap" tabindex="0" role="group" aria-roledescription="slide" aria-label="5: Pilots stall where AI meets data silos, legacy systems and integration">
+<section class="slide" data-id="gap" data-section="Point of view" data-source="Source: alphv.com; alphv.com/about; alphv.com/how-we-work; alphv.com/services (October 2026).">
+  <header class="s-head"><span class="badge">The pilot gap</span><h2 class="title">Pilots stall where AI meets data silos, legacy systems and integration</h2></header>
+  <div class="s-body" style="gap:36px">
+    <div class="flow fill" style="grid-template-columns:232px 48px 1fr 48px 1fr 48px 1fr 48px 232px">
+      <div class="card tight">
+        <div class="col" style="gap:12px;min-height:186px"><span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" /> <path d="M6.453 15h11.094" /> <path d="M8.5 2h7" /> </svg></span><span class="k">Start</span><h3>Pilot</h3></div>
+        <div class="col" style="gap:8px;padding-top:18px;border-top:1px solid var(--line-strong)"><span class="k">Where most are</span><p>Most companies have tried AI.</p></div>
+      </div>
+      <div class="arrow"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div>
+      <div class="card tight">
+        <div class="col" style="gap:12px;min-height:186px"><span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 21 19V5" /> <path d="M3 12A9 3 0 0 0 21 12" /> </svg></span><span class="k">Barrier 01</span><h3>Data sits in silos</h3></div>
+        <div class="col" style="gap:8px;padding-top:18px;border-top:1px solid var(--line-strong)"><span class="k">What closes it</span><p>A data audit of what you hold and where it sits, then retrieval over your own data.</p></div>
+      </div>
+      <div class="arrow"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div>
+      <div class="card tight">
+        <div class="col" style="gap:12px;min-height:186px"><span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="3" /> <path d="M4.5 10H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-.5" /> <path d="M4.5 14H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-.5" /> <path d="M6 6h.01" /> <path d="M6 18h.01" /> <path d="m15.7 13.4-.9-.3" /> <path d="m9.2 10.9-.9-.3" /> <path d="m10.6 15.7.3-.9" /> <path d="m13.6 15.7-.4-1" /> <path d="m10.8 9.3-.4-1" /> <path d="m8.3 13.6 1-.4" /> <path d="m14.7 10.8 1-.4" /> <path d="m13.4 8.3-.3.9" /> </svg></span><span class="k">Barrier 02</span><h3>Legacy systems resist change</h3></div>
+        <div class="col" style="gap:8px;padding-top:18px;border-top:1px solid var(--line-strong)"><span class="k">What closes it</span><p>Replace and connect legacy systems, and build AI into ERP, CRM and <span style="white-space:nowrap">third-party</span> portals.</p></div>
+      </div>
+      <div class="arrow"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div>
+      <div class="card tight">
+        <div class="col" style="gap:12px;min-height:186px"><span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m19 5 3-3" /> <path d="m2 22 3-3" /> <path d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4Z" /> <path d="M7.5 13.5 10 11" /> <path d="M10.5 16.5 13 14" /> <path d="m12 6 6 6 2.3-2.3a2.4 2.4 0 0 0 0-3.4l-2.6-2.6a2.4 2.4 0 0 0-3.4 0Z" /> </svg></span><span class="k">Barrier 03</span><h3>Pilots stall at integration</h3></div>
+        <div class="col" style="gap:8px;padding-top:18px;border-top:1px solid var(--line-strong)"><span class="k">What closes it</span><p>One team from business case to production, with improvement scoped in.</p></div>
+      </div>
+      <div class="arrow"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></div>
+      <div class="card tight blue">
+        <div class="col" style="gap:12px;min-height:186px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M21.801 10A10 10 0 1 1 17 3.335" /> <path d="m9 11 3 3L22 4" /> </svg></span><span class="k">Goal</span><h3>Production</h3></div>
+        <div class="col" style="gap:8px;padding-top:18px;border-top:1px solid var(--on-accent-line)"><span class="k">Where few are</span><p>AI running inside the systems that earn revenue.</p></div>
+      </div>
+    </div>
+    <div class="sowhat"><span class="lbl">So what</span><span><b>ALPHV was founded in 2023 to close that gap.</b> We embed AI into the core systems you already run, then stay to improve it after go-live.</span></div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span class="on">Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com; alphv.com/about; alphv.com/how-we-work; alphv.com/services (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">05</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="principles" tabindex="0" role="group" aria-roledescription="slide" aria-label="6: Four principles shape how we scope, build and run every system">
+<section class="slide s-surface" data-id="principles" data-section="Point of view" data-source="Source: alphv.com/how-we-work; alphv.com/services and service pages (October 2026).">
+  <header class="s-head row"><div><span class="badge">What we believe</span><h2 class="title">Four principles shape how we scope, build and run every system</h2></div><p class="small muted">From a first model to a legacy system replacement, the same four principles apply to every engagement.</p></header>
+  <div class="s-body">
+    <div class="grid-4 fill">
+      <div class="card">
+        <span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /> </svg></span>
+        <h3 style="min-height:111px">Start from the business case</h3>
+        <p style="font-size:24px">Tech advisory, a data audit and AI strategy research come first, so the build goes where AI pays back.</p>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:4px">In practice</span>Tech advisory, data audit and AI strategy for EasyRenz</div>
+      </div>
+      <div class="card">
+        <span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" /> </svg></span>
+        <h3 style="min-height:111px">One team, no hand-offs</h3>
+        <p style="font-size:24px">The engineers who scope your AI are the ones who ship and improve it. You keep one point of accountability throughout.</p>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:4px">In practice</span>Six services, delivered by one team</div>
+      </div>
+      <div class="card">
+        <span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg></span>
+        <h3 style="min-height:111px">Built around your systems, data and regulator</h3>
+        <p style="font-size:24px">Models, hosting and guardrails are chosen to fit the systems you already run, the data you hold and the rules you answer to.</p>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:4px">In practice</span>A law firm’s models run on a locally hosted NVIDIA GPU workstation</div>
+      </div>
+      <div class="card">
+        <span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /> <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /> <path d="M8 16H3v5" /> </svg></span>
+        <h3 style="min-height:111px">Improvement scoped in from day one</h3>
+        <p style="font-size:24px">Monitoring adoption and model performance is part of the build. After go-live, we stay to review, iterate and improve.</p>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:4px">In practice</span>After go-live, we stay to review, iterate and improve</div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span class="on">Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/how-we-work; alphv.com/services and service pages (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">06</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="div-who" tabindex="0" role="group" aria-roledescription="slide" aria-label="7: An AI-native systems integrator from Kuala Lumpur">
+<section class="slide s-accent bg-divider" data-id="div-who" data-section="Who we are" data-nofoot>
+  <div class="s-body end" style="gap:36px">
+    <span class="divider-no">02</span>
+    <h2 class="divider-title">An AI-native systems integrator from Kuala Lumpur</h2>
+    <p class="lede">ALPHV designs, integrates and runs production AI inside the core systems that legal, insurance, healthcare, hospitality, finance and retail teams already run.</p>
+  </div>
+
+</section>
+</div>
+<div class="slide-frame" id="glance" tabindex="0" role="group" aria-roledescription="slide" aria-label="8: A founder-led team of 15+ builds production AI from Kuala Lumpur, with an office in Singapore">
+<section class="slide" data-id="glance" data-section="Who we are" data-source="Source: alphv.com; alphv.com/about (October 2026).">
+  <header class="s-head"><span class="badge">ALPHV at a glance</span><h2 class="title">A founder-led team of 15+ builds production AI from <span class="hl">Kuala Lumpur</span>, with an office in Singapore</h2></header>
+  <div class="s-body">
+    <div class="split rev">
+      <div class="photo-wrap"><img src="img/team-1.jpg" alt="The ALPHV team together in a high-rise office" style="object-position:52% 70%"><div class="cap"><span class="tag">The ALPHV team, 100% Malaysian and fully local</span></div></div>
+      <div class="col" style="gap:30px">
+        <div class="stats grid-2" style="gap:26px 40px">
+          <div class="stat md"><span class="n">16</span><span class="l">Industry verticals served</span></div>
+          <div class="stat md"><span class="n">12</span><span class="l">Projects delivered and in delivery</span></div>
+          <div class="stat md"><span class="n">15<small>+</small></span><span class="l">Solutions architects, engineers and consultants</span></div>
+          <div class="stat md"><span class="n">2</span><span class="l">Office countries: Malaysia (HQ) and Singapore</span></div>
+        </div>
+        <div class="card tight" style="display:grid;grid-template-columns:1fr 1fr;gap:16px 40px;padding:26px 30px">
+          <p style="font-size:21px;color:var(--ink)"><span class="k" style="margin-right:12px">Company</span>ALPHV Technologies Sdn Bhd</p>
+          <p style="font-size:21px;color:var(--ink)"><span class="k" style="margin-right:12px">Reg. No.</span>202301015604 (1509526-V)</p>
+          <p style="font-size:21px;color:var(--ink)"><span class="k" style="margin-right:12px">Founded</span>2023</p>
+          <p style="font-size:21px;color:var(--ink)"><span class="k" style="margin-right:12px">Status</span>MDEC Malaysia Digital</p>
+          <p style="font-size:21px;color:var(--ink)"><span class="k" style="margin-right:12px">HQ</span>Bangsar South, Kuala Lumpur</p>
+          <p style="font-size:21px;color:var(--ink)"><span class="k" style="margin-right:12px">Office</span>WCEGA Tower, Singapore</p>
+          <p style="font-size:21px;color:var(--ink);grid-column:1 / -1"><span class="k" style="margin-right:12px">Clients in</span>Malaysia, Singapore and Vietnam</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span class="on">Who we are</span><span>What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com; alphv.com/about (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">08</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="people" tabindex="0" role="group" aria-roledescription="slide" aria-label="9: The people who scope your system are the people who build it">
+<section class="slide s-surface" data-id="people" data-section="Who we are" data-source="Source: alphv.com/careers; alphv.com/apex; alphv.com/about (October 2026). Note: 13 counts the universities and colleges on the APEX page.">
+  <header class="s-head row"><div><span class="badge">People</span><h2 class="title">The people who scope your system are the people who build it</h2></div><p class="small muted">A 100% Malaysian team, led by a founder who still writes code. We hire across five role families, all working on real client systems.</p></header>
+  <div class="s-body" style="gap:20px">
+    <div class="grid-5">
+      <div class="card tight">
+        <span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /> <path d="M9 13a4.5 4.5 0 0 0 3-4" /> <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /> <path d="M3.477 10.896a4 4 0 0 1 .585-.396" /> <path d="M6 18a4 4 0 0 1-1.967-.516" /> <path d="M12 13h4" /> <path d="M12 18h6a2 2 0 0 1 2 2v1" /> <path d="M12 8h8" /> <path d="M16 8V5a2 2 0 0 1 2-2" /> <circle cx="16" cy="13" r=".5" /> <circle cx="18" cy="3" r=".5" /> <circle cx="20" cy="21" r=".5" /> <circle cx="20" cy="8" r=".5" /> </svg></span>
+        <h4 style="min-height:64px">AI engineers</h4>
+        <p style="font-size:20px">Build retrieval, agents and fine-tuned models, then deploy, monitor and improve them inside client systems.</p>
+      </div>
+      <div class="card tight">
+        <span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <polyline points="16 18 22 12 16 6" /> <polyline points="8 6 2 12 8 18" /> </svg></span>
+        <h4 style="min-height:64px">Software engineers, web and mobile</h4>
+        <p style="font-size:20px">Build the web and mobile platforms, portals and integrations that production AI runs inside.</p>
+      </div>
+      <div class="card tight">
+        <span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m12.99 6.74 1.93 3.44" /> <path d="M19.136 12a10 10 0 0 1-14.271 0" /> <path d="m21 21-2.16-3.84" /> <path d="m3 21 8.02-14.26" /> <circle cx="12" cy="5" r="2" /> </svg></span>
+        <h4 style="min-height:64px">Solutions architects</h4>
+        <p style="font-size:20px">Design architectures that fit a client’s stack, choosing models, hosting and guardrails around their data and regulator.</p>
+      </div>
+      <div class="card tight">
+        <span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" /> <path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" /> <path d="m2.3 2.3 7.286 7.286" /> <circle cx="11" cy="11" r="2" /> </svg></span>
+        <h4 style="min-height:64px">UI/UX designers</h4>
+        <p style="font-size:20px">Design the interfaces people use every day, from client portals and CRM dashboards to lending platforms.</p>
+      </div>
+      <div class="card tight">
+        <span class="tile soft"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 12h.01" /> <path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" /> <path d="M22 13a18.15 18.15 0 0 1-20 0" /> <rect width="20" height="14" x="2" y="6" rx="2" /> </svg></span>
+        <h4 style="min-height:64px">Consultants</h4>
+        <p style="font-size:20px">Run tech advisory, data audits and AI strategy research to find where AI pays back before any build starts.</p>
+      </div>
+    </div>
+    <div class="card tight" style="gap:16px;padding:24px 28px">
+      <div class="row" style="gap:48px;align-items:flex-end">
+        <div class="col" style="gap:8px;width:520px;flex:none;padding-bottom:4px">
+          <span class="k">APEX internship programme</span>
+          <h4>Interns work on hands-on projects with the team</h4>
+        </div>
+        <div class="stats grid-4 grow" style="gap:24px">
+          <div class="stat sm" style="padding-top:14px;gap:6px"><span class="n">8</span><span class="l" style="font-size:20px">Cohorts</span></div>
+          <div class="stat sm" style="padding-top:14px;gap:6px"><span class="n">10<small>+</small></span><span class="l" style="font-size:20px">Interns trained</span></div>
+          <div class="stat sm" style="padding-top:14px;gap:6px"><span class="n">100<small>%</small></span><span class="l" style="font-size:20px">Hands-on projects</span></div>
+          <div class="stat sm" style="padding-top:14px;gap:6px"><span class="n">13</span><span class="l" style="font-size:20px">Universities and colleges</span></div>
+        </div>
+      </div>
+      <div class="logo-wall" style="grid-template-columns:repeat(8,minmax(0,1fr));gap:14px">
+        <div class="logo-cell" style="height:74px;padding:8px 14px"><img src="img/logos/logo-uni-yale.png" alt="Yale University" style="height:40px"></div>
+        <div class="logo-cell" style="height:74px;padding:8px 14px"><img src="img/logos/logo-uni-toronto.png" alt="University of Toronto" style="height:58px"></div>
+        <div class="logo-cell" style="height:74px;padding:8px 14px"><img src="img/logos/logo-uni-illinois.png" alt="University of Illinois" style="height:40px"></div>
+        <div class="logo-cell" style="height:74px;padding:8px 14px"><img src="img/logos/logo-uni-taylors.png" alt="Taylor’s University" style="height:52px"></div>
+        <div class="logo-cell" style="height:74px;padding:8px 14px"><img src="img/logos/logo-uni-sunway-university.png" alt="Sunway University" style="height:47px"></div>
+        <div class="logo-cell" style="height:74px;padding:8px 14px"><img src="img/logos/logo-uni-ukm.png" alt="Universiti Kebangsaan Malaysia" style="height:58px"></div>
+        <div class="logo-cell" style="height:74px;padding:8px 14px"><img src="img/logos/logo-uni-uitm.png" alt="Universiti Teknologi MARA" style="height:52px"></div>
+        <div class="logo-cell" style="height:74px;padding:8px 14px"><img src="img/logos/logo-uni-mmu.png" alt="Multimedia University" style="height:37px"></div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span class="on">Who we are</span><span>What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/careers; alphv.com/apex; alphv.com/about (October 2026). Note: 13 counts the universities and colleges on the APEX page.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">09</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="platforms" tabindex="0" role="group" aria-roledescription="slide" aria-label="10: We choose the model, compute and cloud per project, for your data, cost and residency">
+<section class="slide" data-id="platforms" data-section="Who we are" data-source="Source: alphv.com/platforms-and-clients; alphv.com/insights (October 2026).">
+  <header class="s-head"><span class="badge">Platforms and partners</span><h2 class="title">We choose the model, compute and cloud per project, for your data, cost and residency</h2></header>
+  <div class="s-body">
+    <div class="split">
+      <div class="col" style="gap:26px">
+        <div class="col" style="gap:12px">
+          <span style="font-size:18px;font-weight:500;letter-spacing:.02em;color:var(--accent)">Models</span>
+          <div class="logo-wall" style="grid-template-columns:repeat(5,minmax(0,1fr));gap:14px">
+            <div class="logo-cell" style="padding:12px 10px"><img src="img/logos/logo-qwen.svg" alt="Qwen" style="height:38px"></div>
+            <div class="logo-cell" style="padding:12px 10px"><img src="img/logos/logo-claude.svg" alt="Claude" style="height:31px"></div>
+            <div class="logo-cell" style="padding:12px 10px"><img src="img/logos/logo-openai.png" alt="OpenAI" style="height:33px"></div>
+            <div class="logo-cell" style="padding:12px 10px"><img src="img/logos/logo-gemini.svg" alt="Gemini" style="height:42px"></div>
+            <div class="logo-cell" style="padding:12px 10px"><img src="img/logos/logo-ilmu.png" alt="ILMU" style="height:43px"></div>
+          </div>
+        </div>
+        <div class="logo-wall" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 14px">
+          <span style="grid-column:1 / 3;font-size:18px;font-weight:500;letter-spacing:.02em;color:var(--accent)">Compute</span>
+          <span style="font-size:18px;font-weight:500;letter-spacing:.02em;color:var(--accent)">AI hardware</span>
+          <div class="logo-cell" style="gap:12px;align-content:center"><img src="img/logos/logo-fpt-ai-factory.png" alt="FPT AI Factory" style="height:30px"><span style="font-size:19px;line-height:1;color:var(--muted)">H100 compute</span></div>
+          <div class="logo-cell" style="gap:12px;align-content:center"><img src="img/logos/logo-nvidia.svg" alt="NVIDIA" style="height:31px"><span style="font-size:19px;line-height:1;color:var(--muted)">GPU workstations</span></div>
+          <div class="logo-cell" style="gap:12px;align-content:center"><img src="img/logos/logo-footfallcam.png" alt="FootfallCam" style="height:24px"><span style="font-size:19px;line-height:1;color:var(--muted)">Hardware for Kiralytics</span></div>
+        </div>
+        <div class="col" style="gap:12px">
+          <span style="font-size:18px;font-weight:500;letter-spacing:.02em;color:var(--accent)">Cloud</span>
+          <div class="logo-wall" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:14px">
+            <div class="logo-cell"><img src="img/logos/logo-alibaba-cloud.png" alt="Alibaba Cloud" style="height:24px"></div>
+            <div class="logo-cell"><img src="img/logos/logo-google-cloud.png" alt="Google Cloud" style="height:29px"></div>
+            <div class="logo-cell"><img src="img/logos/logo-microsoft.svg" alt="Microsoft" style="height:33px"></div>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:auto">Technology platforms, not clients.</p>
+      </div>
+      <div class="col" style="gap:28px">
+        <div class="col" style="gap:14px">
+          <span style="font-size:18px;font-weight:500;letter-spacing:.02em;color:var(--accent)">How we choose</span>
+          <div class="grid-2" style="gap:22px 28px">
+            <div style="padding-top:14px;border-top:1px solid var(--line-strong)"><h4 style="font-size:24px;font-weight:500">Data and residency</h4><p style="font-size:21px">Locally hosted models where data must stay in-house</p></div>
+            <div style="padding-top:14px;border-top:1px solid var(--line-strong)"><h4 style="font-size:24px;font-weight:500">Cost</h4><p style="font-size:21px">H100 compute shortens training time and lowers cost</p></div>
+            <div style="padding-top:14px;border-top:1px solid var(--line-strong)"><h4 style="font-size:24px;font-weight:500">Capability</h4><p style="font-size:21px">Vision and language models together where a job needs both</p></div>
+            <div style="padding-top:14px;border-top:1px solid var(--line-strong)"><h4 style="font-size:24px;font-weight:500">Governance</h4><p style="font-size:21px">Guardrails, AI safety and alignment are part of the design</p></div>
+          </div>
+        </div>
+        <div class="col" style="gap:14px">
+          <span style="font-size:18px;font-weight:500;letter-spacing:.02em;color:var(--accent)">Partnerships</span>
+          <div class="col" style="gap:0">
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:20px;padding:12px 0;border-top:1px solid var(--line-strong)"><span style="font-size:19px;font-weight:500;color:var(--ink)">24 Apr 2026</span><p style="font-size:21px">Strategic partnership with FPT AI Factory</p></div>
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:20px;padding:12px 0;border-top:1px solid var(--line-strong)"><span style="font-size:19px;font-weight:500;color:var(--ink)">Dec 2025</span><p style="font-size:21px">Highlighted as one of 12 AI implementation partners at Alibaba Cloud AI Day</p></div>
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:20px;padding:12px 0;border-top:1px solid var(--line-strong)"><span style="font-size:19px;font-weight:500;color:var(--ink)">15 Jul 2025</span><p style="font-size:21px">Joined the Alibaba Cloud Partner Network, Tier 2 reseller for Malaysia</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span class="on">Who we are</span><span>What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/platforms-and-clients; alphv.com/insights (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">10</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="div-what" tabindex="0" role="group" aria-roledescription="slide" aria-label="11: Six services, one team">
+<section class="slide s-accent bg-divider" data-id="div-what" data-section="What we do" data-nofoot>
+  <div class="s-body end" style="gap:36px">
+    <span class="divider-no">03</span>
+    <h2 class="divider-title">Six services, one team</h2>
+    <p class="lede">Every service is shipped and improved by the same engineers who scoped it.</p>
+  </div>
+
+</section>
+</div>
+<div class="slide-frame" id="house" tabindex="0" role="group" aria-roledescription="slide" aria-label="12: Six services cover the path from first model to the last integration">
+<section class="slide" data-id="house" data-section="What we do" data-source="Source: alphv.com/services and its six service pages; alphv.com/how-we-work; alphv.com/products (October 2026).">
+  <header class="s-head"><span class="badge">Capability framework</span><h2 class="title">Six services cover the path from first model to the last integration</h2></header>
+  <div class="s-body">
+    <div class="house">
+      <div class="roof"><h3>Production AI inside the systems you already run</h3><p style="max-width:none">ALPHV designs, builds and runs AI systems inside your existing operations.</p></div>
+      <div class="pillars">
+        <div class="pillar"><span class="k" style="font-size:17px;font-weight:500;color:var(--accent)">01</span><h4 style="min-height:58px">AI engineering</h4><ul><li style="font-size:19px">Knowledge integration and RAG</li><li style="font-size:19px">Specialised <span style="white-space:nowrap">fine-tuning</span></li><li style="font-size:19px">Multimodal intelligence</li><li style="font-size:19px">Document AI</li></ul></div>
+        <div class="pillar"><span class="k" style="font-size:17px;font-weight:500;color:var(--accent)">02</span><h4 style="min-height:58px">Agentic automation</h4><ul><li style="font-size:19px">Agentic process automation</li><li style="font-size:19px">Custom tools, MCP servers and APIs</li><li style="font-size:19px">WhatsApp sales agents</li><li style="font-size:19px">Claims and case handling</li></ul></div>
+        <div class="pillar"><span class="k" style="font-size:17px;font-weight:500;color:var(--accent)">03</span><h4 style="min-height:58px">System integration and consulting</h4><ul><li style="font-size:19px">Strategy before the build</li><li style="font-size:19px">Replace legacy systems</li><li style="font-size:19px">Connect third-party portals</li><li style="font-size:19px">Take over projects midway</li></ul></div>
+        <div class="pillar"><span class="k" style="font-size:17px;font-weight:500;color:var(--accent)">04</span><h4 style="min-height:58px">Computer vision and smart city</h4><ul><li style="font-size:19px">People counting and occupancy</li><li style="font-size:19px">Vehicle classification</li><li style="font-size:19px">Speed detection and flow analysis</li><li style="font-size:19px">Smart city video analytics</li></ul></div>
+        <div class="pillar"><span class="k" style="font-size:17px;font-weight:500;color:var(--accent)">05</span><h4 style="min-height:58px">Web and mobile apps</h4><ul><li style="font-size:19px">Product strategy</li><li style="font-size:19px">UI/UX design</li><li style="font-size:19px">Web platforms</li><li style="font-size:19px">Mobile apps</li></ul></div>
+        <div class="pillar"><span class="k" style="font-size:17px;font-weight:500;color:var(--accent)">06</span><h4 style="min-height:58px">Data, RPA and MLOps</h4><ul><li style="font-size:19px">Data science and analytics</li><li style="font-size:19px">Robotic process automation</li><li style="font-size:19px">Agentic RPA</li><li style="font-size:19px">DevOps and MLOps pipelines</li></ul></div>
+      </div>
+      <div class="base">
+        <div>Method<span>Discover · Design · Implement · Improve</span></div>
+        <div>Architecture<span>A brain, an action layer and guardrails</span></div>
+        <div>Platforms<span>Models, compute and cloud per project</span></div>
+        <div>Products<span>Kiralytics and avatars, ready to deploy</span></div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span class="on">What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/services and its six service pages; alphv.com/how-we-work; alphv.com/products (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">12</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="stack" tabindex="0" role="group" aria-roledescription="slide" aria-label="13: Every system combines a brain, an action layer and guardrails">
+<section class="slide s-surface" data-id="stack" data-section="What we do" data-source="Source: alphv.com/services/ai-engineering; alphv.com/services; alphv.com/insights/sovereign-ai-case-management-law-firm (October 2026).">
+  <header class="s-head"><span class="badge">Full stack AI engineering</span><h2 class="title">Every system combines a brain, an action layer and guardrails</h2></header>
+  <div class="s-body">
+    <div style="display:grid;grid-template-columns:minmax(0,1.6fr) 40px minmax(0,1fr);grid-template-rows:auto repeat(3,minmax(0,1fr)) auto;gap:14px 14px;flex:1;min-height:0">
+
+      <span class="k" style="font-size:17px;font-weight:500;letter-spacing:.04em;color:var(--muted)">Three layers in every ALPHV system</span>
+      <span></span>
+      <span style="font-size:17px;font-weight:500;letter-spacing:.04em;color:var(--accent)">In practice: a 36-year-old law firm</span>
+
+      <!-- guardrails -->
+      <div class="card" style="display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;align-items:center;padding:20px 30px">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg></span><div class="col" style="gap:2px"><h4>The guardrails</h4><span class="muted" style="font-size:19px">AI governance</span></div></div>
+        <ul class="bullets" style="gap:4px"><li style="font-size:20px">AI safety and alignment</li><li style="font-size:20px">Governance guardrails</li><li style="font-size:20px">Locally hosted models where data must stay <span style="white-space:nowrap">in-house</span></li></ul>
+      </div>
+      <span class="ico" style="display:grid;place-items:center;color:var(--accent)"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></span>
+      <div class="card" style="justify-content:center;gap:6px;padding:20px 30px">
+        <b style="font-size:23px">A locally hosted NVIDIA GPU workstation</b>
+        <p style="font-size:20px">The models run here, so client data stays inside the firm.</p>
+      </div>
+
+      <!-- action -->
+      <div class="card" style="display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;align-items:center;padding:20px 30px">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="8" height="8" x="3" y="3" rx="2" /> <path d="M7 11v4a2 2 0 0 0 2 2h4" /> <rect width="8" height="8" x="13" y="13" rx="2" /> </svg></span><div class="col" style="gap:2px"><h4>The action</h4><span class="muted" style="font-size:19px">Agentic and autonomous solutions</span></div></div>
+        <ul class="bullets" style="gap:4px"><li style="font-size:20px">Agentic process automation</li><li style="font-size:20px">Custom tool, MCP and API development for agents</li><li style="font-size:20px">Multi-agent systems</li></ul>
+      </div>
+      <span class="ico" style="display:grid;place-items:center;color:var(--accent)"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></span>
+      <div class="card" style="justify-content:center;gap:6px;padding:20px 30px">
+        <b style="font-size:23px">Agentic RPA across <span style="color:var(--accent)">90+</span> portals</b>
+        <p style="font-size:20px">Automations across bank, government, SSM and CTOS portals, with workflow, email and WhatsApp.</p>
+      </div>
+
+      <!-- brain -->
+      <div class="card" style="display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;align-items:center;padding:20px 30px">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /> <path d="M9 13a4.5 4.5 0 0 0 3-4" /> <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /> <path d="M3.477 10.896a4 4 0 0 1 .585-.396" /> <path d="M6 18a4 4 0 0 1-1.967-.516" /> <path d="M12 13h4" /> <path d="M12 18h6a2 2 0 0 1 2 2v1" /> <path d="M12 8h8" /> <path d="M16 8V5a2 2 0 0 1 2-2" /> <circle cx="16" cy="13" r=".5" /> <circle cx="18" cy="3" r=".5" /> <circle cx="20" cy="21" r=".5" /> <circle cx="20" cy="8" r=".5" /> </svg></span><div class="col" style="gap:2px"><h4>The brain</h4><span class="muted" style="font-size:19px">Foundational intelligence core</span></div></div>
+        <ul class="bullets" style="gap:4px"><li style="font-size:20px">Custom knowledge integration, RAG and beyond</li><li style="font-size:20px">Specialised model fine-tuning</li><li style="font-size:20px">Multimodal intelligence across vision and language</li></ul>
+      </div>
+      <span class="ico" style="display:grid;place-items:center;color:var(--accent)"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></span>
+      <div class="card" style="justify-content:center;gap:6px;padding:20px 30px">
+        <b style="font-size:23px">Qwen with GenAI-RAG</b>
+        <p style="font-size:20px">Retrieval grounds answers in the firm’s own documents.</p>
+      </div>
+
+      <!-- core systems -->
+      <div style="display:grid;grid-template-columns:300px minmax(0,1fr);gap:24px;align-items:center;padding:20px 30px;border-radius:var(--r-small);background:var(--tint);border:1.5px solid var(--tint-2)">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile soft" style="background:#fff"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 21 19V5" /> <path d="M3 12A9 3 0 0 0 21 12" /> </svg></span><b style="font-size:23px">Your core systems</b></div>
+        <p style="font-size:20px;color:var(--ink)">ERP · CRM · case management · bank, government, SSM and CTOS portals · email · WhatsApp</p>
+      </div>
+      <span class="ico" style="display:grid;place-items:center;color:var(--accent)"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></span>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:4px;padding:20px 30px;border-radius:var(--r-small);background:var(--tint);border:1.5px solid var(--tint-2)">
+        <b style="font-size:21px">One ALPHV platform, in place of legacy</b>
+        <p style="font-size:20px;color:var(--ink)">Case management, back office and accounting</p>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span class="on">What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/services/ai-engineering; alphv.com/services; alphv.com/insights/sovereign-ai-case-management-law-firm (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">13</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="services-a" tabindex="0" role="group" aria-roledescription="slide" aria-label="14: AI engineering, agents and integration turn business cases into working systems">
+<section class="slide" data-id="services-a" data-section="What we do" data-source="Source: alphv.com/services and its six service pages (October 2026).">
+  <header class="s-head"><span class="badge">Services 1–3</span><h2 class="title">AI engineering, agents and integration turn business cases into working systems</h2></header>
+  <div class="s-body">
+    <div class="grid-3 fill" style="align-items:stretch">
+      <div class="card">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /> <path d="M9 13a4.5 4.5 0 0 0 3-4" /> <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /> <path d="M3.477 10.896a4 4 0 0 1 .585-.396" /> <path d="M6 18a4 4 0 0 1-1.967-.516" /> <path d="M12 13h4" /> <path d="M12 18h6a2 2 0 0 1 2 2v1" /> <path d="M12 8h8" /> <path d="M16 8V5a2 2 0 0 1 2-2" /> <circle cx="16" cy="13" r=".5" /> <circle cx="18" cy="3" r=".5" /> <circle cx="20" cy="21" r=".5" /> <circle cx="20" cy="8" r=".5" /> </svg></span><h3>AI engineering</h3></div>
+        <p style="font-size:22px;line-height:1.45;color:var(--ink);min-height:64px">Turn your own data into specialised AI</p>
+        <ul class="bullets" style="padding-top:18px;border-top:1px solid var(--line)">
+          <li>Knowledge integration and RAG over your documents and records</li>
+          <li>Specialised fine-tuning, including Qwen2.5-14B on H100 SXM</li>
+          <li>Multimodal models and document AI</li>
+        </ul>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:6px">Proof</span><span style="color:var(--body)">Clinicians at a leading healthcare group review a drafted report instead of writing from scratch</span></div>
+      </div>
+      <div class="card">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 8V4H8" /> <rect width="16" height="12" x="4" y="8" rx="2" /> <path d="M2 14h2" /> <path d="M20 14h2" /> <path d="M15 13v2" /> <path d="M9 13v2" /> </svg></span><h3>Agentic automation</h3></div>
+        <p style="font-size:22px;line-height:1.45;color:var(--ink);min-height:64px">Put AI agents to work across your systems</p>
+        <ul class="bullets" style="padding-top:18px;border-top:1px solid var(--line)">
+          <li>Agentic process automation for documents and claims</li>
+          <li>Custom tool, MCP and API development for agents</li>
+          <li>WhatsApp sales agents that sync leads to your CRM</li>
+        </ul>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:6px">Proof</span><span style="color:var(--body)"><b style="color:var(--accent)">80%</b> less manual data entry time with WhatsApp AI agents for a Singapore hospitality group</span></div>
+      </div>
+      <div class="card">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect x="16" y="16" width="6" height="6" rx="1" /> <rect x="2" y="16" width="6" height="6" rx="1" /> <rect x="9" y="2" width="6" height="6" rx="1" /> <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /> <path d="M12 12V8" /> </svg></span><h3>System integration and consulting</h3></div>
+        <p style="font-size:22px;line-height:1.45;color:var(--ink);min-height:64px">Replace and connect legacy systems, from strategy to go-live</p>
+        <ul class="bullets" style="padding-top:18px;border-top:1px solid var(--line)">
+          <li>Tech advisory, a data audit and AI strategy research</li>
+          <li>Legacy systems replaced and <span style="white-space:nowrap">third-party</span> portals connected</li>
+          <li>Projects taken over midway and delivered</li>
+        </ul>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:6px">Proof</span><span style="color:var(--body)"><b style="color:var(--accent)">90+</b> portal automations for a 36-year-old law firm; iPajak Group’s six branches on one system</span></div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span class="on">What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/services and its six service pages (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">14</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="services-b" tabindex="0" role="group" aria-roledescription="slide" aria-label="15: Vision, platforms and MLOps carry AI to cameras, users and production pipelines">
+<section class="slide s-surface" data-id="services-b" data-section="What we do" data-source="Source: alphv.com/services and its six service pages (October 2026).">
+  <header class="s-head"><span class="badge">Services 4–6</span><h2 class="title">Vision, platforms and MLOps carry AI to cameras, users and production pipelines</h2></header>
+  <div class="s-body">
+    <div class="grid-3 fill" style="align-items:stretch">
+      <div class="card">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="1" /> <path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0" /> </svg></span><h3>Computer vision and smart city</h3></div>
+        <p style="font-size:22px;line-height:1.45;color:var(--ink);min-height:64px">Count, classify and track with video analytics</p>
+        <ul class="bullets" style="padding-top:18px;border-top:1px solid var(--line)">
+          <li>People counting and occupancy with Kiralytics MATA</li>
+          <li>Traffic counting and speed detection with Kiralytics TRAFFIK</li>
+          <li>Smart city video analytics</li>
+        </ul>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:6px">Proof</span><span style="color:var(--body)">Productised as Kiralytics MATA and TRAFFIK, on live CCTV or with AI hardware from FootfallCam</span></div>
+      </div>
+      <div class="card">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect x="2" y="4" width="20" height="16" rx="2" /> <path d="M10 4v4" /> <path d="M2 8h20" /> <path d="M6 4v4" /> </svg></span><h3>Web and mobile apps</h3></div>
+        <p style="font-size:22px;line-height:1.45;color:var(--ink);min-height:64px">Web and mobile platforms used by thousands of people</p>
+        <ul class="bullets" style="padding-top:18px;border-top:1px solid var(--line)">
+          <li>Product strategy and UI/UX design</li>
+          <li>Web platforms and mobile apps, engineered through to delivery</li>
+          <li>AI inside the product, from agents to digital avatars</li>
+        </ul>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:6px">Proof</span><span style="color:var(--body)">LocumLah: <b style="color:var(--accent)">3,000</b> doctors and <b style="color:var(--accent)">600</b> clinics onboarded; Politikus by Caprice: <b style="color:var(--accent)">32,000</b> swipes</span></div>
+      </div>
+      <div class="card">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 15 21.84" /> <path d="M21 5V8" /> <path d="M21 12L18 17H22L19 22" /> <path d="M3 12A9 3 0 0 0 14.59 14.87" /> </svg></span><h3>Data, RPA and MLOps</h3></div>
+        <p style="font-size:22px;line-height:1.45;color:var(--ink);min-height:64px">Keep models accurate in production</p>
+        <ul class="bullets" style="padding-top:18px;border-top:1px solid var(--line)">
+          <li>Data science, analytics and dashboards</li>
+          <li>RPA, and agentic RPA for document work that needs judgement</li>
+          <li>DevOps and MLOps pipelines that retrain, evaluate and redeploy</li>
+        </ul>
+        <div class="foot"><span class="k" style="display:block;margin-bottom:6px">Proof</span><span style="color:var(--body)">RPA for PowerDNA’s genetic test report generation, in Malaysia and China</span></div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span class="on">What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/services and its six service pages (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">15</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="method" tabindex="0" role="group" aria-roledescription="slide" aria-label="16: Every engagement moves through four steps, run by one accountable team">
+<section class="slide" data-id="method" data-section="What we do" data-source="Source: alphv.com/how-we-work (October 2026).">
+  <header class="s-head"><span class="badge">How we work</span><h2 class="title">Every engagement moves through four steps, run by one accountable team</h2></header>
+  <div class="s-body">
+    <div class="steps linked grid-4" style="gap:40px">
+      <div class="step">
+        <span class="num">01</span><span class="phase">Discover</span>
+        <h4 style="min-height:74px">Start from the business case</h4>
+        <p style="font-size:21px;line-height:1.5;min-height:128px">Run tech advisory, a data audit and AI strategy research to find where AI pays back, before any build starts.</p>
+        <ul class="bullets" style="gap:8px;padding-top:16px;border-top:1px solid var(--line-strong)">
+          <li style="font-size:20px">Tech advisory on the systems and processes AI must fit</li>
+          <li style="font-size:20px">A data audit of what you hold and where it sits</li>
+        </ul>
+      </div>
+      <div class="step">
+        <span class="num">02</span><span class="phase">Design</span>
+        <h4 style="min-height:74px">Design an architecture that fits your stack</h4>
+        <p style="font-size:21px;line-height:1.5;min-height:128px">Choose models, hosting and guardrails around your existing systems, your data and your regulator.</p>
+        <ul class="bullets" style="gap:8px;padding-top:16px;border-top:1px solid var(--line-strong)">
+          <li style="font-size:20px">Models chosen per project</li>
+          <li style="font-size:20px">Locally hosted models where data must stay <span style="white-space:nowrap">in-house</span></li>
+        </ul>
+      </div>
+      <div class="step">
+        <span class="num">03</span><span class="phase">Implement</span>
+        <h4 style="min-height:74px">Build AI into production</h4>
+        <p style="font-size:21px;line-height:1.5;min-height:128px">Integrate retrieval, agents and automation across your core systems, including bank, government and SSM portals.</p>
+        <ul class="bullets" style="gap:8px;padding-top:16px;border-top:1px solid var(--line-strong)">
+          <li style="font-size:20px">Agents with the tools, MCP servers and APIs they need to act safely</li>
+          <li style="font-size:20px">Integration with ERP, CRM and <span style="white-space:nowrap">third-party</span> portals</li>
+        </ul>
+      </div>
+      <div class="step">
+        <span class="num">04</span><span class="phase">Improve</span>
+        <h4 style="min-height:74px">Improve continuously after go-live</h4>
+        <p style="font-size:21px;line-height:1.5;min-height:128px">Monitor adoption, review model performance and iterate, with improvement scoped into the build from day one.</p>
+        <ul class="bullets" style="gap:8px;padding-top:16px;border-top:1px solid var(--line-strong)">
+          <li style="font-size:20px">Model performance reviews, with MLOps to keep models accurate</li>
+          <li style="font-size:20px">Iterations planned from day one, not bolted on later</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sowhat" style="margin-top:auto"><span class="lbl">So what</span><span><b>Already mid-build? We can take it over,</b> as we did for iPajak Group’s six-branch pawn brokerage system.</span></div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span class="on">What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/how-we-work (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">16</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="regulated" tabindex="0" role="group" aria-roledescription="slide" aria-label="17: Regulated teams keep data in-house, reach portals and act within guardrails">
+<section class="slide s-surface" data-id="regulated" data-section="What we do" data-source="Source: alphv.com/industries; alphv.com/services/ai-engineering; alphv.com/platforms-and-clients (October 2026).">
+  <header class="s-head"><span class="badge">Regulated sectors</span><h2 class="title">Regulated teams keep data in-house, reach portals and act within guardrails</h2></header>
+  <div class="s-body" style="gap:24px">
+    <div class="grid-3 fill" style="align-items:stretch">
+      <div class="card" style="padding:30px 32px;gap:14px">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /> </svg></span><h3>Data that stays <span style="white-space:nowrap">in-house</span></h3></div>
+        <p style="font-size:20px;line-height:1.55;min-height:93px">Where data must stay inside your organisation, we deploy locally hosted models, for example on your own NVIDIA GPU workstation.</p>
+        <ul class="bullets" style="gap:8px;padding-top:16px;border-top:1px solid var(--line)">
+          <li style="font-size:20px">Client data stays inside the firm for a <span style="white-space:nowrap">36-year-old</span> law firm</li>
+          <li style="font-size:20px">Models, hosting and guardrails chosen around your regulator</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:30px 32px;gap:14px">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M17 21v-2a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1" /> <path d="M19 15V6.5a1 1 0 0 0-7 0v11a1 1 0 0 1-7 0V9" /> <path d="M21 21v-2h-4" /> <path d="M3 5h4V3" /> <path d="M7 5a1 1 0 0 1 1 1v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1V3" /> </svg></span><h3>Integration with the systems you run</h3></div>
+        <p style="font-size:20px;line-height:1.55;min-height:93px">Most of our work connects AI to legacy and <span style="white-space:nowrap">third-party</span> systems, including bank, government, SSM and CTOS portals.</p>
+        <ul class="bullets" style="gap:8px;padding-top:16px;border-top:1px solid var(--line)">
+          <li style="font-size:20px"><b style="color:var(--accent)">90+</b> <span style="white-space:nowrap">third-party</span> portal automations for one law firm</li>
+          <li style="font-size:20px">Projects taken over midway and delivered, as for iPajak Group</li>
+        </ul>
+      </div>
+      <div class="card" style="padding:30px 32px;gap:14px">
+        <div class="row" style="gap:20px;align-items:center;min-height:74px"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg></span><h3>Guardrails and governance</h3></div>
+        <p style="font-size:20px;line-height:1.55;min-height:93px">AI safety and alignment and governance guardrails keep each system accountable, from customer conversations to claims.</p>
+        <ul class="bullets" style="gap:8px;padding-top:16px;border-top:1px solid var(--line)">
+          <li style="font-size:20px">Intelligent conversation flows with guardrails</li>
+          <li style="font-size:20px">Duplicate claims from the same person identified automatically</li>
+          <li style="font-size:20px">CRM features by user access level</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:210px repeat(3,minmax(0,1fr));gap:32px;align-items:center;padding:22px 32px;border-radius:var(--r-card);background:var(--tint);border:1.5px solid var(--tint-2)">
+      <b style="font-size:22px;line-height:1.3">Where models run, chosen per project</b>
+      <div class="row" style="gap:16px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="20" height="8" x="2" y="2" rx="2" ry="2" /> <rect width="20" height="8" x="2" y="14" rx="2" ry="2" /> <line x1="6" x2="6.01" y1="6" y2="6" /> <line x1="6" x2="6.01" y1="18" y2="18" /> </svg></span><div class="col" style="gap:0"><b style="font-size:21px">Inside your organisation</b><span style="font-size:19px;line-height:1.4">Locally hosted models on your own NVIDIA GPU workstation</span></div></div>
+      <div class="row" style="gap:16px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="16" height="16" x="4" y="4" rx="2" /> <rect width="6" height="6" x="9" y="9" rx="1" /> <path d="M15 2v2" /> <path d="M15 20v2" /> <path d="M2 15h2" /> <path d="M2 9h2" /> <path d="M20 15h2" /> <path d="M20 9h2" /> <path d="M9 2v2" /> <path d="M9 20v2" /> </svg></span><div class="col" style="gap:0"><b style="font-size:21px">Partner GPU cloud</b><span style="font-size:19px;line-height:1.4">H100 SXM through FPT AI Factory, for training and fine-tuning</span></div></div>
+      <div class="row" style="gap:16px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /> </svg></span><div class="col" style="gap:0"><b style="font-size:21px">Public cloud</b><span style="font-size:19px;line-height:1.4">Alibaba Cloud and Google Cloud, chosen for data, cost and residency</span></div></div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span class="on">What we do</span><span>Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/industries; alphv.com/services/ai-engineering; alphv.com/platforms-and-clients (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">17</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="div-sectors" tabindex="0" role="group" aria-roledescription="slide" aria-label="18: Work shaped around your sector">
+<section class="slide s-accent bg-divider" data-id="div-sectors" data-nofoot>
+  <div class="s-body end" style="gap:36px">
+    <span class="divider-no">04</span>
+    <h2 class="divider-title">Work shaped around your sector</h2>
+    <p class="lede">Six sectors with work to show, and five products that package proven solutions.</p>
+  </div>
+
+</section>
+</div>
+<div class="slide-frame" id="sectors" tabindex="0" role="group" aria-roledescription="slide" aria-label="19: Work to show in six sectors, from a 36-year-old law firm to a Vietnamese insurer">
+<section class="slide" data-id="sectors" data-section="Sectors and products" data-source="Source: alphv.com/industries, its six sector pages and alphv.com/insights (October 2026). Six of the 16 industry verticals ALPHV serves.">
+  <header class="s-head"><span class="badge">Industries</span><h2 class="title">Work to show in six sectors, from a <span style="white-space:nowrap">36-year-old</span> law firm to a Vietnamese insurer</h2></header>
+  <div class="s-body">
+    <table class="tbl" style="font-size:20px;table-layout:fixed;text-wrap:pretty">
+      <colgroup><col style="width:200px"><col style="width:240px"><col style="width:520px"><col style="width:330px"><col></colgroup>
+      <thead><tr><th>Sector</th><th>Client</th><th>What ALPHV built</th><th>Models and systems</th><th>Proof</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="padding-top:13px;padding-bottom:13px">Legal</td>
+          <td style="padding-top:13px;padding-bottom:13px">Abraham Ooi &amp; Partners, 2025</td>
+          <td style="padding-top:13px;padding-bottom:13px">One platform for case management, back office and accounting, replacing legacy</td>
+          <td style="padding-top:13px;padding-bottom:13px"><div class="tags" style="gap:6px"><span class="tag" style="padding:5px 11px">Qwen</span><span class="tag" style="padding:5px 11px">GenAI-RAG</span><span class="tag" style="padding:5px 11px">Agentic RPA</span><span class="tag" style="padding:5px 11px">NVIDIA GPU</span></div></td>
+          <td style="padding-top:13px;padding-bottom:13px"><span class="acc">90+</span> third-party portal automations; client data stays inside the firm</td>
+        </tr>
+        <tr>
+          <td style="padding-top:13px;padding-bottom:13px">Insurance</td>
+          <td style="padding-top:13px;padding-bottom:13px">Tasco Insurance, Vietnam</td>
+          <td style="padding-top:13px;padding-bottom:13px">A multimodal case system that assesses asset damage from images and video</td>
+          <td style="padding-top:13px;padding-bottom:13px"><div class="tags" style="gap:6px"><span class="tag" style="padding:5px 11px">Qwen</span><span class="tag" style="padding:5px 11px">Multimodal AI</span><span class="tag" style="padding:5px 11px">Agentic AI</span></div></td>
+          <td style="padding-top:13px;padding-bottom:13px"><b>Proof of concept, 2026:</b> <span class="acc">24/7</span> damage assessment; no production results yet</td>
+        </tr>
+        <tr>
+          <td style="padding-top:13px;padding-bottom:13px">Healthcare</td>
+          <td style="padding-top:13px;padding-bottom:13px">Leading healthcare group, 2026</td>
+          <td style="padding-top:13px;padding-bottom:13px">An engine that assesses medicolegal and insurance cases and generates the report</td>
+          <td style="padding-top:13px;padding-bottom:13px"><div class="tags" style="gap:6px"><span class="tag" style="padding:5px 11px">Qwen</span><span class="tag" style="padding:5px 11px">Claude</span><span class="tag" style="padding:5px 11px">RPA</span></div></td>
+          <td style="padding-top:13px;padding-bottom:13px">Clinicians review a draft instead of writing from scratch</td>
+        </tr>
+        <tr>
+          <td style="padding-top:13px;padding-bottom:13px">Hospitality</td>
+          <td style="padding-top:13px;padding-bottom:13px">Singapore hospitality group, 2026</td>
+          <td style="padding-top:13px;padding-bottom:13px">WhatsApp AI agents that handle conversations 24/7 and sync every lead to the CRM</td>
+          <td style="padding-top:13px;padding-bottom:13px"><div class="tags" style="gap:6px"><span class="tag" style="padding:5px 11px">Qwen</span><span class="tag" style="padding:5px 11px">WhatsApp</span><span class="tag" style="padding:5px 11px">AI agents</span></div></td>
+          <td style="padding-top:13px;padding-bottom:13px"><span class="acc">80%</span> less manual data entry time</td>
+        </tr>
+        <tr>
+          <td style="padding-top:13px;padding-bottom:13px">Financial services</td>
+          <td style="padding-top:13px;padding-bottom:13px">Fundaztic and iPajak Group</td>
+          <td style="padding-top:13px;padding-bottom:13px">Debt recovery management for Fundaztic; pawn brokerage for iPajak Group, taken over midway</td>
+          <td style="padding-top:13px;padding-bottom:13px"><div class="tags" style="gap:6px"><span class="tag" style="padding:5px 11px">System integration</span><span class="tag" style="padding:5px 11px">Consulting</span><span class="tag" style="padding:5px 11px">UI/UX</span></div></td>
+          <td style="padding-top:13px;padding-bottom:13px"><span class="acc">6</span> iPajak branches on one system, across Malaysia</td>
+        </tr>
+        <tr>
+          <td style="padding-top:13px;padding-bottom:13px">Retail</td>
+          <td style="padding-top:13px;padding-bottom:13px">Eastern Decorator</td>
+          <td style="padding-top:13px;padding-bottom:13px">An AI content factory that automates <span style="white-space:nowrap">e-commerce</span> product photoshoots</td>
+          <td style="padding-top:13px;padding-bottom:13px"><div class="tags" style="gap:6px"><span class="tag" style="padding:5px 11px">Gemini</span><span class="tag" style="padding:5px 11px">Multimodal AI</span><span class="tag" style="padding:5px 11px">Workflow automation</span></div></td>
+          <td style="padding-top:13px;padding-bottom:13px"><span class="acc">3</span> content types per product: imagery, copy and listing variants</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span class="on">Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/industries, its six sector pages and alphv.com/insights (October 2026). Six of the 16 industry verticals ALPHV serves.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">19</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="products" tabindex="0" role="group" aria-roledescription="slide" aria-label="20: Five products give engagements a working starting point">
+<section class="slide s-surface" data-id="products" data-section="Sectors and products" data-source="Source: alphv.com/products and its product pages (October 2026). The 50.1K views come from a separate AI content service, not from ALPHV HelloGen™.">
+  <header class="s-head"><span class="badge">Products</span><h2 class="title">Five products give engagements a working starting point</h2></header>
+  <div class="s-body">
+    <div style="display:grid;grid-template-columns:200px minmax(0,1fr);grid-template-rows:repeat(5,minmax(0,1fr)) auto;column-gap:28px;row-gap:12px;flex:1;min-height:0">
+
+      <div style="grid-row:span 3;border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:6px"><b style="font-size:23px;line-height:1.25">The Kiralytics family</b><span class="muted" style="font-size:19px;line-height:1.4">Analytics for workforces, shop floors, roads and brands</span></div>
+
+      <div class="card" style="display:grid;grid-template-columns:445px minmax(0,1fr) 470px;gap:30px;align-items:center;padding:14px 24px">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" /> <path d="M16 2v4" /> <path d="M8 2v4" /> <path d="M3 10h5" /> <path d="M17.5 17.5 16 16.3V14" /> <circle cx="16" cy="16" r="6" /> </svg></span><div class="col" style="gap:2px"><span class="k">Workforce optimiser</span><div class="row" style="gap:12px;align-items:center"><h4 style="font-size:24px">Kiralytics SHIFT™</h4><span class="tag" style="padding:5px 11px;border-color:var(--accent-bright);color:var(--accent)">Flagship</span></div></div></div>
+        <p style="font-size:20px">Rostering, GPS-verified attendance and workforce analytics for multi-location retail.</p>
+        <ul class="bullets" style="gap:4px"><li style="font-size:19px">GPS-verified clock-in with geofence validation</li><li style="font-size:19px">Cross-branch KPIs and unified reporting for HQ</li></ul>
+      </div>
+      <div class="card" style="display:grid;grid-template-columns:445px minmax(0,1fr) 470px;gap:30px;align-items:center;padding:14px 24px">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <circle cx="12" cy="12" r="1" /> <path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0" /> </svg></span><div class="col" style="gap:2px"><span class="k">People and traffic counting</span><h4 style="font-size:24px">Kiralytics MATA and TRAFFIK</h4></div></div>
+        <p style="font-size:20px">People counting for retail floors and traffic analytics for road planning.</p>
+        <ul class="bullets" style="gap:4px"><li style="font-size:19px">Foot traffic, flow and occupancy on live CCTV</li><li style="font-size:19px">Vehicle classification and speed detection</li></ul>
+      </div>
+      <div class="card" style="display:grid;grid-template-columns:445px minmax(0,1fr) 470px;gap:30px;align-items:center;padding:14px 24px">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /> <path d="M14.8 7.5a1.84 1.84 0 0 0-2.6 0l-.2.3-.3-.3a1.84 1.84 0 1 0-2.4 2.8L12 13l2.7-2.7c.9-.9.8-2.1.1-2.8" /> </svg></span><div class="col" style="gap:2px"><span class="k">Sentiment monitoring</span><h4 style="font-size:24px">Kiralytics EMOSI</h4></div></div>
+        <p style="font-size:20px">Track brand perception across Facebook, X, Instagram, TikTok and news.</p>
+        <ul class="bullets" style="gap:4px"><li style="font-size:19px">Social: Facebook, X, Instagram and TikTok</li><li style="font-size:19px">News coverage alongside social channels</li></ul>
+      </div>
+
+      <div style="grid-row:span 2;border-top:2px solid var(--ink);padding-top:16px;margin-top:12px;display:flex;flex-direction:column;gap:6px"><b style="font-size:23px;line-height:1.25">ALPHV avatars</b><span class="muted" style="font-size:19px;line-height:1.4">For orders, answers and interviews</span></div>
+
+      <div class="card" style="display:grid;grid-template-columns:445px minmax(0,1fr) 470px;gap:30px;align-items:center;padding:14px 24px;margin-top:12px">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="8" r="5" /> <path d="M20 21a8 8 0 0 0-16 0" /> </svg></span><div class="col" style="gap:2px"><span class="k">Digital avatars</span><div class="row" style="gap:12px;align-items:center"><h4 style="font-size:24px">ALPHV Avatar™</h4><span class="tag" style="padding:5px 11px;border-color:var(--accent-bright);color:var(--accent)">Flagship</span></div></div></div>
+        <p style="font-size:20px">Digital avatars that take orders, answer questions and screen candidates.</p>
+        <ul class="bullets" style="gap:4px"><li style="font-size:19px">Digital Mamak, Digital Ustaz, Digital Interviewer</li><li style="font-size:19px">Digital Ustaz is live at digitalustaz.com</li></ul>
+      </div>
+      <div class="card" style="display:grid;grid-template-columns:445px minmax(0,1fr) 470px;gap:30px;align-items:center;padding:14px 24px">
+        <div class="row" style="gap:18px;align-items:center"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /> <rect x="2" y="6" width="14" height="12" rx="2" /> </svg></span><div class="col" style="gap:2px"><span class="k">Video and voice avatars</span><h4 style="font-size:24px">ALPHV HelloGen™</h4></div></div>
+        <p style="font-size:20px">Turn a 3-minute clip into a life-like avatar with lip-sync and low-latency replies.</p>
+        <ul class="bullets" style="gap:4px"><li style="font-size:19px">Lip-synced video and voice</li><li style="font-size:19px">Low-latency replies</li></ul>
+      </div>
+
+      <div style="border-top:1px solid var(--line-strong);padding-top:16px;margin-top:12px"><b style="font-size:21px">Also from ALPHV</b></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;border-top:1px solid var(--line-strong);padding:16px 24px 0;margin-top:12px">
+        <span style="font-size:20px;line-height:1.45"><b>AI-generated UGC and ads</b> for brands, including a client reel with <b style="color:var(--accent)">50.1K</b> views for @richdadwilliam</span>
+        <span style="font-size:20px;line-height:1.45"><b>Kiralytics FIGHT,</b> a real-time combat sports analysis prototype for national athletes, in development</span>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span class="on">Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/products and its product pages (October 2026). The 50.1K views come from a separate AI content service, not from ALPHV HelloGen™.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">20</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="flagships" tabindex="0" role="group" aria-roledescription="slide" aria-label="21: Two flagships for day-to-day operations: branch rostering and role-based avatars">
+<section class="slide" data-id="flagships" data-section="Sectors and products" data-source="Source: alphv.com/products and its product pages (October 2026).">
+  <header class="s-head"><span class="badge">Flagship products</span><h2 class="title">Two flagships for day-to-day operations: branch rostering and role-based avatars</h2></header>
+  <div class="s-body">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);flex:1;min-height:0">
+
+      <!-- Kiralytics SHIFT -->
+      <div style="display:grid;grid-template-columns:266px minmax(0,1fr);gap:34px;padding-right:52px;min-height:0">
+        <div style="border-radius:var(--r-card);background:var(--surface);display:grid;place-items:center;overflow:hidden;min-height:0">
+          <img src="img/prd-kiralytics-shift.jpg" alt="Kiralytics SHIFT™ clock-in screen showing a staff member’s location at the branch" style="height:540px;width:auto;display:block;clip-path:inset(2.9% 9.3% 6.6% 2.5% round 38px);transform:translate(9px,10px)">
+        </div>
+        <div class="col" style="gap:14px;min-width:0">
+          <span style="font-size:17px;font-weight:500;letter-spacing:.02em;color:var(--accent)">Kiralytics · Workforce optimiser</span>
+          <h3 style="margin-top:-4px">Kiralytics SHIFT™</h3>
+          <p style="font-size:21px">Cloud-native rostering, GPS-verified attendance and workforce analytics for <span style="white-space:nowrap">multi-location</span> retail.</p>
+          <div class="col" style="gap:0;margin-top:8px">
+            <span style="font-size:17px;font-weight:500;letter-spacing:.04em;color:var(--muted);padding-bottom:10px">One product, three views</span>
+            <div style="display:grid;grid-template-columns:168px minmax(0,1fr);gap:16px;padding:11px 0;border-top:1px solid var(--line-strong);font-size:20px;line-height:1.45"><b>Store managers</b><span>Plan the roster and approve changes</span></div>
+            <div style="display:grid;grid-template-columns:168px minmax(0,1fr);gap:16px;padding:11px 0;border-top:1px solid var(--line-strong);font-size:20px;line-height:1.45"><b>Rostered staff</b><span>Clock in at the branch</span></div>
+            <div style="display:grid;grid-template-columns:168px minmax(0,1fr);gap:16px;padding:11px 0;border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);font-size:20px;line-height:1.45"><b>HQ admins</b><span>Compare every branch</span></div>
+          </div>
+          <div class="col" style="gap:0;margin-top:auto"><span style="font-size:17px;font-weight:500;letter-spacing:.04em;color:var(--muted);padding-bottom:12px">Core features</span><div style="display:grid;grid-template-columns:max-content max-content;justify-content:space-between;gap:12px 20px;padding-top:14px;border-top:1px solid var(--line-strong)">
+            <span class="row" style="gap:10px;align-items:center;font-size:19px;color:var(--ink)"><span class="ico" style="color:var(--accent)"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="4" rx="2" /> <path d="M16 2v4" /> <path d="M3 10h18" /> <path d="M8 2v4" /> <path d="M17 14h-6" /> <path d="M13 18H7" /> <path d="M7 14h.01" /> <path d="M17 18h.01" /> </svg></span>Roster timeline</span>
+            <span class="row" style="gap:10px;align-items:center;font-size:19px;color:var(--ink)"><span class="ico" style="color:var(--accent)"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M19.43 12.935c.357-.967.57-1.955.57-2.935a8 8 0 0 0-16 0c0 4.993 5.539 10.193 7.399 11.799a1 1 0 0 0 1.202 0 32.197 32.197 0 0 0 .813-.728" /> <circle cx="12" cy="10" r="3" /> <path d="m16 18 2 2 4-4" /> </svg></span>GPS-verified clock-in</span>
+            <span class="row" style="gap:10px;align-items:center;font-size:19px;color:var(--ink)"><span class="ico" style="color:var(--accent)"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /> </svg></span>Cross-branch KPIs</span>
+            <span class="row" style="gap:10px;align-items:center;font-size:19px;color:var(--ink)"><span class="ico" style="color:var(--accent)"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <polyline points="12 6 12 12 16 14" /> </svg></span>Real-time attendance</span>
+          </div></div>
+        </div>
+      </div>
+
+      <!-- ALPHV Avatar -->
+      <div class="col" style="gap:14px;padding-left:52px;border-left:1px solid var(--line-strong);min-width:0;min-height:0">
+        <span style="font-size:17px;font-weight:500;letter-spacing:.02em;color:var(--accent)">ALPHV · Digital avatars</span>
+        <h3 style="margin-top:-4px">ALPHV Avatar™</h3>
+        <p style="font-size:21px">Digital avatars, each built for one role, from the restaurant counter to the hiring funnel.</p>
+        <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;margin-top:8px;flex:1;min-height:0">
+          <div style="border-radius:var(--r-card);background:var(--surface);display:grid;place-items:center;padding:16px;min-height:0"><img src="img/prd-alphv-avatar.jpg" alt="The Digital Ustaz website by ALPHV, with its AI avatar ready to answer questions about Islam" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+          <div class="col" style="gap:0;justify-content:center">
+            <div style="padding:0 0 12px"><b style="font-size:21px">Digital Mamak</b><p style="font-size:19px;line-height:1.45">Takes restaurant orders</p></div>
+            <div style="padding:12px 0;border-top:1px solid var(--line-strong)"><b style="font-size:21px">Digital Ustaz</b><p style="font-size:19px;line-height:1.45">Answers questions about Islam 24/7 from the Al-Quran and Hadith; live at digitalustaz.com</p></div>
+            <div style="padding:12px 0 0;border-top:1px solid var(--line-strong)"><b style="font-size:21px">Digital Interviewer</b><p style="font-size:19px;line-height:1.45">Screens candidates at scale</p></div>
+          </div>
+        </div>
+        <div class="row" style="gap:18px;align-items:center;padding:16px 22px;border-radius:var(--r-small);background:var(--tint)"><span class="tile"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /> <rect x="2" y="6" width="14" height="12" rx="2" /> </svg></span><span style="font-size:20px;line-height:1.45;color:var(--ink)"><b>ALPHV HelloGen™</b> creates a life-like video and voice avatar from a 3-minute clip, with lip-sync and low-latency replies.</span></div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span class="on">Sectors and products</span><span>Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/products and its product pages (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">21</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="div-proof" tabindex="0" role="group" aria-roledescription="slide" aria-label="22: Work in the field, and the people noticing">
+<section class="slide s-accent bg-divider" data-id="div-proof" data-nofoot>
+  <div class="s-body end" style="gap:36px">
+    <span class="divider-no">05</span>
+    <h2 class="divider-title">Work in the field, and the people noticing</h2>
+    <p class="lede">Nine engagements and a case note across Malaysia, Singapore and Vietnam, plus the wins, stages and partnerships around them.</p>
+  </div>
+
+</section>
+</div>
+<div class="slide-frame" id="portfolio" tabindex="0" role="group" aria-roledescription="slide" aria-label="23: Nine engagements and a case note across eight sectors, from proof of concept to production">
+<section class="slide" data-id="portfolio" data-section="Proof" data-source="Source: alphv.com/insights and its case pages (October 2026). Country shown where the case page states it.">
+  <header class="s-head"><span class="badge">Portfolio</span><h2 class="title">Nine engagements and a case note across eight sectors, from proof of concept to production</h2></header>
+  <div class="s-body">
+    <table class="tbl" style="font-size:19px;table-layout:fixed;white-space:nowrap">
+      <colgroup><col style="width:290px"><col style="width:310px"><col style="width:600px"><col></colgroup>
+      <thead><tr><th>Client</th><th>Sector · country</th><th>What ALPHV built</th><th>Result or status</th></tr></thead>
+      <tbody>
+        <tr><td style="padding-top:13px;padding-bottom:13px">Abraham Ooi &amp; Partners</td><td style="padding-top:13px;padding-bottom:13px">Legal</td><td style="padding-top:13px;padding-bottom:13px">Sovereign AI case management, replacing a legacy system</td><td style="padding-top:13px;padding-bottom:13px"><span class="acc">90+</span> portal automations; in use since 2025</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">Tasco Insurance</td><td style="padding-top:13px;padding-bottom:13px">Insurance · Vietnam</td><td style="padding-top:13px;padding-bottom:13px">Multimodal case system for asset damage claims</td><td style="padding-top:13px;padding-bottom:13px"><b>Proof of concept, 2026;</b> no production results yet</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">Leading healthcare group</td><td style="padding-top:13px;padding-bottom:13px">Healthcare · Malaysia</td><td style="padding-top:13px;padding-bottom:13px">Medicolegal claims processing, intake to adjudication</td><td style="padding-top:13px;padding-bottom:13px"><span class="acc">4</span> claim stages in one flow</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">Leading hospitality group</td><td style="padding-top:13px;padding-bottom:13px">Hospitality · Singapore</td><td style="padding-top:13px;padding-bottom:13px">AI CRM with WhatsApp sales agents</td><td style="padding-top:13px;padding-bottom:13px"><span class="acc">80%</span> less manual data entry time</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">Fundaztic</td><td style="padding-top:13px;padding-bottom:13px">Financial services</td><td style="padding-top:13px;padding-bottom:13px">Debt recovery management and a UI/UX overhaul design</td><td style="padding-top:13px;padding-bottom:13px">Debt recovery system now running</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">iPajak Group</td><td style="padding-top:13px;padding-bottom:13px">Financial services · Malaysia</td><td style="padding-top:13px;padding-bottom:13px">Centralised pawn brokerage system, taken over midway</td><td style="padding-top:13px;padding-bottom:13px"><span class="acc">6</span> branches on one system; delivered</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">Eastern Decorator</td><td style="padding-top:13px;padding-bottom:13px">Retail</td><td style="padding-top:13px;padding-bottom:13px">AI content factory for e-commerce product content</td><td style="padding-top:13px;padding-bottom:13px"><span class="acc">3</span> content types per product</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">FPT AI Factory case note</td><td style="padding-top:13px;padding-bottom:13px">Retail</td><td style="padding-top:13px;padding-bottom:13px">Promotions model: Qwen2.5-14B-Instruct on H100 SXM</td><td style="padding-top:13px;padding-bottom:13px">Promotions model built</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">A telco</td><td style="padding-top:13px;padding-bottom:13px">Telecoms</td><td style="padding-top:13px;padding-bottom:13px">VR and web experience for a travelling roadshow</td><td style="padding-top:13px;padding-bottom:13px">VR headset and browser from one shared scene</td></tr>
+        <tr><td style="padding-top:13px;padding-bottom:13px">Carlsberg</td><td style="padding-top:13px;padding-bottom:13px">Brewing and consumer goods</td><td style="padding-top:13px;padding-bottom:13px">Assisted a core operational data migration</td><td style="padding-top:13px;padding-bottom:13px"><span class="acc">5-month</span> engagement, extraction to cutover</td></tr>
+      </tbody>
+    </table>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span class="on">Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/insights and its case pages (October 2026). Country shown where the case page states it.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">23</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="case-crm" tabindex="0" role="group" aria-roledescription="slide" aria-label="24: WhatsApp AI agents cut manual data entry time by 80% for a Singapore hospitality group">
+<section class="slide s-surface" data-id="case-crm" data-section="Proof" data-source="Source: alphv.com/insights/whatsapp-ai-crm-singapore-hospitality (October 2026). Note: the client is not named on alphv.com; 80% is the reduction in manual data entry time reported on the case page.">
+  <header class="s-head">
+    <span class="badge">Hospitality</span>
+    <h2 class="title">WhatsApp AI agents cut manual data entry time by <span class="hl">80%</span> for a Singapore hospitality group</h2>
+    <div class="case-tags">
+      <span class="tag">Agentic automation</span><span class="tag">Singapore</span><span class="tag">2026</span>
+      <span class="tag" style="background:var(--tint);border-color:transparent;color:var(--accent)">Qwen</span><span class="tag" style="background:var(--tint);border-color:transparent;color:var(--accent)">WhatsApp</span>
+    </div>
+  </header>
+  <div class="s-body">
+    <div class="case-grid">
+      <div class="case-col">
+        <span class="h">Situation</span>
+        <p>A leading hospitality group in Singapore talks to its customers on WhatsApp. Leads from those conversations were entered into the CRM by hand.</p>
+        <figure class="card" style="margin-top:auto;height:300px;padding:10px;position:relative;background:#fff">
+          <img src="img/case-crm-dashboard.jpg" alt="ALPHV AI CRM dashboard with lead and revenue charts" style="width:100%;height:100%;object-fit:contain;display:block">
+          <figcaption style="position:absolute;left:18px;bottom:16px"><span class="tag">AI CRM dashboard, features by user access level</span></figcaption>
+        </figure>
+      </div>
+      <div class="case-col">
+        <span class="h">Approach</span>
+        <p><b>An AI CRM with WhatsApp sales agents.</b></p>
+        <ul class="bullets">
+          <li>Agents handle customer conversations 24/7, in natural language</li>
+          <li>Every lead syncs to the CRM, and hot leads reach sales in real time</li>
+          <li>Intelligent conversation flows with guardrails</li>
+          <li>A CRM dashboard by user access level, with one-click contracts, invoices and reports</li>
+        </ul>
+        <p style="margin-top:auto;height:118px;padding-top:16px;border-top:1px solid var(--line-strong)"><b>How it runs.</b> The agents run on Qwen inside WhatsApp, where the conversations already happen.</p>
+      </div>
+      <div class="case-col impact">
+        <span class="h">Impact</span>
+        <div class="col" style="gap:8px"><span class="hero-num">80<small>%</small></span><p class="muted">Less manual data entry time</p></div>
+        <div class="col" style="gap:8px;padding-top:18px;border-top:1px solid var(--line-strong)"><span class="hero-num">24/7</span><p class="muted">Customer conversations handled by AI agents</p></div>
+        <p style="margin-top:auto;height:118px;padding-top:16px;border-top:1px solid var(--line-strong)"><b>In use, 2026.</b> Every lead reaches the CRM, and the sales team is alerted to hot leads in real time.</p>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span class="on">Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/insights/whatsapp-ai-crm-singapore-hospitality (October 2026). Note: the client is not named on alphv.com; 80% is the reduction in manual data entry time reported on the case page.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">24</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="case-law" tabindex="0" role="group" aria-roledescription="slide" aria-label="25: A 36-year-old law firm now runs on sovereign AI, with 90+ portal automations">
+<section class="slide" data-id="case-law" data-section="Proof" data-source="Source: alphv.com/insights/sovereign-ai-case-management-law-firm; alphv.com, home page; alphv.com/services/system-integration-and-consulting (October 2026).">
+  <header class="s-head">
+    <span class="badge">Legal</span>
+    <h2 class="title">A 36-year-old law firm now runs on <span class="hl">sovereign AI</span>, with 90+ portal automations</h2>
+    <div class="case-tags">
+      <span class="tag">AI engineering</span><span class="tag">System integration</span><span class="tag">2025</span>
+      <span class="tag" style="background:var(--tint);border-color:transparent;color:var(--accent)">Qwen</span><span class="tag" style="background:var(--tint);border-color:transparent;color:var(--accent)">GenAI-RAG</span><span class="tag" style="background:var(--tint);border-color:transparent;color:var(--accent)">Agentic RPA</span><span class="tag" style="background:var(--tint);border-color:transparent;color:var(--accent)">NVIDIA GPU</span>
+    </div>
+  </header>
+  <div class="s-body">
+    <div class="case-grid">
+      <div class="case-col">
+        <span class="h">Situation</span>
+        <p>Case management, back office and accounting ran on a legacy system, and staff worked across bank, government, SSM and CTOS portals. The firm needed AI for document work, without client data leaving the firm.</p>
+        <div class="card" style="margin-top:auto;height:300px;padding:28px;gap:0;justify-content:space-between;background:#fff">
+          <div class="row" style="gap:22px;align-items:center">
+            <img src="img/logos/logo-abraham-ooi-partners.png" alt="Abraham Ooi &amp; Partners" style="width:96px;height:96px;border-radius:16px;flex:none">
+            <div class="col" style="gap:4px"><h4>Abraham Ooi &amp; Partners</h4><p class="muted" style="font-size:19px;line-height:1.4">ALPHV Lawtech Solutions, delivered 2025</p></div>
+          </div>
+          <p style="background:var(--tint);border-radius:16px;padding:16px 20px;font-size:21px;line-height:1.45;color:var(--ink)">The models run on a locally hosted NVIDIA GPU workstation, so client data stays inside the firm.</p>
+        </div>
+      </div>
+      <div class="case-col">
+        <span class="h">Approach</span>
+        <p><b>One platform replaced the legacy system.</b></p>
+        <ul class="bullets">
+          <li>Matters, tasks, teams and a client portal for lawyers, clerks and secretaries</li>
+          <li>Bank loan document AI extraction and template-based document generation</li>
+          <li>90+ third-party portal automations, including banks, government, SSM and CTOS</li>
+          <li>Workflow, email and WhatsApp automation, with accounting and e-invoicing</li>
+        </ul>
+        <p style="margin-top:auto;height:118px;padding-top:16px;border-top:1px solid var(--line-strong)"><b>How it runs.</b> Retrieval grounds answers in the firm’s own documents, and agentic RPA carries the work into third-party portals.</p>
+      </div>
+      <div class="case-col impact">
+        <span class="h">Impact</span>
+        <div class="col" style="gap:8px"><span class="hero-num">90<small>+</small></span><p class="muted">Third-party portal automations, including banks, government, SSM and CTOS</p></div>
+        <div class="col" style="gap:8px;padding-top:18px;border-top:1px solid var(--line-strong)"><span class="hero-num">2025</span><p class="muted">In use since delivery</p></div>
+        <p style="margin-top:auto;height:118px;padding-top:16px;border-top:1px solid var(--line-strong)"><b>In use.</b> The firm runs case management, back office and accounting on one ALPHV platform, with its data kept in-house.</p>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span class="on">Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/insights/sovereign-ai-case-management-law-firm; alphv.com, home page; alphv.com/services/system-integration-and-consulting (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">25</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="case-ipajak" tabindex="0" role="group" aria-roledescription="slide" aria-label="26: ALPHV took over iPajak Group’s project midway and put six branches on one system">
+<section class="slide s-surface" data-id="case-ipajak" data-section="Proof" data-source="Source: alphv.com/insights/pawn-brokerage-system-ipajak; alphv.com/services/system-integration-and-consulting; alphv.com/how-we-work (October 2026). Note: MYR 500 million is the client’s own scale, not an ALPHV result.">
+  <header class="s-head">
+    <span class="badge">Financial services</span>
+    <h2 class="title">ALPHV took over iPajak Group’s project midway and put <span class="hl">six branches on one system</span></h2>
+    <div class="case-tags">
+      <span class="tag">Pawn broking</span><span class="tag">System integration and consulting</span><span class="tag">Malaysia</span>
+      <span class="tag">Taken over midway</span>
+    </div>
+  </header>
+  <div class="s-body">
+    <div class="case-grid">
+      <div class="case-col">
+        <span class="h">Situation</span>
+        <p>iPajak Group is a multi-branch pawn broker in Malaysia that has disbursed MYR 500 million. Its project to run six branches on one centralised pawn brokerage system was already under way when ALPHV took it over.</p>
+        <div class="card" style="margin-top:auto;height:300px;padding:28px;gap:0;justify-content:space-between;background:#fff">
+          <div class="col" style="gap:18px">
+            <img src="img/logos/logo-ipajak.png" alt="iPajak Group" style="height:64px;width:auto;align-self:flex-start">
+            <div class="col" style="gap:4px"><h4>iPajak Group</h4><p class="muted" style="font-size:19px;line-height:1.4">Multi-branch pawn broker, Malaysia</p></div>
+          </div>
+          <p style="background:var(--tint);border-radius:16px;padding:16px 20px;font-size:21px;line-height:1.45;color:var(--ink)">Delivered after a mid-project handover.</p>
+        </div>
+      </div>
+      <div class="case-col">
+        <span class="h">Approach</span>
+        <p><b>A centralised pawn brokerage system for iPajak Group’s branches across Malaysia.</b></p>
+        <ul class="bullets">
+          <li>Took over a project already in progress</li>
+          <li>Scoped the remaining work with the client</li>
+          <li>Built and integrated the centralised system</li>
+          <li>Delivered one system for all six branches</li>
+        </ul>
+        <p style="margin-top:auto;height:118px;padding-top:16px;border-top:1px solid var(--line-strong)"><b>How it runs.</b> One centralised pawn brokerage system now serves all six of iPajak Group’s branches.</p>
+      </div>
+      <div class="case-col impact">
+        <span class="h">Impact</span>
+        <div class="col" style="gap:8px"><span class="hero-num">6</span><p class="muted">Branches across Malaysia on one pawn brokerage system: delivered and running</p></div>
+        <figure class="col" style="gap:16px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line-strong)">
+          <blockquote class="quote" style="font-size:25px;line-height:1.5">Daren and the ALPHV team have been exceptional to work with and have done a commendable job taking over the project midway, especially in providing their technical expertise to meet our specific needs.</blockquote>
+          <figcaption class="attrib"><b>Chong Voon Ying</b><span class="muted">CEO, iPajak Group</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span class="on">Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/insights/pawn-brokerage-system-ipajak; alphv.com/services/system-integration-and-consulting; alphv.com/how-we-work (October 2026). Note: MYR 500 million is the client’s own scale, not an ALPHV result.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">26</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="case-tasco" tabindex="0" role="group" aria-roledescription="slide" aria-label="27: A proof of concept assesses insurance damage claims from images and video, 24/7">
+<section class="slide" data-id="case-tasco" data-section="Proof" data-source="Source: alphv.com/insights/agentic-ai-insurance-claims-tasco; alphv.com/insights (October 2026). Note: proof of concept; no production results yet.">
+  <header class="s-head">
+    <span class="badge">Insurance</span>
+    <h2 class="title">A <span class="hl">proof of concept</span> assesses insurance damage claims from images and video, 24/7</h2>
+    <div class="case-tags">
+      <span class="tag">Agentic automation</span><span class="tag">Vietnam</span><span class="tag">Proof of concept, 2026</span>
+      <span class="tag" style="background:var(--tint);border-color:transparent;color:var(--accent)">Qwen</span><span class="tag" style="background:var(--tint);border-color:transparent;color:var(--accent)">Multimodal AI</span>
+    </div>
+  </header>
+  <div class="s-body">
+    <div class="case-grid">
+      <div class="case-col">
+        <span class="h">Situation</span>
+        <p>Damage claims arrive as images, video and PDFs, at any hour. With Tasco Insurance in Vietnam, ALPHV built a proof of concept that assesses them around the clock, from the first photo to the claim report.</p>
+        <figure class="card" style="margin-top:auto;height:300px;padding:10px;position:relative;background:#fff">
+          <img src="img/svc-web-mobile-apps.jpg" alt="Tasco Insurance web interface designed by ALPHV" style="width:100%;height:100%;object-fit:contain;display:block">
+          <figcaption style="position:absolute;left:18px;bottom:16px"><span class="tag">Tasco Insurance interface, proof-of-concept stage</span></figcaption>
+        </figure>
+      </div>
+      <div class="case-col">
+        <span class="h">Approach</span>
+        <p><b>A multimodal case system that prepares the liability assessment and claim report.</b></p>
+        <ul class="bullets">
+          <li>Images, video and PDFs in one case file</li>
+          <li>Duplicate claims from the same person identified automatically</li>
+          <li>Liability assessment based on Vietnam’s Road Act and compendium</li>
+          <li>Third-party garage, workflow, email and WhatsApp automation</li>
+        </ul>
+        <p style="margin-top:auto;height:118px;padding-top:16px;border-top:1px solid var(--line-strong)"><b>How it runs.</b> Qwen models read images, video and documents together, and AI agents move each case to the claim report.</p>
+      </div>
+      <div class="case-col impact">
+        <span class="h">Impact</span>
+        <div class="col" style="gap:8px"><span class="hero-num">24/7</span><p class="muted">Damage assessment from images and video</p></div>
+        <div class="col" style="gap:8px;padding-top:18px;border-top:1px solid var(--line-strong)"><p style="font-size:30px;font-weight:500;line-height:1.3;color:var(--ink)">No production results to report yet</p><p class="muted">The proof of concept already flags duplicate claims and prepares the liability assessment and claim report.</p></div>
+        <p style="margin-top:auto;height:118px;padding-top:16px;border-top:1px solid var(--line-strong)"><b>Related.</b> ALPHV won the AI for Insurance Challenge × Tasco, first of nine companies, on 22 Oct 2026.</p>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span class="on">Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/insights/agentic-ai-insurance-claims-tasco; alphv.com/insights (October 2026). Note: proof of concept; no production results yet.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">27</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="more-work" tabindex="0" role="group" aria-roledescription="slide" aria-label="28: The same team ships claims engines, content pipelines and a data migration">
+<section class="slide s-surface" data-id="more-work" data-section="Proof" data-source="Source: alphv.com/insights case pages for the healthcare group, Eastern Decorator, Carlsberg, Fundaztic and the telco, and the FPT AI Factory case note (October 2026).">
+  <header class="s-head"><span class="badge">More work</span><h2 class="title">The same team ships claims engines, content pipelines and a data migration</h2></header>
+  <div class="s-body">
+    <div class="grid-3 fill" style="grid-template-rows:repeat(2,minmax(0,1fr))">
+      <div class="card tight" style="gap:10px">
+        <span class="k">Healthcare · A leading healthcare group, Malaysia</span>
+        <h4>Medicolegal claims processing</h4>
+        <p>Qwen and Claude draft each medicolegal report for a clinician to review.</p>
+        <div class="foot" style="display:flex;align-items:baseline;gap:14px"><span style="font-size:44px;font-weight:500;line-height:1;color:var(--accent)">4</span><span>claim stages in one flow, intake to adjudication</span></div>
+      </div>
+      <div class="card tight" style="gap:10px">
+        <span class="k">Retail · Eastern Decorator</span>
+        <h4>AI content factory</h4>
+        <p>Gemini turns source assets into imagery, copy and listing variants, with review.</p>
+        <div class="foot" style="display:flex;align-items:baseline;gap:14px"><span style="font-size:44px;font-weight:500;line-height:1;color:var(--accent)">3</span><span>content types per product</span></div>
+      </div>
+      <div class="card tight" style="gap:10px">
+        <span class="k">Brewing and consumer goods · Carlsberg</span>
+        <h4>Core data migration</h4>
+        <p>ALPHV assisted Carlsberg in migrating core operational data to a target estate.</p>
+        <div class="foot" style="display:flex;align-items:baseline;gap:14px"><span style="font-size:44px;font-weight:500;line-height:1;color:var(--accent);white-space:nowrap">5 months</span><span>from extraction to cutover</span></div>
+      </div>
+      <div class="card tight" style="gap:10px">
+        <span class="k">Financial services · Fundaztic</span>
+        <h4>Debt recovery management</h4>
+        <p>Scoped, built and integrated into the lending operation, plus a UI/UX overhaul design.</p>
+        <div class="foot" style="display:flex;align-items:baseline;gap:14px"><span style="font-size:44px;font-weight:500;line-height:1;color:var(--accent)">DRM</span><span>system that Fundaztic now runs</span></div>
+      </div>
+      <div class="card tight" style="gap:10px">
+        <span class="k">Telecommunications · A telco</span>
+        <h4>VR and web roadshow</h4>
+        <p>A VR experience and a browser build for a travelling roadshow, with on-site support.</p>
+        <div class="foot" style="display:flex;align-items:baseline;gap:14px"><span style="font-size:44px;font-weight:500;line-height:1;color:var(--accent)">2</span><span>clients, VR and web, from one shared scene</span></div>
+      </div>
+      <div class="card tight" style="gap:10px">
+        <span class="k">Retail · Case note with FPT AI Factory</span>
+        <h4>Promotions model</h4>
+        <p>Qwen2.5-14B-Instruct, fine-tuned with LoRA and Flash Attention.</p>
+        <div class="foot" style="display:flex;align-items:baseline;gap:14px"><span style="font-size:44px;font-weight:500;line-height:1;color:var(--accent)">H100</span><span>SXM compute via FPT AI Factory</span></div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span class="on">Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/insights case pages for the healthcare group, Eastern Decorator, Carlsberg, Fundaztic and the telco, and the FPT AI Factory case note (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">28</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="numbers" tabindex="0" role="group" aria-roledescription="slide" aria-label="29: Platforms built for thousands of people, and work taken off their teams">
+<section class="slide s-accent bg-close" data-id="numbers" data-section="Proof" data-source="Source: alphv.com/services/web-and-mobile-apps; alphv.com/insights/sovereign-ai-case-management-law-firm; alphv.com/insights/whatsapp-ai-crm-singapore-hospitality (October 2026). Note: 80% is the result reported for one client.">
+  <header class="s-head"><span class="badge">In numbers</span><h2 class="title">Platforms built for thousands of people, and work taken off their teams</h2></header>
+  <div class="s-body end">
+    <div style="display:grid;grid-template-columns:320px 240px 410px minmax(0,1fr) minmax(0,1fr);gap:30px 32px">
+      <span style="grid-column:1 / span 3;font-size:19px;font-weight:500;letter-spacing:.02em;color:#fff;padding-bottom:14px;border-bottom:2px solid rgba(255,255,255,.55)">Platforms ALPHV designed and engineered</span>
+      <span style="grid-column:4 / span 2;font-size:19px;font-weight:500;letter-spacing:.02em;color:#fff;padding-bottom:14px;border-bottom:2px solid rgba(255,255,255,.55)">Work taken off teams</span>
+      <div class="stat" style="border-top:0;padding-top:0"><span class="n">3,000</span><span class="l" style="text-wrap:pretty">Doctors onboarded to LocumLah, a Malaysian locum platform</span></div>
+      <div class="stat" style="border-top:0;padding-top:0"><span class="n">600</span><span class="l" style="text-wrap:pretty">Clinics onboarded to LocumLah</span></div>
+      <div class="stat" style="border-top:0;padding-top:0"><span class="n">32,000</span><span class="l" style="text-wrap:pretty">Swipes on Politikus by Caprice, Malaysia’s first public predictions game</span></div>
+      <div class="stat" style="border-top:0;padding-top:0"><span class="n">90<small>+</small></span><span class="l" style="text-wrap:pretty">Third-party portal automations for one law firm</span></div>
+      <div class="stat" style="border-top:0;padding-top:0"><span class="n">80<small>%</small></span><span class="l" style="text-wrap:pretty">Less manual data entry time for a Singapore hospitality group</span></div>
+    </div>
+  </div>
+<footer class="s-foot"><span class="src">Source: alphv.com/services/web-and-mobile-apps; alphv.com/insights/sovereign-ai-case-management-law-firm; alphv.com/insights/whatsapp-ai-crm-singapore-hospitality (October 2026). Note: 80% is the result reported for one client.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">29</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="clients" tabindex="0" role="group" aria-roledescription="slide" aria-label="30: Teams across Malaysia, Singapore and Vietnam trust ALPHV">
+<section class="slide" data-id="clients" data-section="Proof" data-source="Source: alphv.com/platforms-and-clients; alphv.com/industries; alphv.com, home page (October 2026). Logos are the client marks shown on alphv.com.">
+  <header class="s-head"><span class="badge">Clients</span><h2 class="title">Teams across Malaysia, Singapore and Vietnam trust ALPHV</h2></header>
+  <div class="s-body">
+    <div class="logo-wall grid-5">
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-fundaztic.png" alt="Fundaztic" style="height:50px;max-height:none"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-ipajak.png" alt="iPajak Group" style="height:42px;max-height:none"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-abraham-ooi-partners.png" alt="Abraham Ooi &amp; Partners" style="height:72px;max-height:none;border-radius:10px"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-tasco-insurance.png" alt="Tasco Insurance" style="height:42px;max-height:none"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-powerdna.png" alt="PowerDNA" style="height:56px;max-height:none"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-easyrenz.png" alt="EasyRenz" style="height:72px;max-height:none"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-carlsberg.png" alt="Carlsberg" style="height:56px;max-height:none"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-mudah-healthcare.png" alt="Mudah Healthcare" style="height:46px;max-height:none"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-borong.png" alt="Borong" style="height:58px;max-height:none"></div>
+      <div class="logo-cell" style="background:#fff;height:128px"><img src="img/logos/logo-locumlah.png" alt="LocumLah" style="height:27px;max-height:none"></div>
+    </div>
+    <figure style="display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:72px;align-items:end;margin-top:auto;padding-top:36px;border-top:2px solid var(--accent)">
+      <blockquote class="quote" style="font-size:38px;line-height:1.42">Our objectives and requirements are well captured and built into solving our problems, incorporating advanced technologies like AI. ALPHV has good people and is easy to work with compared to other tech vendors.</blockquote>
+      <figcaption class="attrib" style="gap:6px"><b>Tracy Gan</b><span>COO, Fundaztic</span><span class="muted">Head of Corporate Strategy and Investment, Paramount Group</span></figcaption>
+    </figure>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span class="on">Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/platforms-and-clients; alphv.com/industries; alphv.com, home page (October 2026). Logos are the client marks shown on alphv.com.</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">30</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="recognition" tabindex="0" role="group" aria-roledescription="slide" aria-label="31: ALPHV placed first of nine at the AI for Insurance Challenge × Tasco">
+<section class="slide s-surface" data-id="recognition" data-section="Proof" data-source="Source: alphv.com/insights; alphv.com/about; alphv.com/platforms-and-clients; alphv.com news pages on the AI for Insurance Challenge × Tasco, RAMEN TECH Global Summit 2026 and Selangor AI Hackathon 2026 (October 2026).">
+  <header class="s-head"><span class="badge">Recognition</span><h2 class="title">ALPHV placed <span class="hl">first of nine</span> at the AI for Insurance Challenge × Tasco</h2></header>
+  <div class="s-body">
+    <div style="position:relative;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));column-gap:24px">
+      <span style="grid-column:1 / span 4;font-size:22px;font-weight:600;color:var(--ink);padding-bottom:12px">2025</span>
+      <span style="grid-column:5 / span 4;font-size:22px;font-weight:600;color:var(--accent);padding-bottom:12px">2026</span>
+      <div style="grid-column:1 / -1;position:relative;height:22px;margin-bottom:16px">
+        <div style="position:absolute;left:0;right:0;top:10px;height:2px;background:repeating-linear-gradient(90deg,var(--tint-2) 0 10px,transparent 10px 18px)"></div>
+        <div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));column-gap:24px;align-items:center">
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--ink)"></span>
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--ink)"></span>
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--ink)"></span>
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--ink)"></span>
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--accent)"></span>
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--accent)"></span>
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--accent)"></span>
+          <span style="width:22px;height:22px;border-radius:50%;background:var(--accent);outline:5px solid var(--tint-2)"></span>
+        </div>
+      </div>
+      <div class="col" style="gap:6px"><span style="font-size:19px;font-weight:500;color:var(--muted)">Jul 2025</span><p style="font-size:19px;line-height:1.45">Alibaba Cloud Partner Network, Tier&nbsp;2 reseller for Malaysia</p></div>
+      <div class="col" style="gap:6px"><span style="font-size:19px;font-weight:500;color:var(--muted)">Aug 2025</span><p style="font-size:19px;line-height:1.45">Technical keynote at the ASEAN AI Summit 2025</p></div>
+      <div class="col" style="gap:6px"><span style="font-size:19px;font-weight:500;color:var(--muted)">Sep 2025</span><p style="font-size:19px;line-height:1.45">Agentic AI panel at MDX 2025, Kuala Lumpur</p></div>
+      <div class="col" style="gap:6px"><span style="font-size:19px;font-weight:500;color:var(--muted)">Dec 2025</span><p style="font-size:19px;line-height:1.45">One of 12 AI implementation partners at Alibaba Cloud AI Day</p></div>
+      <div class="col" style="gap:6px"><span style="font-size:19px;font-weight:500;color:var(--muted)">Apr 2026</span><p style="font-size:19px;line-height:1.45">Strategic partnership with FPT AI Factory</p></div>
+      <div class="col" style="gap:6px"><span style="font-size:19px;font-weight:500;color:var(--muted)">Sep 2026</span><p style="font-size:19px;line-height:1.45">Selangor AI Hackathon 2026, 2nd runner-up of 26</p></div>
+      <div class="col" style="gap:6px"><span style="font-size:19px;font-weight:500;color:var(--muted)">Oct 2026</span><p style="font-size:19px;line-height:1.45">RAMEN TECH Global Summit, Fukuoka: represented Singapore, exhibiting among 124 companies</p></div>
+      <div class="col" style="gap:6px"><span style="font-size:19px;font-weight:500;color:var(--accent)">22 Oct 2026</span><p style="font-size:19px;line-height:1.45;font-weight:500;color:var(--ink)">AI for Insurance Challenge × Tasco: winner, first of nine</p></div>
+    </div>
+    <div class="fill" style="display:grid;grid-template-columns:minmax(0,1fr) 440px 488px;gap:24px">
+      <div class="card blue" style="justify-content:space-between">
+        <div class="col" style="gap:10px"><span class="k">Winner · 22 Oct 2026</span><h3>AI for Insurance Challenge × Tasco</h3></div>
+        <div class="row" style="align-items:flex-end;gap:22px"><span style="font-size:96px;font-weight:500;line-height:.9;letter-spacing:-.02em;color:#fff">1<small style="font-size:.45em">st</small></span><p style="font-size:22px;line-height:1.5;padding-bottom:4px">of nine companies, from the US, Turkey, Dubai, Taiwan, India and Southeast Asia, at the GenAI Fund and Tasco demo day</p></div>
+      </div>
+      <figure class="photo-wrap"><img src="img/news-ramen-tech.jpg" alt="The ALPHV team at the RAMEN TECH Global Summit 2026 in Fukuoka"><figcaption class="cap"><span class="tag">RAMEN TECH Global Summit 2026, Fukuoka</span></figcaption></figure>
+      <figure class="photo-wrap"><img src="img/team-3.jpg" alt="Presentation on stage at Alibaba Cloud AI Day, with ALPHV among the partners on screen"><figcaption class="cap"><span class="tag">Alibaba Cloud AI Day, Kuala Lumpur</span></figcaption></figure>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span class="on">Proof</span><span>Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/insights; alphv.com/about; alphv.com/platforms-and-clients; alphv.com news pages on the AI for Insurance Challenge × Tasco, RAMEN TECH Global Summit 2026 and Selangor AI Hackathon 2026 (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">31</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="div-engage" tabindex="0" role="group" aria-roledescription="slide" aria-label="32: One team, from business case to production">
+<section class="slide s-accent bg-divider" data-id="div-engage" data-section="Engage" data-nofoot>
+  <div class="s-body end" style="gap:36px">
+    <span class="divider-no">06</span>
+    <h2 class="divider-title">One team, from business case to production</h2>
+    <p class="lede">How our model differs, and how a first message turns into a plan.</p>
+  </div>
+
+</section>
+</div>
+<div class="slide-frame" id="questions" tabindex="0" role="group" aria-roledescription="slide" aria-label="33: Seven questions to ask any AI partner, and how ALPHV answers them">
+<section class="slide" data-id="questions" data-section="Engage" data-source="Source: alphv.com/about, /how-we-work, /services, /platforms-and-clients and /insights case pages (October 2026).">
+  <header class="s-head"><span class="badge">Why ALPHV</span><h2 class="title">Seven questions to ask any AI partner, and how ALPHV answers them</h2></header>
+  <div class="s-body">
+    <table class="tbl" style="table-layout:fixed">
+      <colgroup><col style="width:56px"><col style="width:430px"><col style="width:560px"><col></colgroup>
+      <thead><tr><th></th><th>Question to ask</th><th class="us" style="padding-left:24px">ALPHV’s answer</th><th style="padding-left:28px">Evidence</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent);font-weight:600;padding-block:16px">01</td><td style="color:var(--ink);font-weight:500;padding-block:16px">Who builds what you scoped?</td><td class="us" style="padding:16px 16px 16px 24px">The engineers who scope it ship and improve it</td><td style="padding:16px 0 16px 28px">A founder-led team of 15+, 100% Malaysian</td></tr>
+        <tr><td style="color:var(--accent);font-weight:600;padding-block:16px">02</td><td style="color:var(--ink);font-weight:500;padding-block:16px">Where does the work start?</td><td class="us" style="padding:16px 16px 16px 24px">With the business case, before any build starts</td><td style="padding:16px 0 16px 28px">Tech advisory, data audit and AI strategy for EasyRenz</td></tr>
+        <tr><td style="color:var(--accent);font-weight:600;padding-block:16px">03</td><td style="color:var(--ink);font-weight:500;padding-block:16px">Where will our data run?</td><td class="us" style="padding:16px 16px 16px 24px">Locally hosted, where data must stay in-house</td><td style="padding:16px 0 16px 28px">Client data stays inside a 36-year-old law firm</td></tr>
+        <tr><td style="color:var(--accent);font-weight:600;padding-block:16px">04</td><td style="color:var(--ink);font-weight:500;padding-block:16px">Which models?</td><td class="us" style="padding:16px 16px 16px 24px">Per project: Qwen, Claude, OpenAI, Gemini or ILMU</td><td style="padding:16px 0 16px 28px">Qwen (legal), Qwen and Claude (medicolegal claims), Gemini (retail)</td></tr>
+        <tr><td style="color:var(--accent);font-weight:600;padding-block:16px">05</td><td style="color:var(--ink);font-weight:500;padding-block:16px">Can it reach our local systems and portals?</td><td class="us" style="padding:16px 16px 16px 24px">Yes, from ERP and CRM to SSM and CTOS portals</td><td style="padding:16px 0 16px 28px">90+ third-party portal automations for one law firm</td></tr>
+        <tr><td style="color:var(--accent);font-weight:600;padding-block:16px">06</td><td style="color:var(--ink);font-weight:500;padding-block:16px">What happens after go-live?</td><td class="us" style="padding:16px 16px 16px 24px">We stay to review, iterate and improve</td><td style="padding:16px 0 16px 28px">An Improve step on every service, scoped in from day one</td></tr>
+        <tr><td style="color:var(--accent);font-weight:600;padding-block:16px">07</td><td style="color:var(--ink);font-weight:500;padding-block:16px">Can you take over a project in flight?</td><td class="us" style="padding:16px 16px 16px 24px">Yes. We scope the remaining work, then deliver it</td><td style="padding:16px 0 16px 28px">iPajak Group’s six-branch system, taken over midway</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="font-size:19px;margin-top:auto;padding-top:16px;border-top:1px solid var(--line-strong)">Where a global firm may fit better: multi-country transformation programmes that need large teams in many markets at once.</p>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span>Proof</span><span class="on">Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/about, /how-we-work, /services, /platforms-and-clients and /insights case pages (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">33</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="engage" tabindex="0" role="group" aria-roledescription="slide" aria-label="34: Engagements start from the business case, wherever your systems are today">
+<section class="slide s-surface" data-id="engage" data-section="Engage" data-source="Source: alphv.com/contact; alphv.com/services/system-integration-and-consulting (October 2026).">
+  <header class="s-head"><span class="badge">How to engage</span><h2 class="title">Engagements start from <span class="hl">the business case</span>, wherever your systems are today</h2></header>
+  <div class="s-body">
+    <div class="split rev" style="gap:64px">
+      <div class="col" style="gap:22px">
+        <span style="font-size:19px;font-weight:500;letter-spacing:.02em;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--line-strong)">What happens after you get in touch</span>
+        <div class="col fill" style="position:relative;gap:0;justify-content:space-between;padding-top:8px">
+          <div style="position:absolute;left:31px;top:72px;bottom:110px;width:2px;background:repeating-linear-gradient(180deg,var(--tint-2) 0 10px,transparent 10px 18px)"></div>
+          <div style="display:grid;grid-template-columns:64px 1fr;gap:26px;position:relative"><span class="step"><span class="num">01</span></span><div class="col" style="gap:8px"><h4 style="font-size:28px;font-weight:500;line-height:1.25;color:var(--ink)">Tell us about the business case</h4><p style="font-size:22px">Share what you want AI to change and the systems involved, by form, WhatsApp, phone or email.</p></div></div>
+          <div style="display:grid;grid-template-columns:64px 1fr;gap:26px;position:relative"><span class="step"><span class="num">02</span></span><div class="col" style="gap:8px"><h4 style="font-size:28px;font-weight:500;line-height:1.25;color:var(--ink)">Find where AI pays back</h4><p style="font-size:22px">Tech advisory, a data audit and AI strategy research show where AI pays back, before any build starts.</p></div></div>
+          <div style="display:grid;grid-template-columns:64px 1fr;gap:26px;position:relative"><span class="step"><span class="num">03</span></span><div class="col" style="gap:8px"><h4 style="font-size:28px;font-weight:500;line-height:1.25;color:var(--ink)">One team designs, builds and improves it</h4><p style="font-size:22px">The engineers who scope your AI are the ones who ship and improve it. No hand-offs.</p></div></div>
+        </div>
+      </div>
+      <div class="col" style="gap:22px">
+        <span style="font-size:19px;font-weight:500;letter-spacing:.02em;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--line-strong)">Where we start depends on where you are</span>
+        <div class="grid-2 fill" style="grid-template-rows:repeat(2,minmax(0,1fr))">
+          <div class="card tight" style="gap:12px"><h4>Strategy before the build</h4><p>Tech advisory, a data audit and AI strategy research to find where AI pays back, before any build starts.</p><div class="foot"><b style="color:var(--accent);font-weight:500">Proof</b> · EasyRenz</div></div>
+          <div class="card tight" style="gap:12px"><h4>Replace legacy systems</h4><p>A 36-year-old law firm replaced its legacy system with one ALPHV platform, back office included.</p><div class="foot"><b style="color:var(--accent);font-weight:500">Proof</b> · Abraham Ooi &amp; Partners, 2025</div></div>
+          <div class="card tight" style="gap:12px"><h4>Connect third-party portals</h4><p>For the same law firm: 90+ portal automations, including banks, government, SSM and CTOS.</p><div class="foot"><b style="color:var(--accent);font-weight:500">Proof</b> · 90+ portal automations</div></div>
+          <div class="card tight" style="gap:12px"><h4>Take over projects midway</h4><p>We took over iPajak Group’s pawn brokerage system midway and delivered it for six branches.</p><div class="foot"><b style="color:var(--accent);font-weight:500">Proof</b> · iPajak Group</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<nav class="tracker" aria-hidden="true"><span>Point of view</span><span>Who we are</span><span>What we do</span><span>Sectors and products</span><span>Proof</span><span class="on">Engage</span></nav>
+<footer class="s-foot"><span class="src">Source: alphv.com/contact; alphv.com/services/system-integration-and-consulting (October 2026).</span><span class="meta"><span class="mark">ALPHV</span><span>Corporate overview 2026</span><span class="pg">34</span></span></footer>
+</section>
+</div>
+<div class="slide-frame" id="close" tabindex="0" role="group" aria-roledescription="slide" aria-label="35: Let’s build what’s next">
+<section class="slide s-accent bg-close" data-id="close" data-section="Engage" data-nofoot>
+  <div class="row" style="justify-content:space-between;align-items:center">
+    <img class="cover-logo" src="img/logos/alphv-white.png" alt="ALPHV">
+    <span class="badge">Talk to an AI engineer</span>
+  </div>
+  <div class="s-body end" style="gap:36px">
+    <h1 class="display">Let’s build what’s next</h1>
+    <p class="lede" style="max-width:1080px">Tell us where your business needs to be. We’ll map the path to get there.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 64px;padding-top:32px;border-top:1px solid rgba(255,255,255,.22)">
+    <div class="kv" style="display:block"><div><span class="k">Email</span><span class="v">admin@alphv.com</span></div></div>
+    <div class="kv" style="display:block"><div><span class="k">WhatsApp or call</span><span class="v">+60 16-518 7740</span></div></div>
+    <div class="kv" style="display:block"><div><span class="k">Web</span><span class="v">alphv.com</span></div></div>
+    <div class="kv" style="display:block;grid-column:span 2"><div><span class="k">Headquarters</span><span class="v" style="font-size:22px;line-height:1.45">Unit 21-05, Level 21, Tower A, The Vertical Business Suites,<br>8 Jalan Kerinchi, Bangsar South, 59200 Kuala Lumpur</span></div></div>
+    <div class="kv" style="display:block"><div><span class="k">Office</span><span class="v" style="font-size:22px;line-height:1.45">WCEGA Tower, 21 Bukit Batok Crescent, Singapore 658065</span></div></div>
+  </div>
+  <div class="row" style="justify-content:space-between;align-items:baseline;font-size:19px;color:var(--on-accent-body);margin-bottom:-60px">
+    <span style="font-weight:500;color:#fff">We automate everything.</span>
+    <span>ALPHV Technologies Sdn Bhd · Company Reg. No. 202301015604 (1509526-V)</span>
+  </div>
+
+</section>
+</div>
+</main>
+<div class="present-hint" hidden>← → to move · Esc to exit</div>
+<script>
+// Deck viewer: scroll reel by default, single-slide "present" mode on demand.
+(function () {
+  const frames = Array.from(document.querySelectorAll(".slide-frame"));
+  const count = document.querySelector(".vb-count");
+  const presentBtn = document.getElementById("present-btn");
+  const hint = document.querySelector(".present-hint");
+  let current = 0;
+  let presenting = false;
+
+  function fit() {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    frames.forEach((f) => {
+      let w = f.clientWidth;
+      if (presenting) {
+        const k = Math.min(vw / 1920, vh / 1080);
+        f.style.width = 1920 * k + "px";
+        f.style.height = 1080 * k + "px";
+        w = 1920 * k;
+      } else {
+        f.style.width = "";
+        f.style.height = "";
+        w = f.clientWidth;
+      }
+      f.style.setProperty("--k", (w / 1920).toFixed(5));
+    });
+  }
+
+  function label() {
+    if (count) count.textContent = String(current + 1).padStart(2, "0") + " / " + String(frames.length).padStart(2, "0");
+  }
+
+  function show(i, scroll) {
+    current = Math.max(0, Math.min(frames.length - 1, i));
+    frames.forEach((f, j) => f.classList.toggle("current", j === current));
+    label();
+    if (!presenting && scroll) frames[current].scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+  }
+
+  function setPresenting(on) {
+    presenting = on;
+    document.body.classList.toggle("presenting", on);
+    if (hint) hint.hidden = !on;
+    fit();
+    show(current, !on);
+    if (on && document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else if (!on && document.fullscreenElement && document.exitFullscreen) {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  // Track the slide nearest the middle of the window while scrolling the reel.
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (presenting || ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const mid = window.innerHeight / 2;
+      let best = 0, bestDist = Infinity;
+      frames.forEach((f, i) => {
+        const r = f.getBoundingClientRect();
+        const d = Math.abs(r.top + r.height / 2 - mid);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      current = best;
+      label();
+    });
+  }, { passive: true });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.target.closest && e.target.closest("input, textarea, select")) return;
+    const k = e.key;
+    if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(k)) { e.preventDefault(); show(current + 1, true); }
+    else if (["ArrowLeft", "ArrowUp", "PageUp"].includes(k)) { e.preventDefault(); show(current - 1, true); }
+    else if (k === "Home") { e.preventDefault(); show(0, true); }
+    else if (k === "End") { e.preventDefault(); show(frames.length - 1, true); }
+    else if (k === "p" || k === "P" || k === "f" || k === "F") { setPresenting(!presenting); }
+    else if (k === "Escape" && presenting) { setPresenting(false); }
+  });
+
+  frames.forEach((f, i) => f.addEventListener("click", (e) => {
+    if (!presenting) return;
+    const r = f.getBoundingClientRect();
+    show(e.clientX - r.left > r.width / 3 ? current + 1 : current - 1, false);
+  }));
+
+  document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement && presenting) setPresenting(false);
+  });
+
+  if (presentBtn) presentBtn.addEventListener("click", () => setPresenting(true));
+  window.addEventListener("resize", fit);
+  if ("ResizeObserver" in window) new ResizeObserver(fit).observe(document.querySelector(".reel"));
+
+  fit();
+  const fromHash = frames.findIndex((f) => f.id === location.hash.slice(1));
+  show(fromHash > 0 ? fromHash : 0, fromHash > 0);
+})();
+
+</script>
+</body>
+</html>
