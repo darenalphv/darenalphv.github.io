@@ -1,0 +1,97 @@
+---
+// Unlisted booking pages: rates, track record, terms and an enquiry form, one page per market
+// (/book/malaysia/ in ringgit, /book/international/ in US dollars). Shared by link only: nothing on
+// the site links here, the pages carry noindex, and the sitemap and llms.txt leave them out.
+import Base from '../../layouts/Base.astro';
+import SegmentCover from '../../components/SegmentCover.astro';
+import Services from '../../components/book/Services.astro';
+import Ledger from '../../components/book/Ledger.astro';
+import Enquiry from '../../components/book/Enquiry.astro';
+import Notes from '../../components/Notes.astro';
+import { markets, bookNotes, type Market } from '../../data/rates';
+
+export function getStaticPaths() {
+  return markets.map((market) => ({ params: { market: market.slug }, props: { market } }));
+}
+
+const { market } = Astro.props as { market: Market };
+---
+
+<Base title="Book Daren Tan · Consulting, Workshops & Keynotes" description={market.description} noindex>
+  <SegmentCover name="Book Daren" line={market.line} period={market.period} compact>
+    <nav class="jump" aria-label="On this page">
+      {market.services.map((service) => <a href={`#${service.id}`}>{service.name}</a>)}
+      <a href="#enquire">Enquire</a>
+    </nav>
+  </SegmentCover>
+
+  <div class="kit">
+    <Services market={market} />
+
+    <!-- Every fact here is in .source/content.md; each figure cites a note in bookNotes (src/data/rates.ts). -->
+    <Ledger id="record" heading="Track record" sub="The work behind the rates">
+      <div>
+        <dt>Transformation</dt>
+        <dd>
+          Digital Transformation Specialist (Data Science) at BASF, <span class="tabular">2021</span>{' '}
+          to <span class="tabular">2023</span>, building AI/ML and virtual-agent solutions.
+        </dd>
+      </div>
+      <div>
+        <dt>Due diligence</dt>
+        <dd>
+          Director (Technology) at Growth Charger, <span class="tabular">2023</span> to{' '}
+          <span class="tabular">2025</span>: technical due-diligence frameworks and founder advice on architecture
+          and AI.
+        </dd>
+      </div>
+      <div>
+        <dt>Training</dt>
+        <dd>
+          Programmes in <span class="tabular">2026</span> for Great Eastern (<span class="tabular">500+</span>{' '}
+          agency leaders),<a class="note-ref" href="#note-1" aria-label="Note 1">1</a> Amway Malaysia and Silverlake
+          Axis, and a SIDEC workshop at which each of <span class="tabular">150</span> SME participants built a
+          working AI agent.<a class="note-ref" href="#note-2" aria-label="Note 2">2</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Teaching</dt>
+        <dd>
+          Lead Instructor at Forward School, <span class="tabular">2020</span> to <span class="tabular">2023</span>,
+          with corporate cohorts from Dell, Intel and Pos Malaysia.
+        </dd>
+      </div>
+      <div>
+        <dt>Speaking</dt>
+        <dd>
+          More than <span class="tabular">30</span> invited talks,<a class="note-ref" href="#note-3" aria-label="Note 3"
+            >3</a
+          >{' '}including the technical AI keynote at the ASEAN AI Summit <span class="tabular">2025</span> to{' '}
+          <span class="tabular">200+</span> attendees.<a class="note-ref" href="#note-4" aria-label="Note 4">4</a>
+        </dd>
+      </div>
+      <div>
+        <dt>Company</dt>
+        <dd>
+          Founder & CEO of ALPHV Group of Companies, the first Malaysian Global Strategic Partner of Alibaba
+          Cloud.<a class="note-ref" href="#note-5" aria-label="Note 5">5</a>
+        </dd>
+      </div>
+    </Ledger>
+
+    <Ledger id="terms" heading="Terms" sub="What the prices include">
+      {
+        market.terms.map((term) => (
+          <div>
+            <dt>{term.label}</dt>
+            <dd>{term.value}</dd>
+          </div>
+        ))
+      }
+    </Ledger>
+
+    <Enquiry market={market} />
+  </div>
+
+  <Notes notes={bookNotes} />
+</Base>

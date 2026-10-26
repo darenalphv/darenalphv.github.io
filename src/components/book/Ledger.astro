@@ -1,0 +1,58 @@
+---
+// Booking pages: a block of ruled label-and-text rows (the track record and the terms).
+// Rows are passed in as <div><dt>…</dt><dd>…</dd></div>.
+interface Props {
+  id: string;
+  heading: string;
+  sub: string;
+}
+const { id, heading, sub } = Astro.props;
+---
+
+<section id={id} class="kit-block" aria-labelledby={`${id}-heading`}>
+  <div class="side">
+    <h2 id={`${id}-heading`} class="side-heading">{heading}</h2>
+    <p class="side-sub">{sub}</p>
+  </div>
+  <dl class="ledger">
+    <slot />
+  </dl>
+</section>
+
+<style>
+  .ledger {
+    margin: 0;
+    border-top: 1px solid var(--color-rule-soft);
+  }
+
+  .ledger > :global(div) {
+    display: grid;
+    grid-template-columns: calc(340 * var(--u)) minmax(0, 1fr);
+    gap: calc(40 * var(--u));
+    padding-block: calc(22 * var(--u));
+    border-bottom: 1px solid var(--color-rule-soft);
+    font-size: max(calc(28 * var(--u)), 16px);
+    line-height: 1.45;
+  }
+
+  .ledger :global(dt) {
+    color: var(--color-ink-2);
+  }
+
+  .ledger :global(dd) {
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  .ledger :global(.note-ref) {
+    font-size: 0.62em;
+  }
+
+  @media (max-width: 1023px) {
+    .ledger > :global(div) {
+      grid-template-columns: 1fr;
+      gap: 4px;
+      padding-block: 14px;
+    }
+  }
+</style>

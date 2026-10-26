@@ -9,12 +9,15 @@ interface Props {
   description?: string;
   // extra schema.org nodes for this page (src/lib/schema.ts), added to the site-wide Person graph
   schema?: object[];
+  // unlisted pages (the booking pages) stay out of search results and the sitemap
+  noindex?: boolean;
 }
 
 const {
   title = 'Daren Tan · AI Speaker & Trainer in Malaysia · Founder & CEO, ALPHV',
   description = 'Daren Tan is a Malaysian AI expert, speaker and trainer: Founder & CEO of ALPHV Group of Companies and founder of Developer Kaki, Malaysia’s largest developer community.',
   schema = [],
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -28,7 +31,7 @@ const ogImage = new URL('/og.jpg', Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
     <link rel="canonical" href={canonical} />
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
