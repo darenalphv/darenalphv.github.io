@@ -48,8 +48,9 @@ The ecosystem rests on ten years as an engineer, CTO, instructor and researcher.
 ## Capabilities and Constraints
 
 - Scope for v1: a home page plus two case-study pages, Developer Kaki and ALPHV Group of Companies.
-- Two calls to action: the LinkedIn profile (primary) and a direct WhatsApp link to Daren (https://wa.me/60165187740, added at Daren's request on 2026-10-24; the number is not printed on the page). There is no email call to action, no contact form and no booking flow. A media kit page (/media-kit/) gives event organisers speaker bios to copy and speaker photos to download; it is a resource, not a third call to action.
-- Talks and BFM episodes appear as proof only, not as a speaking-services pitch.
+- Two calls to action: the LinkedIn profile (primary) and a direct WhatsApp link to Daren (https://wa.me/60165187740, added at Daren's request on 2026-10-24; the number is not printed on the page). There is no email call to action, no contact form and no booking flow on the public site. A media kit page (/media-kit/) gives event organisers speaker bios to copy and speaker photos to download; it is a resource, not a third call to action.
+- Booking pages, added at Daren's request on 2026-10-26: /book/malaysia/ (ringgit) and /book/international/ (US dollars) list rates and terms for consulting, workshops and keynotes, with a short track record and an enquiry form. They are unlisted, shared by Daren as a private link: no page links to them, they carry noindex, the sitemap and llms.txt leave them out, and the two never link to each other. The form has no server; it opens a WhatsApp message to Daren or an email to daren@alphv.com with the details filled in. Rates and terms live in `src/data/rates.ts`.
+- Talks and BFM episodes appear as proof only, not as a speaking-services pitch. The unlisted booking pages are the one place services are sold.
 - The site is static, with content authored in the repo. Language: English.
 - Voice: polished and professional (Daren's choice), not the casual register of Daren's LinkedIn posts.
 

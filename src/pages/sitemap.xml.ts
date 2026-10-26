@@ -1,7 +1,8 @@
 // sitemap.xml, built from the pages in src/pages so new pages are listed without editing this file.
 import type { APIRoute } from 'astro';
 
-const pages = Object.keys(import.meta.glob('./**/*.astro'));
+// The booking pages under ./book/ are unlisted: shared by link only, so they stay out of the sitemap.
+const pages = Object.keys(import.meta.glob('./**/*.astro')).filter((file) => !file.startsWith('./book/'));
 
 // "./index.astro" → "/", "./media-kit.astro" → "/media-kit/", "./work/alphv-group.astro" → "/work/alphv-group/"
 const pathFor = (file: string) => file.slice(1).replace(/index\.astro$/, '').replace(/\.astro$/, '/');

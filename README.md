@@ -34,8 +34,12 @@ npm run preview
 | `/work/alphv-group/` | Segment review of ALPHV Group of Companies |
 | `/work/developer-kaki/` | Segment review of Developer Kaki |
 | `/media-kit/` | Speaker bios to copy and speaker photos to download, for event organisers |
+| `/book/malaysia/` | Unlisted. Rates in ringgit, terms and an enquiry form, for organisations in Malaysia |
+| `/book/international/` | Unlisted. The same in US dollars, for organisations outside Malaysia |
 | `/llms.txt` | Plain-text summary for AI assistants, generated from the site's data |
-| `/sitemap.xml` | Generated from the pages in `src/pages/` |
+| `/sitemap.xml` | Generated from the pages in `src/pages/`, except the booking pages |
+
+The two booking pages are shared by link only. No page links to them, they carry `noindex`, and the sitemap and `llms.txt` leave them out. They never link to each other.
 
 ## Editing content
 
@@ -53,6 +57,7 @@ Saving in the CMS commits to `main`, which redeploys the site. Images can be upl
 
 - `src/data/content.ts` is the single source of truth for facts on the site: profile, numbered notes, key figures, experience, qualifications, recognition, press, articles, BFM episodes, talks and socials.
 - `src/components/work/alphv/data.ts` and `src/components/work/devkaki/data.ts` hold the two segment reviews.
+- `src/data/rates.ts` holds the booking pages' services, prices and terms for each market.
 
 ### Every fact needs a source
 

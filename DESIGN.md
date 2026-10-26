@@ -263,6 +263,12 @@ A working page at /media-kit/ for event organisers, reached from the header, the
 - **Speaker photos:** three columns (two below 1023px, one below 560px), portraits first, at their own proportions and never framed. Each has its caption, shape, pixel size and file size, and a Download button that serves the uploaded original under a "daren-tan-…" file name; the page shows WebP previews.
 Copy and Download are square ink-outline buttons that invert on hover. Bios and photos are edited in Pages CMS (`bios`, `speaker-photos`; photos upload to `src/assets/speaker-photos`).
 
+### Booking Pages
+Two unlisted working pages, /book/malaysia/ and /book/international/, built like the media kit: a compact segment cover ("Book Daren", the market's rate year in the period slot) with outline jump links on the plate, then blocks on paper, each opening on a strong ink rule with its side head in the 411-unit column. The block styles (`.kit`, `.kit-block`, `.side`, `.kit-btn`, `.jump`) live in `global.css` and are shared with the media kit.
+- **Services:** Consulting, Workshops and Keynotes. Each opens with an intro at max(34 units, 18px) beside a ruled list of topics (talk titles carry their venue in secondary ink), then a ruled price list: option name at 800 / 90%, a detail line, the price as an 800 / 90% tabular figure with "From" above and the unit below in secondary ink, and an "Enquire" outline button that picks that option in the form. Prices are terms, not reported figures, so they carry no note marks.
+- **Track record and Terms:** ruled label-and-text rows (`src/components/book/Ledger.astro`). Track-record figures cite the page's own Notes block, numbered from 1.
+- **Enquire:** a two-column form (one column below 1023px) of square fields with a 1px Secondary Ink border on white, Ink on hover, and the usual focus ring. "Send on WhatsApp" is filled ink with paper text, inverting to the outline on hover; "Send by email" is the outline button. It is the only filled ink button on the site, and it never takes ultramarine. The header and footer keep LinkedIn and WhatsApp as they are.
+
 ### Segment Cover and Next Segment
 Case-study pages open on a full-bleed ultramarine plate with no photo: a back link (a left arrow and "Daren Tan", to the home page) and the period across the top, the segment name in the display cut, the line as a title, the field behind, and a caption. They end with a "Next segment review" hand-off: a strong rule, a side head, the other segment's name at 150 units, and a large arrow. The name turns ultramarine on hover.
 
